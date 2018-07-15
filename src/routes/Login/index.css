@@ -1,0 +1,27 @@
+.login-root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.login-form-wrapper {
+  max-width: 275px;
+  width: 100%;
+}
+
+.login-form-fields-container > .login-form-field {
+  display: block;
+  width: 100%;
+}
+
+.login-form-fields-container .login-form-field {
+  margin: 40px 0;
+}
+
+.login-form-actions-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 0;
+}
