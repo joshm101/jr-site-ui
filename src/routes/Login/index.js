@@ -1,67 +1,168 @@
 import React, { Component } from 'react'
-import { TextField, Button } from '@material-ui/core'
+import {
+  Button,
+  CircularProgress,
+  Snackbar
+} from '@material-ui/core'
+
+import ValidatedLoginField from './ValidatedLoginField'
+import withAuthActions from '../../hoc/withAuthActions'
+import withAuthState from '../../hoc/withAuthState'
 
 import './index.css'
 
 class Login extends Component {
   state = {
     username: '',
-    password: ''
+    password: '',
+    usernameTouched: false,
+    passwordTouched: false
   }
 
+  /**
+   * Login form submit event handler
+   */
   handleLoginSubmit = (event) => {
+    // prevent default submission behavior
     event.preventDefault()
-    console.log('login submit')
+
+    // get entered credentials and initiate login submit
+    // asynchronous action routine.
+    const { username, password } = this.state
+    const { loginFormSubmittedRoutine } = this.props
+    loginFormSubmittedRoutine({
+      username, password
+    })
   }
 
+  /**
+   * Login form field change event handler
+   */
   handleLoginFormChanged = (event) => {
     const { name, value } = event.target
 
+    const touchedProperty = `${name}Touched`
     this.setState({
-      [name]: value
+      [name]: value,
+      [touchedProperty]: true
     })
+  }
+
+  /**
+   * Error notification dismiss event handler
+   */
+  handleErrorDismiss = () => {
+    const { authErrorsDismissed } = this.props
+
+    authErrorsDismissed()
+  }
+
+  /**
+   * Populates array of username errors based on
+   * specified validation conditions
+   * @return {string[]} - Array of string errors
+   */
+  usernameErrors = (username) => {
+    const errors = []
+    if (!username) {
+      errors.push('Username is required.')
+    }
+
+    return errors
+  }
+
+  /**
+   * Populates array of password errors based on
+   * specified validation conditions
+   * @return {string[]} - Array of string errors
+   */
+  passwordErrors = (password) => {
+    const errors = []
+    if (!password) {
+      errors.push('Password is required.')
+    }
+
+    return errors
   }
 
   render() {
     const { username, password } = this.state
+    const usernameErrors = this.usernameErrors(username)
+    const passwordErrors = this.passwordErrors(password)
+    const errors = usernameErrors.concat(passwordErrors)
+    const { loginSubmitting } = this.props.auth
+    const authErrors = this.props.auth.errors
+    const {
+      usernameTouched,
+      passwordTouched
+    } = this.state
     return (
       <div className="login-root">
         <div className="login-form-wrapper">
           <h2>Login</h2>
-          <form onSubmit={this.handleLoginSubmit}>
+          <form autoComplete="off" onSubmit={this.handleLoginSubmit}>
             <div className="login-form-fields-container">
-              <TextField
-                className="login-form-field"
-                label="Username"
-                name="username"
-                onChange={this.handleLoginFormChanged}
-                value={username}
-                fullWidth
-              />
-              <TextField
-                className="login-form-field"
-                label="Password"
-                type="password"
-                name="password"
-                onChange={this.handleLoginFormChanged}
-                value={password}
-                fullWidth
-              />
+              <div className="login-form-field-wrapper">
+                <ValidatedLoginField
+                  label="Username"
+                  name="username"
+                  onChange={this.handleLoginFormChanged}
+                  value={username}
+                  errors={usernameErrors}
+                  touched={usernameTouched}
+                />
+              </div>
+              <div className="login-form-field-wrapper">
+                <ValidatedLoginField
+                  label="Password"
+                  name="password"
+                  onChange={this.handleLoginFormChanged}
+                  value={password}
+                  errors={passwordErrors}
+                  touched={passwordTouched}
+                  type="password"
+                />
+              </div>
             </div>
             <div className="login-form-actions-container">
               <Button
                 type="submit"
                 variant="raised"
                 color="primary"
+                disabled={errors.length > 0 || loginSubmitting}
               >
+                {loginSubmitting &&
+                  <CircularProgress
+                    size={20}
+                    className="login-loading-indicator"
+                  />
+                }
                 Submit
               </Button>
             </div>
           </form>
         </div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'left'
+          }}
+          autoHideDuration={3000}
+          open={authErrors.length > 0}
+          onClose={this.handleErrorDismiss}
+          message={
+            authErrors.map(authError =>
+              <div key={authError}>
+                {authError}
+              </div>
+            )
+          }
+        />
       </div>
     )
   }
 }
 
-export default Login
+export default withAuthState(
+  withAuthActions(Login)
+)

@@ -11,12 +11,12 @@
   width: 100%;
 }
 
-.login-form-fields-container > .login-form-field {
+.login-form-fields-container > .login-form-field-wrapper {
   display: block;
   width: 100%;
 }
 
-.login-form-fields-container .login-form-field {
+.login-form-fields-container .login-form-field-wrapper {
   margin: 40px 0;
 }
 
@@ -24,4 +24,8 @@
   display: flex;
   justify-content: flex-end;
   padding: 15px 0;
+}
+
+.login-loading-indicator {
+  margin-right: 16px;
 }
