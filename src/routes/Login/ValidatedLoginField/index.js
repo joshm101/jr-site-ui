@@ -11,6 +11,7 @@ const ValidatedLoginField = props => (
       value={props.value}
       error={props.errors.length > 0 && props.touched}
       type={props.type}
+      disabled={props.disabled}
       fullWidth
     />
     {props.touched && props.errors.length > 0 &&

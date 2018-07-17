@@ -19,6 +19,21 @@ class Login extends Component {
     passwordTouched: false
   }
 
+  componentDidMount() {
+    if (this.props.auth.tokenValid) {
+      this.props.history.push('/interface')
+      return
+    }
+    const token = localStorage.getItem('jr-site-auth-token')
+    this.props.tokenValidityCheckRoutine(token)
+  }
+
+  componentDidUpdate() {
+    if (this.props.auth.tokenValid) {
+      this.props.history.push('/interface')
+    }
+  }
+
   /**
    * Login form submit event handler
    */
@@ -90,7 +105,11 @@ class Login extends Component {
     const usernameErrors = this.usernameErrors(username)
     const passwordErrors = this.passwordErrors(password)
     const errors = usernameErrors.concat(passwordErrors)
-    const { loginSubmitting } = this.props.auth
+    const {
+      loginSubmitting,
+      checkingTokenValidity
+    } = this.props.auth
+    const loading = loginSubmitting || checkingTokenValidity
     const authErrors = this.props.auth.errors
     const {
       usernameTouched,
@@ -110,6 +129,7 @@ class Login extends Component {
                   value={username}
                   errors={usernameErrors}
                   touched={usernameTouched}
+                  disabled={loading}
                 />
               </div>
               <div className="login-form-field-wrapper">
@@ -121,6 +141,7 @@ class Login extends Component {
                   errors={passwordErrors}
                   touched={passwordTouched}
                   type="password"
+                  disabled={loading}
                 />
               </div>
             </div>
@@ -129,9 +150,9 @@ class Login extends Component {
                 type="submit"
                 variant="raised"
                 color="primary"
-                disabled={errors.length > 0 || loginSubmitting}
+                disabled={errors.length > 0 || loading}
               >
-                {loginSubmitting &&
+                {loading &&
                   <CircularProgress
                     size={20}
                     className="login-loading-indicator"
