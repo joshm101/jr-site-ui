@@ -7,3 +7,4 @@ export const authErrorsDismissed = () => ({
 })
 
 export const loginFormSubmittedRoutine = createRoutine('LOGIN_FORM_SUBMITTED')
+export const tokenValidityCheckRoutine = createRoutine('TOKEN_VALIDITY_CHECK')

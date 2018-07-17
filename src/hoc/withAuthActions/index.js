@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import {
   loginFormSubmittedRoutine,
+  tokenValidityCheckRoutine,
   authErrorsDismissed
 } from '../../actions'
 
@@ -13,6 +14,7 @@ export default (ConnectedComponent) => {
 
   const mapDispatchToProps = {
     loginFormSubmittedRoutine,
+    tokenValidityCheckRoutine,
     authErrorsDismissed
   }
 
