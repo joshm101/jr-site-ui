@@ -13,8 +13,9 @@ function* loginHandler(action) {
   const { username, password } = action.payload
   try {
     const token = yield call(loginService.login, username, password)
+    localStorage.setItem('jr-site-auth-token', token)
     yield put(
-      loginFormSubmittedRoutine.success(token)
+      loginFormSubmittedRoutine.success()
     )
   } catch (error) {
     yield put(

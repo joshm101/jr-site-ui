@@ -3,7 +3,6 @@ import * as actionTypes from '../../actions/actionTypes'
 
 const initialState = {
   loginSubmitting: false,
-  token: '',
   errors: []
 }
 
@@ -29,8 +28,7 @@ const handleLoginFormSubmittedTrigger = (state) => ({
 
 const handleLoginFormSubmittedSuccess = (state, action) => ({
   ...state,
-  loginSubmitting: false,
-  token: action.payload
+  loginSubmitting: false
 })
 
 const handleLoginFormSubmittedFailure = (state, action) => ({
