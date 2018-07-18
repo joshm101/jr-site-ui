@@ -14,11 +14,15 @@ const USERS_API_URL = process.env.REACT_APP_USERS_API_URL
  */
 const login = (username, password) => {
   if (!username) {
-    throw new Error('No username was provided.')
+    return Promise.reject(
+      new Error('No username was provided.')
+    )
   }
 
   if (!password) {
-    throw new Error('No password was provided.')
+    return Promise.reject(
+      new Error('No password was provided.')
+    )
   }
 
   return axios.post(
