@@ -12,7 +12,8 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    backgroundColor: '#e5e5e5'
   },
   appBar: {
     position: 'absolute',
@@ -38,6 +39,7 @@ const styles = theme => ({
   },
   drawerPaper: {
     position: 'relative',
+    background: theme.palette.background.light,
     width: drawerWidth
   },
   drawerHeader: {
@@ -45,11 +47,20 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
+    background: theme.palette.background.light,
+    ...theme.mixins.toolbar
+  },
+  drawerHeaderPlaceholder: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: '0 8px',
+    background: theme.palette.background.main,
     ...theme.mixins.toolbar
   },
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.main,
     padding: theme.spacing.unit * 3,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -65,7 +76,7 @@ const styles = theme => ({
     marginLeft: 0
   },
   mobileContent: {
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.main,
     width: '100%',
     padding: '24px'
   }

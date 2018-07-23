@@ -80,7 +80,7 @@ class Interface extends Component {
               [classes.contentShift]: drawerOpen
             })}
           >
-            <div className={classes.drawerHeader} />
+            <div className={classes.drawerHeaderPlaceholder} />
             <Content />
           </main>
         </Hidden>
@@ -96,7 +96,7 @@ class Interface extends Component {
             </Toolbar>
           </AppBar>
           <main className={classes.mobileContent}>
-            <div className={classes.drawerHeader} />
+            <div className={classes.drawerHeaderPlaceholder} />
             <Content />
           </main>
         </Hidden>
