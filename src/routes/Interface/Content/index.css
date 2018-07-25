@@ -1,7 +1,36 @@
+.interface-subroute-root {
+  max-width: 980px;
+  margin: auto;
+}
+
 .interface-posts-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 250px));
   grid-template-rows: repeat(auto-fill, auto-fill);
   gap: 100px;
   justify-content: center;
+  max-width: 980px;
+  margin: auto;
+}
+
+.interface-view-post-root {
+  text-align: center;
+}
+
+.interface-view-post-thumbnail,
+.interface-view-post-thumbnail img {
+  max-width: 320px;
+  width: 100%;
+  margin: auto;
+}
+
+.interface-view-post-description {
+  margin-top: 50px;
+  text-align: left;
+  white-space: pre-wrap;
+}
+
+.interface-view-post-actions {
+  display: flex;
+  justify-content: flex-end;
 }

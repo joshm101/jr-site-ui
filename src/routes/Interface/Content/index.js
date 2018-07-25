@@ -1,24 +1,14 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
 
-import withPosts from '../../../hoc/withPosts'
-import InterfacePost from '../../../components/InterfacePost'
-import './index.css'
+import Posts from './Posts'
+import ViewPost from './ViewPost'
 
-const Content = ({ posts }) => (
+const Content = ({ match, posts }) => (
   <div>
-    <h2>Interface content</h2>
-    <div className="interface-posts-container">
-      {posts.data.length > 0 &&
-        posts.data.map((post, index) =>
-          <InterfacePost
-            key={post._id}
-            post={post}
-            className={`interface-post-${index}`}
-          />
-        )
-      }
-    </div>
+    <Route exact path={`${match.url}/`} component={Posts} />
+    <Route path={`${match.url}/view-post/:_id`} component={ViewPost} />
   </div>
 )
 
-export default withPosts(Content)
+export default Content

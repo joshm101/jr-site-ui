@@ -8,6 +8,7 @@ import {
   Typography,
   Icon
 } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 import './index.css'
 
@@ -27,11 +28,18 @@ const InterfacePost = ({ post, className }) => (
       </Typography>
     </CardContent>
     <CardActions className="interface-post-actions">
+      <Link
+        to={`/interface/view-post/${post._id}`}
+        className="interface-post-link"
+      >
+        <Button size="small" variant="flat">
+          <Icon fontSize="inherit">visibility</Icon>
+          &nbsp;&nbsp;View Details
+        </Button>
+      </Link>
       <Button size="small" variant="flat">
-        <Icon fontSize="inherit">visibility</Icon>&nbsp;&nbsp;View Details
-      </Button>
-      <Button size="small" variant="flat">
-        <Icon fontSize="inherit">edit</Icon>&nbsp;&nbsp;Edit
+        <Icon fontSize="inherit">edit</Icon>
+        &nbsp;&nbsp;Edit
       </Button>
     </CardActions>
   </Card>

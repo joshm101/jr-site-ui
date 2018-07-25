@@ -34,7 +34,7 @@ class Interface extends Component {
 
   render() {
     const { drawerOpen, anchor, title } = this.state
-    const { classes } = this.props
+    const { classes, match } = this.props
     const drawer = (
       <Drawer
         variant="persistent"
@@ -81,7 +81,7 @@ class Interface extends Component {
             })}
           >
             <div className={classes.drawerHeaderPlaceholder} />
-            <Content />
+            <Content match={match} />
           </main>
         </Hidden>
 
@@ -97,7 +97,7 @@ class Interface extends Component {
           </AppBar>
           <main className={classes.mobileContent}>
             <div className={classes.drawerHeaderPlaceholder} />
-            <Content />
+            <Content match={match} />
           </main>
         </Hidden>
       </div>
