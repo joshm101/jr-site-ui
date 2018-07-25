@@ -38,7 +38,7 @@ const ViewPost = ({ match, posts }) => {
         </CardContent>
         <CardActions className="interface-view-post-actions">
           <Button variant="flat" color="primary" size="small">
-            <Icon>edit</Icon>&nbsp;&nbsp;Edit
+            <Icon fontSize="inherit">edit</Icon>&nbsp;&nbsp;Edit
           </Button>
         </CardActions>
       </Card>
