@@ -14,6 +14,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
 import Content from './Content'
+import InterfaceMobileLinks from '../../components/InterfaceMobileLinks'
 
 import styles from './styles'
 
@@ -98,6 +99,7 @@ class Interface extends Component {
           <main className={classes.mobileContent}>
             <div className={classes.drawerHeaderPlaceholder} />
             <Content match={match} />
+            <InterfaceMobileLinks />
           </main>
         </Hidden>
       </div>

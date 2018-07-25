@@ -80,7 +80,8 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.main,
     width: '100%',
     padding: '24px',
-    overflow: 'auto'
+    overflow: 'auto',
+    marginBottom: '56px'
   }
 })
 
