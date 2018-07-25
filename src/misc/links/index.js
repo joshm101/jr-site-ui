@@ -9,8 +9,8 @@ export default [
     icon: ViewModule
   },
   {
-    name: 'Misc.',
-    path: 'misc',
+    name: 'Misc. Content',
+    path: 'misc-content',
     icon: ViewAgenda
   },
   {
