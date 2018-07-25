@@ -1,0 +1,7 @@
+.interface-posts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 250px));
+  grid-template-rows: repeat(auto-fill, auto-fill);
+  gap: 100px;
+  justify-content: center;
+}

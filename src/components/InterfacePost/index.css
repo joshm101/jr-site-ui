@@ -1,0 +1,21 @@
+.interface-post-media {
+  height: 256px;
+  width: 256px;
+}
+
+.interface-post {
+  display: flex;
+  flex-direction: column;
+}
+
+.interface-post-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 25ch;
+}
+
+.interface-post-actions {
+  display: flex;
+  justify-content: space-between;
+}

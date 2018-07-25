@@ -8,8 +8,8 @@ const drawerWidth = 240
 const styles = theme => ({
   interfaceRoot: {
     zIndex: 1,
-    overflow: 'hidden',
     position: 'relative',
+    overflow: 'hidden',
     display: 'flex',
     width: '100%',
     height: '100%',
@@ -66,7 +66,8 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    marginLeft: -drawerWidth
+    marginLeft: -drawerWidth,
+    overflow: 'auto'
   },
   contentShift: {
     transition: theme.transitions.create('margin', {
@@ -78,7 +79,8 @@ const styles = theme => ({
   mobileContent: {
     backgroundColor: theme.palette.background.main,
     width: '100%',
-    padding: '24px'
+    padding: '24px',
+    overflow: 'auto'
   }
 })
 
