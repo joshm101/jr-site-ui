@@ -19,3 +19,7 @@ body {
   display: block;
   text-align: center;
 }
+
+.text-left {
+  text-align: left;
+}

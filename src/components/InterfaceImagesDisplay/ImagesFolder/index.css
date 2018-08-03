@@ -1,0 +1,8 @@
+.interface-images-folder-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 200px));
+  margin-left: 50px;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  justify-content: center;
+}
