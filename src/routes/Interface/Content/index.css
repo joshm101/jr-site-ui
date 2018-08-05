@@ -34,3 +34,8 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.interface-content-routes-container {
+  max-width: 980px;
+  margin: auto;
+}

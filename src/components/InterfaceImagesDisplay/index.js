@@ -3,55 +3,24 @@ import { Typography, CircularProgress } from '@material-ui/core'
 
 import withImages from '../../hoc/withImages'
 import ImagesFolder from './ImagesFolder'
+import generateImagesByFolder from '../../utils/generate-images-by-folder'
 
 import './index.css'
 
 class InterfaceImagesDisplay extends Component {
-  /**
-   * Takes an array of image objects and organizes
-   * them by their respective folders.
-   * @param {object[]} - Array of image objects
-   * @return {object} - Image objects by folder
-   */
-  generateImagesByFolder = (images) => {
-    return images.reduce((accumulator, imageObject) => {
-      const relativePathSplit = imageObject.relativePath.split('/')
-      const folderIndex = relativePathSplit.length - 2
-
-      const folder = relativePathSplit[folderIndex]
-      const entry = accumulator[folder]
-      if (entry) {
-        // folder already exists in accumulator,
-        // add current image to folder entry
-        entry.images = entry.images.concat(imageObject.url)
-        return accumulator
-      }
-
-      // folder entry does not exist in accumulator,
-      // set entry and add image as first element
-      // of images array
-      accumulator[folder] = {
-        name: folder,
-        images: [imageObject.url]
-      }
-
-      return accumulator
-    }, {})
-  }
-
   render() {
-    const { loading } = this.props.images
+    const { retrievingImages } = this.props.images
     const images = this.props.images.data
-    const imagesByFolder = this.generateImagesByFolder(images)
+    const imagesByFolder = generateImagesByFolder(images)
     const folders = Object.values(imagesByFolder)
     return (
       <div className="interface-images-display">
-        {images.length === 0 && !loading &&
-          <Typography variant="headline" align="left">
+        {images.length === 0 && !retrievingImages &&
+          <Typography variant="headline" align="center">
             No images have been uploaded.
           </Typography>
         }
-        {images.length > 0 &&
+        {images.length > 0 && !retrievingImages &&
           folders.map(folder =>
             <ImagesFolder
               key={folder.name}
@@ -60,7 +29,7 @@ class InterfaceImagesDisplay extends Component {
             />
           )
         }
-        {loading &&
+        {retrievingImages &&
           <CircularProgress color="primary" />
         }
       </div>

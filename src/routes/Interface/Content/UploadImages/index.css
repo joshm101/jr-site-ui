@@ -1,0 +1,35 @@
+#select-images-input {
+  display: none;
+}
+
+.file-upload-controls-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.upload-images-route-wrapper {
+
+}
+
+.upload-images-route-content-wrapper {
+  max-width: 580px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.file-upload-previews {
+  width: 100%;
+  margin-top: 100px;
+}
+
+.submit-button-wrapper {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.files-selected-additional-controls {
+  width: 100%;
+}

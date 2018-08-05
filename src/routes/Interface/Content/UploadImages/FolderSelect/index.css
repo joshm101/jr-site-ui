@@ -1,0 +1,17 @@
+.interface-images-upload-folder-select {
+  width: 100%;
+  margin-top: 50px;
+}
+
+.interface-images-upload-folder-select-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  max-width: 300px;
+  margin-top: 50px;
+}
+
+.define-new-folder-wrapper {
+  margin-top: 25px;
+  text-align: center;
+}

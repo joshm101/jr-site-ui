@@ -1,0 +1,9 @@
+.upload-failure-dialog-icon-wrapper {
+  margin-bottom: 15px;
+  color: #d32f2f;
+  text-align: center;
+}
+
+.upload-failure-dialog-icon-wrapper svg {
+  font-size: 45px;
+}

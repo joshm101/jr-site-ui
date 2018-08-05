@@ -1,0 +1,9 @@
+.upload-success-dialog-icon-wrapper {
+  margin-bottom: 15px;
+  color: #43a047;
+  text-align: center;
+}
+
+.upload-success-dialog-icon-wrapper svg {
+  font-size: 45px;
+}

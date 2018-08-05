@@ -1,6 +1,8 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 
+import InterfaceImagesGrid from '../../InterfaceImagesGrid'
+
 import './index.css'
 
 const ImagesFolder = ({ name, images }) => (
@@ -11,23 +13,8 @@ const ImagesFolder = ({ name, images }) => (
     >
       {name}
     </Typography>
-    <div className="interface-images-folder-image-grid">
-      {
-        images.map(image =>
-          <div
-            key={image}
-            style={
-              {
-                backgroundImage: `url(${image})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                height: '200px',
-                width: '200px'
-              }
-            }
-          />
-        )
-      }
+    <div className="interface-images-folder">
+      <InterfaceImagesGrid images={images} />
     </div>
   </div>
 )

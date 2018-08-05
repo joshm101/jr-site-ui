@@ -1,0 +1,9 @@
+.initiate-file-upload-controls {
+  margin-bottom: 50px;
+}
+
+.initiate-file-upload-controls a {
+  text-decoration: none;
+  display: flex;
+  justify-content: flex-end;
+}
