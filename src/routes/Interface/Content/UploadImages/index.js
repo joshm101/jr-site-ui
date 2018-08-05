@@ -129,7 +129,7 @@ class UploadImages extends Component {
     const { retrievingImages } = this.props.images
     const files = fileHandlerService.getFiles()
     return (
-      <div className="upload-images-route-wrapper">
+      <div>
         <Typography
           variant="display2"
           className="interface-route-header"
