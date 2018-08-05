@@ -1,7 +1,7 @@
 import { getImagesRoutine } from '../../actions'
 
 const initialState = {
-  loading: false,
+  retrievingImages: false,
   errors: [],
   data: []
 }
@@ -22,14 +22,16 @@ const imagesReducer = (state = initialState, action) => {
 const handleGetImagesTrigger = (state) => {
   return {
     ...state,
-    loading: true
+    retrievingImages: true,
+    uploadErrors: [],
+    invalidFiles: []
   }
 }
 
 const handleGetImagesSuccess = (state, action) => {
   return {
     ...state,
-    loading: false,
+    retrievingImages: false,
     data: action.payload
   }
 }
@@ -37,7 +39,7 @@ const handleGetImagesSuccess = (state, action) => {
 const handleGetImagesFailure = (state, action) => {
   return {
     ...state,
-    loading: false,
+    retrievingImages: false,
     errors: action.payload
   }
 }
