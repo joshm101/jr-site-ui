@@ -19,4 +19,11 @@ describe('Images', () => {
 
     expect(wrapper.exists()).toBe(true)
   })
+
+  it('invokes getImagesRoutine', () => {
+    const getImagesRoutine = jest.fn()
+    setup({ getImagesRoutine })
+
+    expect(getImagesRoutine).toHaveBeenCalledTimes(1)
+  })
 })
