@@ -10,6 +10,7 @@ import {
   uploadImagesDefineNewFolderCancel,
   uploadImagesDefineNewFolderValueChange,
   uploadImagesDefineNewFolderSubmit,
+  uploadImagesRemoveImage,
   dismissUploadImagesSuccessNotice,
   dismissUploadImagesFailureNotice
 } from '../../actions'
@@ -32,6 +33,7 @@ export default (ComposedComponent) => {
     uploadImagesDefineNewFolderCancel,
     uploadImagesDefineNewFolderValueChange,
     uploadImagesDefineNewFolderSubmit,
+    uploadImagesRemoveImage,
     dismissUploadImagesSuccessNotice,
     dismissUploadImagesFailureNotice
   }

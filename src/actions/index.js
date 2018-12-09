@@ -37,6 +37,11 @@ export const uploadImagesDefineNewFolderCancel = () => ({
   type: actionTypes.UPLOAD_IMAGES_DEFINE_NEW_FOLDER_CANCEL
 })
 
+export const uploadImagesRemoveImage = payload => ({
+  type: actionTypes.UPLOAD_IMAGES_REMOVE_IMAGE,
+  payload
+})
+
 export const dismissUploadImagesSuccessNotice = () => ({
   type: actionTypes.DISMISS_UPLOAD_IMAGES_SUCCESS_NOTICE
 })

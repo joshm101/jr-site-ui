@@ -44,6 +44,8 @@ const uploadImagesReducer = (state = initialState, action) => {
       return handleDismissUploadImagesSuccessNotice()
     case actionTypes.DISMISS_UPLOAD_IMAGES_FAILURE_NOTICE:
       return handleDismissUploadImagesFailureNotice(state)
+    case actionTypes.UPLOAD_IMAGES_REMOVE_IMAGE:
+      return handleUploadImagesRemoveImage(state, action)
     default:
       return state
   }
@@ -151,6 +153,19 @@ const handleDismissUploadImagesFailureNotice = (state) => {
   return {
     ...state,
     errors: []
+  }
+}
+
+const handleUploadImagesRemoveImage = (state, action) => {
+  const { filePreviewUrls } = state
+  const index = action.payload
+
+  return {
+    ...state,
+    filePreviewUrls: [
+      ...filePreviewUrls.slice(0, index),
+      ...filePreviewUrls.slice(index + 1)
+    ]
   }
 }
 

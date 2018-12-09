@@ -118,6 +118,25 @@ class UploadImages extends Component {
     })
   }
 
+  handleSelectedFileRemoval = (index) => {
+    const { uploadImagesRemoveImage } = this.props
+
+    fileHandlerService.removeFile(index)
+    uploadImagesRemoveImage(index)
+  }
+
+  getSelectedImagesActions = () => (
+    [
+      {
+        key: 0,
+        color: 'primary',
+        size: 'small',
+        onClick: this.handleSelectedFileRemoval,
+        text: 'Remove Image'
+      }
+    ]
+  )
+
   render() {
     const {
       invalidFiles,
@@ -128,6 +147,9 @@ class UploadImages extends Component {
     } = this.props.uploadImages
     const { retrievingImages } = this.props.images
     const files = fileHandlerService.getFiles()
+
+    const selectedImagesActions = this.getSelectedImagesActions()
+
     return (
       <div>
         <Typography
@@ -167,6 +189,7 @@ class UploadImages extends Component {
               </Typography>
               <InterfaceImagesGrid
                 images={filePreviewUrls}
+                actions={selectedImagesActions}
                 style={{
                   backgroundRepeat: 'no-repeat',
                   backgroundSize: 'contain'

@@ -21,6 +21,15 @@ const fileHandlerService = () => {
       },
       getFiles: () => {
         return filesToUpload
+      },
+      removeFile: (index) => {
+        filesToUpload = [
+          ...filesToUpload.slice(0, index),
+          ...filesToUpload.slice(index + 1)
+        ]
+      },
+      removeAllFiles: () => {
+        filesToUpload = []
       }
     })
   }
