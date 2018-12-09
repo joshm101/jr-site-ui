@@ -1,5 +1,5 @@
 .interface-subroute-root {
-  max-width: 980px;
+  max-width: 1200px;
   margin: auto;
 }
 
@@ -9,7 +9,7 @@
   grid-template-rows: repeat(auto-fill, auto-fill);
   gap: 100px;
   justify-content: center;
-  max-width: 980px;
+  max-width: 1200px;
   margin: auto;
 }
 
@@ -36,6 +36,6 @@
 }
 
 .interface-content-routes-container {
-  max-width: 980px;
+  max-width: 1200px;
   margin: auto;
 }
