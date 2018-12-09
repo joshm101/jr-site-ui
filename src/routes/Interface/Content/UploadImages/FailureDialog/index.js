@@ -8,6 +8,7 @@ import {
   Button
 } from '@material-ui/core'
 import Close from '@material-ui/icons/Close'
+import PropTypes from 'prop-types'
 
 import withUploadImages from '../../../../../hoc/withUploadImages'
 
@@ -46,4 +47,16 @@ const FailureDialog = (props) => {
   )
 }
 
+FailureDialog.propTypes = {
+  uploadImages: PropTypes.shape({
+    errors: PropTypes.array
+  }),
+  dismissUploadImagesFailureNotice: PropTypes.func
+}
+FailureDialog.defaultProps = {
+  uploadImages: { errors: [] },
+  dismissUploadImagesFailureNotice: () => { }
+}
+
+export const FailureDialogNoWrap = FailureDialog
 export default withUploadImages(FailureDialog)
