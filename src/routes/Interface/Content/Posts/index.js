@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import InterfacePost from '../../../../components/InterfacePost'
 import withPosts from '../../../../hoc/withPosts'
@@ -21,4 +22,10 @@ const Posts = ({ posts }) => (
   </div>
 )
 
+Posts.propTypes = {
+  posts: PropTypes.shape({ data: PropTypes.array })
+}
+Posts.defaultProps = { posts: { data: [] } }
+
+export const PostsNoWrap = Posts
 export default withPosts(Posts)
