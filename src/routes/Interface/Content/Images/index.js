@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, Typography } from '@material-ui/core'
 import Add from '@material-ui/icons/Add'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import InterfaceImagesDisplay
   from '../../../../components/InterfaceImagesDisplay'
@@ -44,4 +45,8 @@ class Images extends Component {
   }
 }
 
+Images.propTypes = { getImagesRoutine: PropTypes.func }
+Images.defaultProps = { getImagesRoutine: () => { } }
+
+export const ImagesNoWrap = Images
 export default withImagesActions(Images)
