@@ -15,8 +15,8 @@ const createStoreWithMiddleware = compose(
   (
     (
       typeof window === 'object' &&
-      typeof window.devToolsExtension !== 'undefined'
-    ) ? window.devToolsExtension() : (f) => { return f }
+      typeof window.window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
+    ) ? window.window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => { return f }
   )
 )(createStore)
 
