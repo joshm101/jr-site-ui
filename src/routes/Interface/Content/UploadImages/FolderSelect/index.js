@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   Select,
   MenuItem,
@@ -68,4 +69,20 @@ const FolderSelect = ({
   )
 }
 
+FolderSelect.propTypes = {
+  value: PropTypes.string,
+  folders: PropTypes.array,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  uploadImagesDefineNewFolderTrigger: PropTypes.func
+}
+FolderSelect.defaultProps = {
+  value: '',
+  folders: [],
+  onChange: () => { },
+  disabled: false,
+  uploadImagesDefineNewFolderTrigger: () => { }
+}
+
+export const FolderSelectNoWrap = FolderSelect
 export default withUploadImages(FolderSelect)
