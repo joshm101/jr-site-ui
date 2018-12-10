@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {
   Dialog,
   DialogContent,
@@ -104,4 +105,26 @@ class NewFolderDialog extends Component {
   }
 }
 
+NewFolderDialog.propTypes = {
+  uploadImages: PropTypes.shape({
+    newFolderName: PropTypes.string,
+    definingNewFolder: PropTypes.bool,
+    folders: PropTypes.array
+  }),
+  uploadImagesDefineNewFolderCancel: PropTypes.func,
+  uploadImagesDefineNewFolderSubmit: PropTypes.func,
+  uploadImagesDefineNewFolderValueChange: PropTypes.func
+}
+NewFolderDialog.defaultProps = {
+  uploadImages: {
+    newFolderName: '',
+    definingNewFolder: false,
+    folders: []
+  },
+  uploadImagesDefineNewFolderCancel: () => { },
+  uploadImagesDefineNewFolderSubmit: () => { },
+  uploadImagesDefineNewFolderValueChange: () => { }
+}
+
+export const NewFolderDialogNoWrap = NewFolderDialog
 export default withUploadImages(NewFolderDialog)
