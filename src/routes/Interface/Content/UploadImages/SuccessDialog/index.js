@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   Dialog,
   DialogContent,
@@ -51,4 +52,16 @@ const SuccessDialog = (props) => {
   )
 }
 
+SuccessDialog.propTypes = {
+  uploadImages: PropTypes.shape({
+    displaySuccessNotification: PropTypes.bool
+  }),
+  dismissUploadImagesSuccessNotice: PropTypes.func
+}
+SuccessDialog.defaultProps = {
+  uploadImages: { displaySuccessNotification: false },
+  dismissUploadImagesSuccessNotice: () => { }
+}
+
+export const SuccessDialogNoWrap = SuccessDialog
 export default withUploadImages(SuccessDialog)
