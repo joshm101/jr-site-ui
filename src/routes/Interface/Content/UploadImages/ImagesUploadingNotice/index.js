@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   Snackbar,
@@ -46,5 +47,14 @@ const ImagesUploadingNotice = ({ open, onClose }) => (
     />
   </Snackbar>
 )
+
+ImagesUploadingNotice.propTypes = {
+  open: PropTypes.bool,
+  onClose: PropTypes.func
+}
+ImagesUploadingNotice.defaultProps = {
+  open: false,
+  onClose: () => { }
+}
 
 export default ImagesUploadingNotice
