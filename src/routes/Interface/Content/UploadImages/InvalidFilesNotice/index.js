@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Button, Snackbar, SnackbarContent } from '@material-ui/core'
 import Check from '@material-ui/icons/Check'
 
@@ -40,5 +41,16 @@ const InvalidFilesNotice = ({ open, invalidFiles, onClose }) => (
     />
   </Snackbar>
 )
+
+InvalidFilesNotice.propTypes = {
+  open: PropTypes.bool,
+  invalidFiles: PropTypes.array,
+  onClose: PropTypes.func
+}
+InvalidFilesNotice.defaultProps = {
+  open: false,
+  invalidFiles: [],
+  onClose: () => { }
+}
 
 export default InvalidFilesNotice
