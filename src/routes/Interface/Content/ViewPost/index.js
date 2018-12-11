@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   Typography,
   Card,
@@ -11,9 +12,15 @@ import {
 
 import withPosts from '../../../../hoc/withPosts'
 
+const defaultPost = {
+  title: '',
+  thumbnail: '',
+  description: ''
+}
+
 const ViewPost = ({ match, posts }) => {
   const _id = parseInt(match.params._id)
-  const post = posts.data.find(post => post._id === _id)
+  const post = posts.data.find(post => post._id === _id) || defaultPost
   return (
     <div
       className="interface-view-post-root interface-subroute-root"
@@ -46,4 +53,18 @@ const ViewPost = ({ match, posts }) => {
   )
 }
 
+ViewPost.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      _id: PropTypes.string
+    })
+  }),
+  posts: PropTypes.shape({ data: PropTypes.array })
+}
+ViewPost.defaultProps = {
+  match: { params: { _id: '' } },
+  posts: { data: [] }
+}
+
+export const ViewPostNoWrap = ViewPost
 export default withPosts(ViewPost)
