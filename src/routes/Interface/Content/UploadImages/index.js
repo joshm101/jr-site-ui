@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Button, Typography, CircularProgress } from '@material-ui/core'
 import Filter from '@material-ui/icons/Filter'
 
@@ -232,6 +233,36 @@ class UploadImages extends Component {
   }
 }
 
+UploadImages.propTypes = {
+  uploadImages: PropTypes.shape({
+    invalidFiles: PropTypes.array,
+    filePreviewUrls: PropTypes.array,
+    uploadingImages: PropTypes.bool,
+    folders: PropTypes.array,
+    selectedFolder: PropTypes.string
+  }),
+  images: PropTypes.shape({ retrievingImages: PropTypes.bool }),
+  getImagesRoutine: PropTypes.func,
+  uploadImagesInvalidFilesNoticeDismissed: PropTypes.func,
+  uploadImagesRemoveImage: PropTypes.func,
+  uploadImagesImageSelection: PropTypes.func
+}
+UploadImages.defaultProps = {
+  uploadImages: {
+    invalidFiles: [],
+    filePreviewUrls: [],
+    uploadingImages: false,
+    folders: [],
+    selectedFolder: 'default'
+  },
+  images: { retrievingImages: false },
+  getImagesRoutine: () => { },
+  uploadImagesInvalidFilesNoticeDismissed: () => { },
+  uploadImagesRemoveImage: () => { },
+  uploadImagesImageSelection: () => { }
+}
+
+export const UploadImagesNoWrap = UploadImages
 export default withUploadImages(
   withImagesActions(
     withImages(UploadImages)
