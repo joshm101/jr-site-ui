@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   Button,
   CircularProgress
@@ -10,7 +11,7 @@ const SubmitButton = ({ onClick, uploadingImages }) => {
   if (uploadingImages) {
     button = (
       <Button
-        variant="raised"
+        variant="contained"
         color="primary"
         disabled={uploadingImages}
         onClick={onClick}
@@ -26,7 +27,7 @@ const SubmitButton = ({ onClick, uploadingImages }) => {
   } else {
     button = (
       <Button
-        variant="raised"
+        variant="contained"
         color="primary"
         disabled={uploadingImages}
         onClick={onClick}
@@ -42,6 +43,15 @@ const SubmitButton = ({ onClick, uploadingImages }) => {
       {button}
     </div>
   )
+}
+
+SubmitButton.propTypes = {
+  onClick: PropTypes.func,
+  uploadingImages: PropTypes.bool
+}
+SubmitButton.defaultProps = {
+  onClick: () => { },
+  uploadingImages: false
 }
 
 export default SubmitButton
