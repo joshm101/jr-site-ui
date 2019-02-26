@@ -7,15 +7,14 @@
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
-    "eslint": "^5.1.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.1.5",
     "redux": "^4.0.0",
-    "redux-devtools": "^3.4.1",
+    "redux-devtools": "^3.5.0",
     "redux-saga": "^0.16.0",
     "redux-saga-routines": "^2.2.5"
   },
@@ -34,5 +33,11 @@
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
     "moxios": "^0.4.0"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
