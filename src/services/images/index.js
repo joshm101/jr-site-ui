@@ -3,7 +3,7 @@ import axios from 'axios'
 import { handleAxiosRequestError } from '../utils'
 import validImageFile from '../../utils/valid-image-file'
 
-const IMAGES_API_URL = process.env.REACT_APP_IMAGES_API_URL
+const API_URL = process.env.REACT_APP_API_URL
 
 /**
  * Fires a network request to the get-images endpoint
@@ -13,7 +13,7 @@ const IMAGES_API_URL = process.env.REACT_APP_IMAGES_API_URL
  */
 const getImages = () => {
   return axios.get(
-    `${IMAGES_API_URL}/get-images`
+    `${API_URL}/images`
   ).then(response =>
     response.data.data
   ).catch(handleAxiosRequestError)
@@ -63,7 +63,7 @@ const uploadImages = (imageFiles, folder) => {
       'Authorization': `Bearer: ${authToken}`
     },
     data: formData,
-    url: `${IMAGES_API_URL}/upload-images`
+    url: `${API_URL}/images/upload-images`
   }
 
   // Make POST request to upload images.

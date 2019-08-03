@@ -6,10 +6,10 @@ import store from './store'
 import './index.css'
 import App from './App'
 
-const USERS_API_URL = process.env.REACT_APP_USERS_API_URL
+const API_URL = process.env.REACT_APP_API_URL
 
 const validEnv = () => (
-  !!(USERS_API_URL)
+  !!(API_URL)
 )
 
 ReactDOM.render(

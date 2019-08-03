@@ -2,7 +2,7 @@ import axios from 'axios'
 
 import { handleAxiosRequestError } from '../utils'
 
-const USERS_API_URL = process.env.REACT_APP_USERS_API_URL
+const API_URL = process.env.REACT_APP_API_URL
 
 /**
  * Fires a network request to the login endpoint
@@ -26,7 +26,7 @@ const login = (username, password) => {
   }
 
   return axios.post(
-    `${USERS_API_URL}/login`,
+    `${API_URL}/auth/login`,
     {
       username, password
     }
