@@ -70,7 +70,7 @@ class Interface extends Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="title" color="inherit" noWrap>
+              <Typography variant="h6" color="inherit" noWrap>
                 {title}
               </Typography>
             </Toolbar>
@@ -91,7 +91,7 @@ class Interface extends Component {
             className={classNames(classes.appBar)}
           >
             <Toolbar>
-              <Typography variant="title" color="inherit" noWrap>
+              <Typography variant="h6" color="inherit" noWrap>
                 {title}
               </Typography>
             </Toolbar>

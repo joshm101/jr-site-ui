@@ -153,7 +153,7 @@ class UploadImages extends Component {
     return (
       <div>
         <Typography
-          variant="display2"
+          variant="h3"
           className="interface-route-header"
         >
           Upload Images
@@ -162,7 +162,7 @@ class UploadImages extends Component {
           <div className="file-upload-controls-wrapper">
             <Button
               component="label"
-              variant="raised"
+              variant="contained"
               color="primary"
               disabled={retrievingImages || uploadingImages}
             >

@@ -148,7 +148,7 @@ class Login extends Component {
             <div className="login-form-actions-container">
               <Button
                 type="submit"
-                variant="raised"
+                variant="contained"
                 color="primary"
                 disabled={errors.length > 0 || loading}
               >
