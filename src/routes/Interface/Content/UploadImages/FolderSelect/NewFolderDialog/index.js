@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import { makeStyles } from '@material-ui/styles'
 import {
   Dialog,
   DialogContent,
@@ -14,21 +15,43 @@ import withUploadImages from '../../../../../../hoc/withUploadImages'
 
 import './index.css'
 
-class NewFolderDialog extends Component {
-  state = {
-    folderNameInputTouched: false
+const useStyles = makeStyles(theme => ({
+  cardAreas: {
+    backgroundColor: theme.palette.primary.main
+  },
+  cancel: {
+    color: theme.palette.text.primary
+  },
+  dialogContentText: {
+    color: theme.palette.text.primary
   }
+}))
 
-  onInputChange = (event) => {
-    this.setState({
-      folderNameInputTouched: true
-    })
-    const { uploadImagesDefineNewFolderValueChange } = this.props
+function NewFolderDialog(props) {
+  const [
+    folderNameInputTouched,
+    setFolderNameInputTouched
+  ] = useState(false)
+
+  const {
+    uploadImagesDefineNewFolderValueChange,
+    uploadImagesDefineNewFolderCancel,
+    uploadImagesDefineNewFolderSubmit,
+    uploadImages
+  } = props
+
+  const {
+    folders,
+    newFolderName,
+    definingNewFolder
+  } = uploadImages
+
+  const onInputChange = event => {
+    setFolderNameInputTouched(true)
     uploadImagesDefineNewFolderValueChange(event.target.value)
   }
 
-  folderNameValid = () => {
-    const { folders, newFolderName } = this.props.uploadImages
+  const folderNameValid = () => {
     const resultIndex = folders.findIndex(folder =>
       folder === newFolderName
     )
@@ -36,72 +59,66 @@ class NewFolderDialog extends Component {
     return resultIndex === -1
   }
 
-  render() {
-    const {
-      newFolderName,
-      definingNewFolder
-    } = this.props.uploadImages
-    const {
-      uploadImagesDefineNewFolderCancel,
-      uploadImagesDefineNewFolderSubmit
-    } = this.props
-    const { folderNameInputTouched } = this.state
-    const folderNameValid = this.folderNameValid()
-    const folderNameEmpty = !newFolderName
-    return (
-      <Dialog
-        open={definingNewFolder}
-        onClose={uploadImagesDefineNewFolderCancel}
-      >
-        <DialogTitle>
-          Define New Folder
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Please type in the name of the new folder.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            fullWidth
-            className="new-folder-name-input"
-            type="text"
-            value={newFolderName}
-            placeholder="Enter folder name..."
-            onChange={this.onInputChange}
-            error={
-              (folderNameEmpty || !folderNameValid) &&
-              folderNameInputTouched
-            }
-          />
-          {!folderNameValid && folderNameInputTouched &&
-            <FormHelperText error>
-              Folder name is already taken.
-            </FormHelperText>
+  const folderNameEmpty = !newFolderName
+
+  const classes = useStyles()
+
+  return (
+    <Dialog
+      open={definingNewFolder}
+      onClose={uploadImagesDefineNewFolderCancel}
+    >
+      <DialogTitle className={classes.cardAreas}>
+        Define New Folder
+      </DialogTitle>
+      <DialogContent className={classes.cardAreas}>
+        <DialogContentText className={classes.dialogContentText}>
+          Please type in the name of the new folder.
+        </DialogContentText>
+        <TextField
+          autoFocus
+          fullWidth
+          className="new-folder-name-input"
+          type="text"
+          value={newFolderName}
+          placeholder="Enter folder name..."
+          onChange={onInputChange}
+          error={
+            (folderNameEmpty || !folderNameValid()) &&
+            folderNameInputTouched
           }
-          {folderNameEmpty && folderNameInputTouched &&
-            <FormHelperText error>
-              Folder name must not be empty.
-            </FormHelperText>
-          }
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={uploadImagesDefineNewFolderCancel}
-            color="primary"
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={uploadImagesDefineNewFolderSubmit}
-            color="primary"
-            disabled={!folderNameValid || folderNameEmpty}
-          >
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
-    )
-  }
+        />
+        {!folderNameValid() && folderNameInputTouched &&
+          <FormHelperText error>
+            Folder name is already taken.
+          </FormHelperText>
+        }
+        {folderNameEmpty && folderNameInputTouched &&
+          <FormHelperText error>
+            Folder name must not be empty.
+          </FormHelperText>
+        }
+      </DialogContent>
+      <DialogActions className={classes.cardAreas}>
+        <Button
+          onClick={uploadImagesDefineNewFolderCancel}
+          color="primary"
+          variant="text"
+          className={classes.cancel}
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={uploadImagesDefineNewFolderSubmit}
+          color="secondary"
+          disabled={!folderNameValid() || folderNameEmpty}
+          variant="text"
+        >
+          Submit
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
 }
 
 export default withUploadImages(NewFolderDialog)
