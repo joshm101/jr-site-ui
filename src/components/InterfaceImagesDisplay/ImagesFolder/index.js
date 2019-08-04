@@ -8,7 +8,7 @@ import './index.css'
 const ImagesFolder = ({ name, images }) => (
   <div>
     <Typography
-      variant="headline"
+      variant="h5"
       align="left"
     >
       {name}

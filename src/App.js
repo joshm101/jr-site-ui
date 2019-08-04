@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { MuiThemeProvider } from '@material-ui/core/styles'
+import { ThemeProvider } from '@material-ui/styles'
 
 import Login from './routes/Login'
 import Home from './routes/Home'
@@ -11,7 +11,7 @@ import './App.css'
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
         <Router>
           <div className="routes-wrapper">
             <Route path="/" component={Home} />
@@ -19,7 +19,7 @@ class App extends Component {
             <Route path="/interface" component={Interface} />
           </div>
         </Router>
-      </MuiThemeProvider>
+      </ThemeProvider>
     )
   }
 }

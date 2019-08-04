@@ -31,7 +31,7 @@ const FolderSelect = ({
   return (
     <div className="interface-images-upload-folder-select">
       <Typography
-        variant="title"
+        variant="h6"
         style={{ marginRight: '25px' }}
       >
         Select a folder:

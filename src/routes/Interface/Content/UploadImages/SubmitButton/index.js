@@ -10,7 +10,7 @@ const SubmitButton = ({ onClick, uploadingImages }) => {
   if (uploadingImages) {
     button = (
       <Button
-        variant="raised"
+        variant="contained"
         color="primary"
         disabled={uploadingImages}
         onClick={onClick}
@@ -26,7 +26,7 @@ const SubmitButton = ({ onClick, uploadingImages }) => {
   } else {
     button = (
       <Button
-        variant="raised"
+        variant="contained"
         color="primary"
         disabled={uploadingImages}
         onClick={onClick}
