@@ -19,7 +19,7 @@ class Images extends Component {
     return (
       <div className="interface-images-container">
         <Typography
-          variant="display2"
+          variant="h3"
           className="interface-route-header"
         >
           Site Images
@@ -29,8 +29,8 @@ class Images extends Component {
             to="/interface/images/upload"
           >
             <Button
-              variant="raised"
-              color="primary"
+              variant="contained"
+              color="secondary"
             >
               <Add />&nbsp;&nbsp;
               Upload Images

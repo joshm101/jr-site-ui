@@ -21,7 +21,7 @@ const ViewPost = ({ match, posts }) => {
       <Card elevation={0}>
         <CardHeader
           title={
-            <Typography variant="headline">{post.title}</Typography>
+            <Typography variant="h5">{post.title}</Typography>
           }
         />
         <CardContent>
@@ -37,7 +37,7 @@ const ViewPost = ({ match, posts }) => {
           </div>
         </CardContent>
         <CardActions className="interface-view-post-actions">
-          <Button variant="flat" color="primary">
+          <Button variant="text" color="primary">
             <Icon fontSize="inherit">edit</Icon>&nbsp;&nbsp;Edit
           </Button>
         </CardActions>

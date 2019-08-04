@@ -21,7 +21,7 @@ const InterfacePost = ({ post, className }) => (
     />
     <CardContent className="interface-post-content">
       <Typography
-        variant="subheading"
+        variant="subtitle1"
         className="interface-post-title"
       >
         {post.title}
@@ -32,12 +32,12 @@ const InterfacePost = ({ post, className }) => (
         to={`/interface/view-post/${post._id}`}
         className="interface-post-link"
       >
-        <Button size="small" variant="flat">
+        <Button size="small" variant="text">
           <Icon fontSize="inherit">visibility</Icon>
           &nbsp;&nbsp;View Details
         </Button>
       </Link>
-      <Button size="small" variant="flat">
+      <Button size="small" variant="text">
         <Icon fontSize="inherit">edit</Icon>
         &nbsp;&nbsp;Edit
       </Button>
