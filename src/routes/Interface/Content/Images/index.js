@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import ContentHeader from '../ContentHeader'
+import ContentContainer from '../ContentContainer'
 import InterfaceImagesDisplay
   from '../../../../components/InterfaceImagesDisplay'
 import withImagesActions from '../../../../hoc/withImagesActions'
@@ -37,9 +38,9 @@ class Images extends Component {
             </div>
           }
         />
-        <div>
+        <ContentContainer>
           <InterfaceImagesDisplay />
-        </div>
+        </ContentContainer>
       </div>
     )
   }

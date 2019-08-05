@@ -8,6 +8,7 @@ import {
   Button,
   Icon
 } from '@material-ui/core'
+import ContentContainer from '../ContentContainer'
 
 import withPosts from '../../../../hoc/withPosts'
 
@@ -15,9 +16,7 @@ const ViewPost = ({ match, posts }) => {
   const _id = parseInt(match.params._id)
   const post = posts.data.find(post => post._id === _id)
   return (
-    <div
-      className="interface-view-post-root interface-subroute-root"
-    >
+    <ContentContainer className="interface-view-post-root">
       <Card elevation={0}>
         <CardHeader
           title={
@@ -42,7 +41,7 @@ const ViewPost = ({ match, posts }) => {
           </Button>
         </CardActions>
       </Card>
-    </div>
+    </ContentContainer>
   )
 }
 

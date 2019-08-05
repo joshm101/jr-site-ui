@@ -14,6 +14,7 @@ import SubmitButton from './SubmitButton'
 import SuccessDialog from './SuccessDialog'
 import FailureDialog from './FailureDialog'
 import ContentHeader from '../ContentHeader'
+import ContentContainer from '../ContentContainer'
 import InterfaceImagesGrid
   from '../../../../components/InterfaceImagesGrid'
 import fileHandlerServiceCreator
@@ -186,7 +187,7 @@ class UploadImages extends Component {
             </div>
           }
         />
-        <div className="upload-images-route-content-wrapper">
+        <ContentContainer>
           {files.length > 0 &&
             <div className="files-selected-additional-controls">
               <div className="folder-select-button-wrapper">
@@ -226,7 +227,7 @@ class UploadImages extends Component {
           />
           <SuccessDialog />
           <FailureDialog />
-        </div>
+        </ContentContainer>
       </div>
     )
   }

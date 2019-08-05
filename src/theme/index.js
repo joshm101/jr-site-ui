@@ -61,6 +61,11 @@ const overrides = {
       }
     }
   },
+  MuiPaper: {
+    root: {
+      backgroundColor: palette.primary.main
+    }
+  },
   MuiDialogTitle: {
     root: {
       backgroundColor: palette.primary.main

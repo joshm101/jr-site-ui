@@ -1,16 +1,9 @@
-.interface-subroute-root {
-  max-width: 1200px;
-  margin: auto;
-}
-
 .interface-posts-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 250px));
   grid-template-rows: repeat(auto-fill, auto-fill);
   gap: 100px;
   justify-content: center;
-  max-width: 1200px;
-  margin: auto;
 }
 
 .interface-view-post-root {
