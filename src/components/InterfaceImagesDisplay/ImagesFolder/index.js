@@ -10,6 +10,7 @@ const ImagesFolder = ({ name, images }) => (
     <Typography
       variant="h5"
       align="left"
+      color="textPrimary"
     >
       {name}
     </Typography>

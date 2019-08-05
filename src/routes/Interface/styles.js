@@ -20,7 +20,8 @@ const styles = theme => ({
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    backgroundColor: theme.palette.primary.main
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -39,7 +40,7 @@ const styles = theme => ({
   },
   drawerPaper: {
     position: 'relative',
-    background: theme.palette.background.light,
+    background: theme.palette.background.main,
     width: drawerWidth
   },
   drawerHeader: {
@@ -47,7 +48,7 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
-    background: theme.palette.background.light,
+    background: theme.palette.background.main,
     ...theme.mixins.toolbar
   },
   drawerHeaderPlaceholder: {
@@ -55,7 +56,7 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
-    background: theme.palette.background.main,
+    background: theme.palette.background.dark,
     ...theme.mixins.toolbar
   },
   content: {

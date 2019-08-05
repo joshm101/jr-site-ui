@@ -2,9 +2,9 @@ import { createMuiTheme } from '@material-ui/core/styles'
 
 const palette = {
   primary: {
-    main: '#263238',
-    light: '#4f5b62',
-    dark: '#000a12',
+    main: '#2f3235',
+    light: '#585b5f',
+    dark: '#050a0f',
     contrastText: '#fff'
   },
   secondary: {
@@ -14,19 +14,90 @@ const palette = {
     contrastText: '#000000'
   },
   background: {
-    main: '#f2f2f2',
-    light: '#fafafa'
+    main: '#1f2023',
+    light: '#4f5b62'
   },
   error: {
     main: '#e57373',
     light: '#ffa4a2',
     dark: '#af4448',
     contrastText: '#fff'
+  },
+  info: {
+    main: '#000',
+    light: '#000',
+    dark: '#000',
+    contrastText: '#fff'
+  },
+  text: {
+    primary: '#fff',
+    secondary: '#000',
+    disabled: 'rgba(0, 0, 0, 0.38)'
+  }
+}
+
+const overrides = {
+  MuiFab: {
+    root: {
+      '&&$disabled': {
+        '& svg': {
+          color: palette.text.primary
+        },
+        backgroundColor: palette.primary.dark,
+        color: palette.text.primary
+      }
+    }
+  },
+  MuiButton: {
+    contained: {
+      '&$root': {
+        '&$disabled': {
+          '& svg': {
+            color: palette.text.primary
+          },
+          backgroundColor: palette.primary.dark,
+          color: palette.text.primary
+        }
+      }
+    }
+  },
+  MuiDialogTitle: {
+    root: {
+      backgroundColor: palette.primary.main
+    }
+  },
+  MuiDialogContent: {
+    root: {
+      backgroundColor: palette.primary.main
+    }
+  },
+  MuiDialogActions: {
+    root: {
+      backgroundColor: palette.primary.main
+    }
+  },
+  MuiDialogContentText: {
+    root: {
+      color: palette.text.primary
+    }
+  },
+  MuiBottomNavigationAction: {
+    root: {
+      backgroundColor: palette.primary.main,
+      color: palette.secondary.light
+    }
+  },
+  MuiSnackbar: {
+    root: {
+      maxWidth: '515px',
+      width: '100%'
+    }
   }
 }
 
 const theme = createMuiTheme({
-  palette
+  palette,
+  overrides
 })
 
 export default theme

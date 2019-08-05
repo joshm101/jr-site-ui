@@ -36,6 +36,7 @@ class Interface extends Component {
   render() {
     const { drawerOpen, anchor, title } = this.state
     const { classes, match } = this.props
+
     const drawer = (
       <Drawer
         variant="persistent"

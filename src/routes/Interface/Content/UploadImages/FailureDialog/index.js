@@ -1,4 +1,5 @@
 import React from 'react'
+import { makeStyles } from '@material-ui/styles'
 import {
   Dialog,
   DialogContent,
@@ -12,10 +13,15 @@ import Close from '@material-ui/icons/Close'
 import withUploadImages from '../../../../../hoc/withUploadImages'
 
 import './index.css'
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
 
 const FailureDialog = (props) => {
   const { errors } = props.uploadImages
   const { dismissUploadImagesFailureNotice } = props
+
+  const classes = useStyles()
   return (
     <Dialog
       open={errors.length > 0}
@@ -26,7 +32,7 @@ const FailureDialog = (props) => {
         Upload Failure
       </DialogTitle>
       <DialogContent>
-        <div className="upload-failure-dialog-icon-wrapper">
+        <div className={classes.icon}>
           <Close />
         </div>
         <DialogContentText>
@@ -38,6 +44,7 @@ const FailureDialog = (props) => {
         <Button
           onClick={dismissUploadImagesFailureNotice}
           color="primary"
+          className="white-text"
         >
           Ok
         </Button>

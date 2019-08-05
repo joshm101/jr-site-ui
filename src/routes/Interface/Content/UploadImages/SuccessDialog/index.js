@@ -42,6 +42,7 @@ const SuccessDialog = (props) => {
           <Button
             onClick={dismissUploadImagesSuccessNotice}
             color="primary"
+            className="white-text"
           >
             Ok
           </Button>

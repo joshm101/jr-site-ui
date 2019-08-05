@@ -1,46 +1,51 @@
 import React from 'react'
+import { makeStyles } from '@material-ui/styles'
 import {
-  Button,
+  Fab,
   CircularProgress
 } from '@material-ui/core'
 import CloudUpload from '@material-ui/icons/CloudUpload'
 
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
+
 const SubmitButton = ({ onClick, uploadingImages }) => {
-  let button
-  if (uploadingImages) {
-    button = (
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={uploadingImages}
-        onClick={onClick}
-      >
-        <CircularProgress
-          fontSize="inherit"
-          size={15}
-        />
-        &nbsp;&nbsp;
-        Uploading selected images...
-      </Button>
-    )
-  } else {
-    button = (
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={uploadingImages}
-        onClick={onClick}
-      >
-        <CloudUpload />
-        &nbsp;&nbsp;
-        Upload selected images
-      </Button>
-    )
-  }
+  const classes = useStyles()
+
+  const fabContent = uploadingImages ? (
+    <>
+      <CircularProgress
+        // fontSize="inherit"
+        size={15}
+      />
+      &nbsp;&nbsp;
+      Uploading...
+      &nbsp;&nbsp;
+    </>
+  ) : (
+    <>
+      <CloudUpload />
+      &nbsp;&nbsp;
+      Upload
+      &nbsp;&nbsp;
+    </>
+  )
+
+  const ariaLabel = uploadingImages ? 'uploading' : 'upload'
+
   return (
-    <div>
-      {button}
-    </div>
+    <Fab
+      color="secondary"
+      disabled={uploadingImages}
+      onClick={onClick}
+      aria-label={ariaLabel}
+      variant="extended"
+      className={classes.fab}
+      classes={{ disabled: classes.fabDisabled }}
+    >
+      {fabContent}
+    </Fab>
   )
 }
 

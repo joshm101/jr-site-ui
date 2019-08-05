@@ -60,10 +60,10 @@ const uploadImages = (imageFiles, folder) => {
   const requestOptions = {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer: ${authToken}`
+      'Authorization': `Bearer ${authToken}`
     },
     data: formData,
-    url: `${API_URL}/images/upload-images`
+    url: `${API_URL}/images/upload`
   }
 
   // Make POST request to upload images.

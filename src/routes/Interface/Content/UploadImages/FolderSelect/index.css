@@ -1,17 +1,44 @@
 .interface-images-upload-folder-select {
   width: 100%;
-  margin-top: 50px;
+  margin-bottom: 25px;
+}
+
+.interface-images-upload-folder-select .MuiFormControl-root {
+  width: 100%;
 }
 
 .interface-images-upload-folder-select-wrapper {
   display: flex;
   justify-content: center;
   margin: auto;
-  max-width: 300px;
-  margin-top: 50px;
+  width: 100%;
+  max-width: 375px;
+}
+
+.interface-images-upload-folder-select-wrapper label.Mui-focused {
+  color: #fff;
 }
 
 .define-new-folder-wrapper {
   margin-top: 25px;
   text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .interface-images-upload-folder-select-wrapper {
+    margin-right: 45px;
+    margin-left: 0;
+    max-width: 300px;
+  }
+
+  .interface-images-upload-folder-select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .define-new-folder-wrapper {
+    align-self: flex-end;
+    margin-left: 45px;
+  }
 }

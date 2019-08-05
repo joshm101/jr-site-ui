@@ -16,7 +16,7 @@ class InterfaceImagesDisplay extends Component {
     return (
       <div className="interface-images-display">
         {images.length === 0 && !retrievingImages &&
-          <Typography variant="h5" align="center">
+          <Typography variant="h5" align="center" color="textPrimary">
             No images have been uploaded.
           </Typography>
         }

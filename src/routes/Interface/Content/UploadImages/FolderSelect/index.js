@@ -1,16 +1,26 @@
 import React from 'react'
+import { makeStyles } from '@material-ui/styles'
 import {
-  Select,
-  MenuItem,
-  Typography,
-  Button
+  Button,
+  InputLabel,
+  FormControl
 } from '@material-ui/core'
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder'
 
 import withUploadImages from '../../../../../hoc/withUploadImages'
 import NewFolderDialog from './NewFolderDialog'
+import Select from '../../../../../components/Select'
 
 import './index.css'
+
+const useStyles = makeStyles(theme => ({
+  selectLabel: {
+    color: theme.palette.text.primary,
+    '&:focus': {
+      color: theme.palette.text.primary
+    }
+  }
+}))
 
 const FolderSelect = ({
   value,
@@ -20,7 +30,7 @@ const FolderSelect = ({
   uploadImagesDefineNewFolderTrigger
 }) => {
   const defaultIndex = folders.findIndex(folder => folder === 'default')
-  let finalFolders = folders
+  let finalFolders = [...folders]
   if (defaultIndex === -1) {
     finalFolders = [
       'default',
@@ -28,35 +38,44 @@ const FolderSelect = ({
     ]
   }
 
+  const classnames = useStyles()
+
   return (
     <div className="interface-images-upload-folder-select">
-      <Typography
-        variant="h6"
-        style={{ marginRight: '25px' }}
-      >
-        Select a folder:
-      </Typography>
       <div className="interface-images-upload-folder-select-wrapper">
-        <Select
-          fullWidth
-          value={value}
-          onChange={onChange}
-          style={{ flex: 2 }}
-          disabled={disabled}
-        >
-          {
-            finalFolders.map(folder =>
-              <MenuItem key={folder} value={folder}>
-                {folder}
-              </MenuItem>
-            )
-          }
-        </Select>
+        <FormControl className={classnames.selectLabel}>
+          <InputLabel
+            htmlFor="folder-select"
+            className={classnames.selectLabel}
+          >
+            Select folder
+          </InputLabel>
+          <Select
+            fullWidth
+            value={value}
+            onChange={onChange}
+            disabled={disabled}
+            inputProps={{
+              name: 'folder-select',
+              id: 'folder-select'
+            }}
+          >
+            {
+              finalFolders.map(folder =>
+                <Select.Item key={folder} value={folder}>
+                  {folder}
+                </Select.Item>
+              )
+            }
+          </Select>
+        </FormControl>
       </div>
       <div className="define-new-folder-wrapper">
         <Button
           disabled={disabled}
           onClick={uploadImagesDefineNewFolderTrigger}
+          variant="text"
+          color="secondary"
         >
           <CreateNewFolder />
           &nbsp;&nbsp;

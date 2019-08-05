@@ -1,3 +1,7 @@
+html {
+  background: #2f3235;
+}
+
 .App {
   text-align: center;
 }
@@ -20,6 +24,11 @@
 
 .App-intro {
   font-size: large;
+}
+
+.MuiDrawer-paperAnchorDockedLeft {
+  /*!important to override inline style*/
+  border-right: none !important;
 }
 
 @keyframes App-logo-spin {

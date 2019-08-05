@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Button, Typography, CircularProgress } from '@material-ui/core'
+import { Button, CircularProgress } from '@material-ui/core'
+import Close from '@material-ui/icons/Close'
 import Filter from '@material-ui/icons/Filter'
 
 import validImageFile from '../../../../utils/valid-image-file'
@@ -12,6 +13,7 @@ import FolderSelect from './FolderSelect'
 import SubmitButton from './SubmitButton'
 import SuccessDialog from './SuccessDialog'
 import FailureDialog from './FailureDialog'
+import ContentHeader from '../ContentHeader'
 import InterfaceImagesGrid
   from '../../../../components/InterfaceImagesGrid'
 import fileHandlerServiceCreator
@@ -125,17 +127,21 @@ class UploadImages extends Component {
     uploadImagesRemoveImage(index)
   }
 
-  getSelectedImagesActions = () => (
-    [
+  getSelectedImagesActions = () => {
+    const { uploadingImages } = this.props.uploadImages
+
+    return [
       {
         key: 0,
-        color: 'primary',
+        color: 'secondary',
         size: 'small',
         onClick: this.handleSelectedFileRemoval,
-        text: 'Remove Image'
+        text: 'Remove Image',
+        icon: <Close fontSize="small" />,
+        disabled: uploadingImages
       }
     ]
-  )
+  }
 
   render() {
     const {
@@ -152,51 +158,35 @@ class UploadImages extends Component {
 
     return (
       <div>
-        <Typography
-          variant="h3"
-          className="interface-route-header"
-        >
-          Upload Images
-        </Typography>
-        <div className="upload-images-route-content-wrapper">
-          <div className="file-upload-controls-wrapper">
-            <Button
-              component="label"
-              variant="contained"
-              color="primary"
-              disabled={retrievingImages || uploadingImages}
-            >
-              {!retrievingImages &&
-                <Filter fontSize="inherit" />
-              }
-              {retrievingImages &&
-                <CircularProgress size={15} color="primary" />
-              }
-              &nbsp;&nbsp;
-              {'Select images'}
-              <input
-                id="select-images-input"
-                multiple
-                type="file"
-                onChange={this.handleImagesSelection}
-              />
-            </Button>
-          </div>
-          {filePreviewUrls.length > 0 &&
-            <div className="file-upload-previews">
-              <Typography variant="title">
-                Selected images:
-              </Typography>
-              <InterfaceImagesGrid
-                images={filePreviewUrls}
-                actions={selectedImagesActions}
-                style={{
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'contain'
-                }}
-              />
+        <ContentHeader
+          title="Upload Images"
+          action={
+            <div className="file-upload-controls-wrapper">
+              <Button
+                component="label"
+                variant="text"
+                color="secondary"
+                disabled={retrievingImages || uploadingImages}
+              >
+                {!retrievingImages &&
+                  <Filter fontSize="inherit" />
+                }
+                {retrievingImages &&
+                  <CircularProgress size={15} color="primary" />
+                }
+                &nbsp;&nbsp;
+                {'Select images'}
+                <input
+                  id="select-images-input"
+                  multiple
+                  type="file"
+                  onChange={this.handleImagesSelection}
+                />
+              </Button>
             </div>
           }
+        />
+        <div className="upload-images-route-content-wrapper">
           {files.length > 0 &&
             <div className="files-selected-additional-controls">
               <div className="folder-select-button-wrapper">
@@ -207,12 +197,22 @@ class UploadImages extends Component {
                   disabled={uploadingImages}
                 />
               </div>
-              <div className="submit-button-wrapper">
-                <SubmitButton
-                  onClick={this.handleUploadImagesClick}
-                  uploadingImages={uploadingImages}
-                />
-              </div>
+              <SubmitButton
+                onClick={this.handleUploadImagesClick}
+                uploadingImages={uploadingImages}
+              />
+            </div>
+          }
+          {filePreviewUrls.length > 0 &&
+            <div className="file-upload-previews">
+              <InterfaceImagesGrid
+                images={filePreviewUrls}
+                actions={selectedImagesActions}
+                style={{
+                  backgroundRepeat: 'no-repeat',
+                  backgroundSize: 'contain'
+                }}
+              />
             </div>
           }
           <InvalidFilesNotice

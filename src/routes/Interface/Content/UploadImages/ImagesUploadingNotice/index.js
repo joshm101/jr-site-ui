@@ -11,12 +11,10 @@ const ImagesUploadingNotice = ({ open, onClose }) => (
   <Snackbar
     open={open}
     autoHideDuration={6000}
-    variant="info"
-    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
     onClose={onClose}
   >
     <SnackbarContent
-      style={{ backgroundColor: '#1976d2' }}
       className="white-text"
       action={
         <Button
@@ -26,7 +24,7 @@ const ImagesUploadingNotice = ({ open, onClose }) => (
           className="white-text"
         >
           <Check fontSize="inherit" />&nbsp;&nbsp;
-          Got it
+          Ok
         </Button>
       }
       message={
