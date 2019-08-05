@@ -15,8 +15,8 @@ import SuccessDialog from './SuccessDialog'
 import FailureDialog from './FailureDialog'
 import ContentHeader from '../ContentHeader'
 import ContentContainer from '../ContentContainer'
-import InterfaceImagesGrid
-  from '../../../../components/InterfaceImagesGrid'
+import ImagesGrid
+  from '../../../../components/Interface/ImagesGrid'
 import fileHandlerServiceCreator
   from '../../../../services/images/fileHandlerService'
 
@@ -206,7 +206,7 @@ class UploadImages extends Component {
           }
           {filePreviewUrls.length > 0 &&
             <div className="file-upload-previews">
-              <InterfaceImagesGrid
+              <ImagesGrid
                 images={filePreviewUrls}
                 actions={selectedImagesActions}
                 style={{

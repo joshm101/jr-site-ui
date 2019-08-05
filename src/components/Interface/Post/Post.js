@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom'
 
 import './index.css'
 
-const InterfacePost = ({ post, className }) => (
+const Post = ({ post, className }) => (
   <Card elevation={0} className={`interface-post ${className}`}>
     <CardMedia
       image={post.thumbnail}
@@ -45,4 +45,4 @@ const InterfacePost = ({ post, className }) => (
   </Card>
 )
 
-export default InterfacePost
+export default Post

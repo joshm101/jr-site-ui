@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Typography, CircularProgress } from '@material-ui/core'
 
-import withImages from '../../hoc/withImages'
+import withImages from '../../../hoc/withImages'
 import ImagesFolder from './ImagesFolder'
-import generateImagesByFolder from '../../utils/generate-images-by-folder'
+import generateImagesByFolder from '../../../utils/generate-images-by-folder'
 
 import './index.css'
 
-class InterfaceImagesDisplay extends Component {
+class ImagesDisplay extends Component {
   render() {
     const { retrievingImages } = this.props.images
     const images = this.props.images.data
@@ -37,4 +37,4 @@ class InterfaceImagesDisplay extends Component {
   }
 }
 
-export default withImages(InterfaceImagesDisplay)
+export default withImages(ImagesDisplay)
