@@ -13,11 +13,10 @@ const styles = theme => ({
   },
 
   title: {
-    marginBottom: theme.spacing(4)
+    marginBottom: theme.spacing(6)
   },
   description: {
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(6),
     color: theme.palette.text.primary,
     textAlign: 'left',
     whiteSpace: 'pre-wrap'
