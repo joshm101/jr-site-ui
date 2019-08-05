@@ -3,6 +3,7 @@ import React from 'react'
 import Title from './Title'
 import Images from './Images'
 import Description from './Description'
+import Group from './Group'
 
 function PostDetails(props) {
   const { post, children } = props
@@ -20,5 +21,6 @@ function PostDetails(props) {
 PostDetails.Title = Title
 PostDetails.Images = Images
 PostDetails.Description = Description
+PostDetails.Group = Group
 
 export default PostDetails

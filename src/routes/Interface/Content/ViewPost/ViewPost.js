@@ -25,8 +25,10 @@ const ViewPost = ({ match, posts }) => {
       />
       <ContentContainer className="interface-view-post-root">
         <PostDetails post={post}>
-          <PostDetails.Title />
-          <PostDetails.Images />
+          <PostDetails.Group className="i-view-post-details-title-images">
+            <PostDetails.Title />
+            <PostDetails.Images />
+          </PostDetails.Group>
           <PostDetails.Description />
         </PostDetails>
       </ContentContainer>
