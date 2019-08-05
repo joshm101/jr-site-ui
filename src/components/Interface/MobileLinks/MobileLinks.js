@@ -4,10 +4,10 @@ import {
   BottomNavigationAction
 } from '@material-ui/core'
 
-import links from '../../misc/links'
+import links from '../../../misc/links'
 import './index.css'
 
-const InterfaceMobileLinks = () => (
+const MobileLinks = () => (
   <BottomNavigation
     showLabels
     className="interface-mobile-links"
@@ -24,4 +24,4 @@ const InterfaceMobileLinks = () => (
   </BottomNavigation>
 )
 
-export default InterfaceMobileLinks
+export default MobileLinks

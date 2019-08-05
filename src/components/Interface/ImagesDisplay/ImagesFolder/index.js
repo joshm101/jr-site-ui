@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
 
-import InterfaceImagesGrid from '../../InterfaceImagesGrid'
+import ImagesGrid from '../../ImagesGrid'
 
 import './index.css'
 
@@ -15,7 +15,7 @@ const ImagesFolder = ({ name, images }) => (
       {name}
     </Typography>
     <div className="interface-images-folder">
-      <InterfaceImagesGrid images={images} />
+      <ImagesGrid images={images} />
     </div>
   </div>
 )

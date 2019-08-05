@@ -6,8 +6,8 @@ import PropTypes from 'prop-types'
 
 import ContentHeader from '../ContentHeader'
 import ContentContainer from '../ContentContainer'
-import InterfaceImagesDisplay
-  from '../../../../components/InterfaceImagesDisplay'
+import ImagesDisplay
+  from '../../../../components/Interface/ImagesDisplay'
 import withImagesActions from '../../../../hoc/withImagesActions'
 
 import './index.css'
@@ -39,7 +39,7 @@ class Images extends Component {
           }
         />
         <ContentContainer>
-          <InterfaceImagesDisplay />
+          <ImagesDisplay />
         </ContentContainer>
       </div>
     )
