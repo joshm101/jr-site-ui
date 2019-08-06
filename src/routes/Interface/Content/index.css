@@ -17,12 +17,6 @@
   margin: auto;
 }
 
-.interface-view-post-description {
-  margin-top: 50px;
-  text-align: left;
-  white-space: pre-wrap;
-}
-
 .interface-view-post-actions {
   display: flex;
   justify-content: flex-end;
