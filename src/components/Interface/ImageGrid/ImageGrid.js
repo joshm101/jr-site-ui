@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ImagesGrid = ({
+const ImageGrid = ({
   images,
   actions,
   style
@@ -77,4 +77,4 @@ const ImagesGrid = ({
   )
 }
 
-export default ImagesGrid
+export default ImageGrid
