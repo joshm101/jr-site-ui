@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Button, CircularProgress } from '@material-ui/core'
-import Close from '@material-ui/icons/Close'
 import Filter from '@material-ui/icons/Filter'
 
 import validImageFile from '../../../../utils/valid-image-file'
@@ -15,6 +14,7 @@ import SuccessDialog from './SuccessDialog'
 import FailureDialog from './FailureDialog'
 import ContentHeader from '../ContentHeader'
 import ContentContainer from '../ContentContainer'
+import UploadPreviewImage from './UploadPreviewImage'
 import ImageGrid
   from '../../../../components/Interface/ImageGrid'
 import fileHandlerServiceCreator
@@ -121,27 +121,16 @@ class UploadImages extends Component {
     })
   }
 
-  handleSelectedFileRemoval = (index) => {
-    const { uploadImagesRemoveImage } = this.props
+  handleSelectedFileRemoval = index => {
+    // note that currying does not prevent recreation
+    // of function on render (compared to an inline
+    // function inside of render method)
+    return () => {
+      const { uploadImagesRemoveImage } = this.props
 
-    fileHandlerService.removeFile(index)
-    uploadImagesRemoveImage(index)
-  }
-
-  getSelectedImagesActions = () => {
-    const { uploadingImages } = this.props.uploadImages
-
-    return [
-      {
-        key: 0,
-        color: 'secondary',
-        size: 'small',
-        onClick: this.handleSelectedFileRemoval,
-        text: 'Remove Image',
-        icon: <Close fontSize="small" />,
-        disabled: uploadingImages
-      }
-    ]
+      fileHandlerService.removeFile(index)
+      uploadImagesRemoveImage(index)
+    }
   }
 
   render() {
@@ -154,8 +143,6 @@ class UploadImages extends Component {
     } = this.props.uploadImages
     const { retrievingImages } = this.props.images
     const files = fileHandlerService.getFiles()
-
-    const selectedImagesActions = this.getSelectedImagesActions()
 
     return (
       <div>
@@ -206,14 +193,16 @@ class UploadImages extends Component {
           }
           {filePreviewUrls.length > 0 &&
             <div className="file-upload-previews">
-              <ImageGrid
-                images={filePreviewUrls}
-                actions={selectedImagesActions}
-                style={{
-                  backgroundRepeat: 'no-repeat',
-                  backgroundSize: 'contain'
-                }}
-              />
+              <ImageGrid>
+                {filePreviewUrls.map((imgSrc, index) => (
+                  <UploadPreviewImage
+                    key={imgSrc}
+                    src={imgSrc}
+                    imageIndex={index}
+                    onClick={this.handleSelectedFileRemoval(index)}
+                  />
+                ))}
+              </ImageGrid>
             </div>
           }
           <InvalidFilesNotice
