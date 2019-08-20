@@ -30,7 +30,7 @@ class ImagesDisplay extends Component {
           )
         }
         {retrievingImages &&
-          <CircularProgress color="primary" />
+          <CircularProgress color="secondary" />
         }
       </div>
     )
