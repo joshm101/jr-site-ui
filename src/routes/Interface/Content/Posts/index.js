@@ -4,8 +4,6 @@ import Post from '../../../../components/Interface/Post'
 import ContentContainer from '../ContentContainer'
 import withPosts from '../../../../hoc/withPosts'
 
-import ImageSelector from '../../../../components/Interface/ImageSelector'
-
 import '../index.css'
 
 const Posts = ({ posts }) => (
@@ -19,7 +17,6 @@ const Posts = ({ posts }) => (
         />
       )
     }
-    <ImageSelector />
   </ContentContainer>
 )
 
