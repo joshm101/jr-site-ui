@@ -17,12 +17,11 @@ const useStyles = makeStyles(theme => ({
     gridGap: '10px'
   },
   gridItem: {
-    margin: '4px',
-    display: 'flex',
-    alignItems: 'center'
+    margin: '4px'
   },
   image: {
-    width: '100%'
+    width: '100%',
+    paddingTop: '75%'
   },
   cardActionsArea: {
     backgroundColor: theme.palette.primary.main
