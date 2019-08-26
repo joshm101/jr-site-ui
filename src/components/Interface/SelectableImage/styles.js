@@ -2,7 +2,7 @@ const styles = theme => ({
   root: {
     position: 'relative'
   },
-  checkbox: {
+  selector: {
     '& svg': {
       color: theme.palette.secondary.main,
       fontSize: '2rem'
