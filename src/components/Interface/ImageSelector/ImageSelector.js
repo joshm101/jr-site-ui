@@ -45,7 +45,7 @@ function ImageSelector(props) {
   const imageIsSelected = imageUrl => (
     multiple ?
       value && value.includes(imageUrl) :
-      value && value === imageUrl
+      value === imageUrl
   )
 
   const handleMultiModeImageSelect = src => (
