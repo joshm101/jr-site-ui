@@ -32,7 +32,7 @@ const palette = {
   text: {
     primary: '#fff',
     secondary: '#000',
-    disabled: 'rgba(0, 0, 0, 0.38)'
+    disabled: 'rgba(255, 255, 255, 0.27)'
   }
 }
 
@@ -59,6 +59,54 @@ const overrides = {
           color: palette.text.primary
         }
       }
+    }
+  },
+  MuiTextField: {
+    root: {
+      '& label': {
+        color: palette.secondary.main,
+        '&.Mui-focused': {
+          color: palette.secondary.main
+        }
+      }
+    }
+  },
+  MuiOutlinedInput: {
+    root: {
+      '& fieldset': {
+        borderColor: palette.secondary.main
+      },
+      '&:hover': {
+        '& fieldset': {
+          borderColor: `${palette.secondary.light} !important`
+        }
+      },
+      '&.Mui-focused': {
+        '& fieldset': {
+          borderColor: `${palette.secondary.main} !important`
+        }
+      },
+      '&.Mui-focused:hover': {
+        '& fieldset': {
+          borderColor: `${palette.secondary.main} !important`
+        }
+      },
+      '& input': {
+        color: palette.text.primary
+      }
+    }
+  },
+  MuiTypography: {
+    root: {
+      color: palette.text.primary
+    }
+  },
+  MuiMobileStepper: {
+    root: {
+      backgroundColor: 'transparent'
+    },
+    dotActive: {
+      backgroundColor: palette.text.primary
     }
   },
   MuiPaper: {

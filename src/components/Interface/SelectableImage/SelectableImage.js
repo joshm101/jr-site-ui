@@ -28,11 +28,6 @@ function SelectableImage(props) {
     left: true
   }
 
-  const handleChange = () => {
-    console.log('src: ', src)
-    onSelect && onSelect(src)
-  }
-
   return (
     <div className={classes.root}>
       <Image src={src} className={className} />
@@ -40,12 +35,12 @@ function SelectableImage(props) {
         isTransparent={!isSelected}
         contentPositioning={overlayContentPositioning}
         className={classes.overlay}
-        onClick={handleChange}
+        onClick={() => onSelect(src)}
       >
         {mode === CHECKBOX &&
           <Checkbox
             checked={isSelected}
-            onChange={handleChange}
+            onChange={() => onSelect(src)}
             value={src}
             color="secondary"
             className={classes.selector}
@@ -54,7 +49,7 @@ function SelectableImage(props) {
         {mode === RADIO &&
           <Radio
             checked={isSelected}
-            onChange={handleChange}
+            onChange={() => onSelect(src)}
             value={src}
             color="secondary"
             className={classes.selector}

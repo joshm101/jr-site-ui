@@ -21,7 +21,8 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.background.main,
+    boxShadow: 'none'
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -49,6 +50,9 @@ const styles = theme => ({
     justifyContent: 'flex-end',
     padding: '0 8px',
     background: theme.palette.background.main,
+    '& button': {
+      color: theme.palette.text.primary
+    },
     ...theme.mixins.toolbar
   },
   drawerHeaderPlaceholder: {
