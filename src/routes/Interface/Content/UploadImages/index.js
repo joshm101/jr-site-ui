@@ -4,8 +4,7 @@ import Filter from '@material-ui/icons/Filter'
 
 import validImageFile from '../../../../utils/valid-image-file'
 import withUploadImages from '../../../../hoc/withUploadImages'
-import withImagesActions from '../../../../hoc/withImagesActions'
-import { useImages } from '../../../../hooks'
+import { useImages, useImagesActions } from '../../../../hooks'
 import InvalidFilesNotice from './InvalidFilesNotice'
 import ImagesUploadingNotice from './ImagesUploadingNotice'
 import FolderSelect from './FolderSelect'
@@ -26,7 +25,6 @@ const fileHandlerService = fileHandlerServiceCreator()
 
 function UploadImages(props) {
   const {
-    getImagesRoutine,
     uploadImages,
     uploadImagesRoutine,
     uploadImagesRemoveImage,
@@ -34,6 +32,8 @@ function UploadImages(props) {
     uploadImagesImageSelection,
     uploadImagesInvalidFilesNoticeDismissed
   } = props
+
+  const { getImagesRoutine } = useImagesActions()
 
   const {
     invalidFiles,
@@ -228,6 +228,4 @@ function UploadImages(props) {
   )
 }
 
-export default withUploadImages(
-  withImagesActions(UploadImages)
-)
+export default withUploadImages(UploadImages)
