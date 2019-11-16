@@ -3,8 +3,11 @@ import { Button, CircularProgress } from '@material-ui/core'
 import Filter from '@material-ui/icons/Filter'
 
 import validImageFile from '../../../../utils/valid-image-file'
-import withUploadImages from '../../../../hoc/withUploadImages'
-import { useImages, useImagesActions } from '../../../../hooks'
+import {
+  useImages,
+  useImagesActions,
+  useUploadImages
+} from '../../../../hooks'
 import InvalidFilesNotice from './InvalidFilesNotice'
 import ImagesUploadingNotice from './ImagesUploadingNotice'
 import FolderSelect from './FolderSelect'
@@ -23,15 +26,15 @@ import './index.css'
 
 const fileHandlerService = fileHandlerServiceCreator()
 
-function UploadImages(props) {
+function UploadImages() {
+  const { actions, state } = useUploadImages()
   const {
-    uploadImages,
     uploadImagesRoutine,
     uploadImagesRemoveImage,
     uploadImagesSelectFolder,
     uploadImagesImageSelection,
     uploadImagesInvalidFilesNoticeDismissed
-  } = props
+  } = actions
 
   const { getImagesRoutine } = useImagesActions()
 
@@ -41,7 +44,7 @@ function UploadImages(props) {
     uploadingImages,
     folders,
     selectedFolder
-  } = uploadImages
+  } = state
 
   const [
     displayImagesUploadingNotice,
@@ -126,7 +129,7 @@ function UploadImages(props) {
   }
 
   const handleUploadImagesClick = () => {
-    const { selectedFolder } = uploadImages
+    const { selectedFolder } = state
 
     uploadImagesRoutine(selectedFolder)
 
@@ -228,4 +231,4 @@ function UploadImages(props) {
   )
 }
 
-export default withUploadImages(UploadImages)
+export default UploadImages

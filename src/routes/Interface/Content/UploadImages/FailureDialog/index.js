@@ -10,16 +10,17 @@ import {
 } from '@material-ui/core'
 import Close from '@material-ui/icons/Close'
 
-import withUploadImages from '../../../../../hoc/withUploadImages'
+import { useUploadImages } from '../../../../../hooks'
 
 import './index.css'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-const FailureDialog = (props) => {
-  const { errors } = props.uploadImages
-  const { dismissUploadImagesFailureNotice } = props
+function FailureDialog() {
+  const { actions, state } = useUploadImages()
+  const { errors } = state
+  const { dismissUploadImagesFailureNotice } = actions
 
   const classes = useStyles()
   return (
@@ -53,4 +54,4 @@ const FailureDialog = (props) => {
   )
 }
 
-export default withUploadImages(FailureDialog)
+export default FailureDialog
