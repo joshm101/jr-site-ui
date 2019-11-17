@@ -2,7 +2,7 @@ import React from 'react'
 
 import ImageGrid from '../ImageGrid'
 import SelectableImage from '../SelectableImage'
-import withImages from '../../../hoc/withImages'
+import { useImages } from '../../../hooks'
 import theme from '../../../theme'
 
 import { IMAGE_SELECTION_MODES } from '../constants'
@@ -36,9 +36,10 @@ function ImageSelector(props) {
   const {
     value,
     onChange,
-    multiple,
-    images: imagesState
+    multiple
   } = props
+
+  const imagesState = useImages()
 
   const { data: images } = imagesState
 
@@ -91,4 +92,4 @@ function ImageSelector(props) {
   )
 }
 
-export default withImages(ImageSelector)
+export default ImageSelector

@@ -1,9 +1,10 @@
 import React, { useEffect, useCallback } from 'react'
 
 import PostForm from '../../../../components/Interface/PostForm'
-import withImagesActions from '../../../../hoc/withImagesActions'
+import { useImagesActions } from '../../../../hooks'
 
-function CreatePost({ getImagesRoutine }) {
+function CreatePost() {
+  const { getImagesRoutine } = useImagesActions()
   const initGetImagesRoutine = useCallback(
     () => getImagesRoutine(),
     [getImagesRoutine]
@@ -20,4 +21,4 @@ function CreatePost({ getImagesRoutine }) {
   )
 }
 
-export default withImagesActions(CreatePost)
+export default CreatePost
