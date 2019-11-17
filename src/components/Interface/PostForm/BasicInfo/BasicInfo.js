@@ -6,6 +6,13 @@ import Switch from '@material-ui/core/Switch'
 import FormControl from '@material-ui/core/FormControl'
 import FormHelperText from '@material-ui/core/FormHelperText'
 
+import {
+  TITLE_ID,
+  FEATURED_ID,
+  DESCRIPTION_ID,
+  EMBED_ID
+} from './BasicInfo.constants'
+
 import styles from '../styles'
 
 const useStyles = makeStyles(styles)
@@ -30,6 +37,7 @@ function BasicInfo(props) {
             error={errors.title}
             required
             {...text('title')}
+            inputProps={{ 'data-test-id': TITLE_ID }}
           />
           <FormHelperText className="title-helper-text">
             {errors.title}
@@ -43,7 +51,8 @@ function BasicInfo(props) {
                 color="secondary"
                 inputProps={{
                   id: 'featured',
-                  name: 'featured'
+                  name: 'featured',
+                  'data-test-id': FEATURED_ID
                 }}
                 value="featured"
                 {...checkbox('featured')}
@@ -61,6 +70,7 @@ function BasicInfo(props) {
         label="Description"
         margin="normal"
         variant="outlined"
+        inputProps={{ 'data-test-id': DESCRIPTION_ID }}
         {...textarea('description')}
       />
       <TextField
@@ -69,6 +79,7 @@ function BasicInfo(props) {
         label="Embeddable code"
         margin="normal"
         variant="outlined"
+        inputProps={{ 'data-test-id': EMBED_ID }}
         {...text('embedContent')}
       />
     </>
