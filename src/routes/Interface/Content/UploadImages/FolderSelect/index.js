@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core'
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder'
 
-import withUploadImages from '../../../../../hoc/withUploadImages'
+import { useUploadImages } from '../../../../../hooks'
 import NewFolderDialog from './NewFolderDialog'
 import Select from '../../../../../components/Select'
 
@@ -22,13 +22,10 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const FolderSelect = ({
-  value,
-  folders,
-  onChange,
-  disabled,
-  uploadImagesDefineNewFolderTrigger
-}) => {
+function FolderSelect(props) {
+  const { value, folders, onChange, disabled } = props
+  const { actions } = useUploadImages()
+  const { uploadImagesDefineNewFolderTrigger } = actions
   const defaultIndex = folders.findIndex(folder => folder === 'default')
   let finalFolders = [...folders]
   if (defaultIndex === -1) {
@@ -87,4 +84,4 @@ const FolderSelect = ({
   )
 }
 
-export default withUploadImages(FolderSelect)
+export default FolderSelect

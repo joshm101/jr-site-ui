@@ -11,7 +11,7 @@ import {
   Button
 } from '@material-ui/core'
 
-import withUploadImages from '../../../../../../hoc/withUploadImages'
+import { useUploadImages } from '../../../../../../hooks'
 
 import './index.css'
 
@@ -33,18 +33,19 @@ function NewFolderDialog(props) {
     setFolderNameInputTouched
   ] = useState(false)
 
+  const { actions, state } = useUploadImages()
+
   const {
     uploadImagesDefineNewFolderValueChange,
     uploadImagesDefineNewFolderCancel,
-    uploadImagesDefineNewFolderSubmit,
-    uploadImages
-  } = props
+    uploadImagesDefineNewFolderSubmit
+  } = actions
 
   const {
     folders,
     newFolderName,
     definingNewFolder
-  } = uploadImages
+  } = state
 
   const onInputChange = event => {
     setFolderNameInputTouched(true)
@@ -121,4 +122,4 @@ function NewFolderDialog(props) {
   )
 }
 
-export default withUploadImages(NewFolderDialog)
+export default NewFolderDialog

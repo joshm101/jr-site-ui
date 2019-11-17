@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import { Button } from '@material-ui/core'
 import Add from '@material-ui/icons/Add'
 import { Link } from 'react-router-dom'
@@ -8,46 +8,45 @@ import ContentHeader from '../ContentHeader'
 import ContentContainer from '../ContentContainer'
 import ImagesDisplay
   from '../../../../components/Interface/ImagesDisplay'
-import withImagesActions from '../../../../hoc/withImagesActions'
+import { useImagesActions } from '../../../../hooks'
 
 import './index.css'
 
-class Images extends Component {
-  componentDidMount() {
-    this.props.getImagesRoutine()
-  }
+function Images() {
+  const { getImagesRoutine } = useImagesActions()
 
-  render() {
-    return (
-      <div className="interface-images-container">
-        <ContentHeader
-          title="Site Images"
-          action={
-            <div className="initiate-file-upload-controls">
-              <Link
-                to="/interface/images/upload"
+  useEffect(() => {
+    getImagesRoutine()
+  }, [])
+
+  return (
+    <div className="interface-images-container">
+      <ContentHeader
+        title="Site Images"
+        action={
+          <div className="initiate-file-upload-controls">
+            <Link
+              to="/interface/images/upload"
+            >
+              <Button
+                variant="text"
+                color="secondary"
               >
-                <Button
-                  variant="text"
-                  color="secondary"
-                >
-                  <Add />&nbsp;
-                  Upload Images
-                </Button>
-              </Link>
-            </div>
-          }
-        />
-        <ContentContainer>
-          <ImagesDisplay />
-        </ContentContainer>
-      </div>
-    )
-  }
+                <Add />&nbsp;
+                Upload Images
+              </Button>
+            </Link>
+          </div>
+        }
+      />
+      <ContentContainer>
+        <ImagesDisplay />
+      </ContentContainer>
+    </div>
+  )
 }
 
 Images.propTypes = { getImagesRoutine: PropTypes.func }
 Images.defaultProps = { getImagesRoutine: () => { } }
 
-export const ImagesNoWrap = Images
-export default withImagesActions(Images)
+export default Images
