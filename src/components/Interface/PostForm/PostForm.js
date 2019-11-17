@@ -9,6 +9,13 @@ import ThumbnailSelection from './ThumbnailSelection'
 import ImagesSelection from './ImagesSelection'
 import FormActions, { Back, Next, Submit } from './FormActions'
 import FormErrors from './FormErrors'
+import {
+  MIN_STEP,
+  MAX_STEP,
+  STEP_IDS,
+  CURRENT_STEP_ROOT,
+  STEPS
+} from './PostForm.constants'
 
 import styles from './styles'
 
@@ -37,10 +44,9 @@ const initialFormValues = {
   images: []
 }
 
-function PostForm() {
-  const MIN_STEP = 1
-  const MAX_STEP = 3
+const ROOT_ELEMENT_ID = 'pf'
 
+function PostForm() {
   const [ currentStep, setCurrentStep ] = useState(1)
   const [ formState, formFieldInitializers ] = (
     useFormState(initialFormValues)
@@ -48,13 +54,10 @@ function PostForm() {
 
   const classes = useStyles()
 
-  console.log(formState)
   const { validity, touched, values, errors } = formState
 
   const handleSubmitClick = event => {
     event.preventDefault()
-
-    console.log(event)
 
     console.log('form state on submit: ', formState)
   }
@@ -113,37 +116,39 @@ function PostForm() {
     )
   ].filter(error => error)
 
-  const steps = [
-    {
-      title: 'Post Info',
-      node: (
-        <div className={classes.basicInfo}>
-          <BasicInfo
-            fieldInitializers={formFieldInitializers}
-            errors={errors}
-          />
-        </div>
-      )
-    },
-    {
-      title: 'Post Cover',
-      node: (
-        <div className={classes.imageSelection}>
-          <ThumbnailSelection fieldInitializers={formFieldInitializers} />
-        </div>
-      )
-    },
-    {
-      title: 'Post Images',
-      node: (
-        <div className={classes.imageSelection}>
-          <ImagesSelection fieldInitializers={formFieldInitializers} />
-        </div>
-      )
-    }
-  ]
+  const getStepNode = id => {
+    const {
+      POST_INFO,
+      POST_COVER_IMAGE,
+      POST_IMAGES
+    } = STEP_IDS
 
-  console.log('currentStep: ', currentStep)
+    switch (id) {
+      case POST_INFO:
+        return (
+          <div className={classes.basicInfo}>
+            <BasicInfo
+              fieldInitializers={formFieldInitializers}
+              errors={errors}
+            />
+          </div>
+        )
+      case POST_COVER_IMAGE:
+        return (
+          <div className={classes.imageSelection}>
+            <ThumbnailSelection fieldInitializers={formFieldInitializers} />
+          </div>
+        )
+      case POST_IMAGES:
+        return (
+          <div className={classes.imageSelection}>
+            <ImagesSelection fieldInitializers={formFieldInitializers} />
+          </div>
+        )
+      default:
+        return null
+    }
+  }
 
   const backButton = (
     <Back
@@ -154,6 +159,7 @@ function PostForm() {
 
   const nextButton = (
     <Next
+      data-test-id={`${ROOT_ELEMENT_ID}--actions-next`}
       onClick={handleNextButtonClick}
       disabled={currentStep === MAX_STEP}
     />
@@ -166,27 +172,32 @@ function PostForm() {
     />
   )
 
-  const renderCurrentStep = (steps, currentStepIndex) => (
-    <>
-      <Typography variant="h5">
-        {steps[currentStepIndex].title}
-      </Typography>
-      <div className={classes.stepContent}>
-        <div>{steps[currentStepIndex].node}</div>
+  const renderCurrentStep = (steps, currentStepIndex) => {
+    const stepId = steps[currentStepIndex].id
+    const dataTestId = `${CURRENT_STEP_ROOT}--${stepId}`
+
+    return (
+      <div data-test-id={dataTestId}>
+        <Typography variant="h5">
+          {steps[currentStepIndex].title}
+        </Typography>
+        <div className={classes.stepContent}>
+          <div>{getStepNode(stepId)}</div>
+        </div>
       </div>
-    </>
-  )
+    )
+  }
 
   return (
     <form autoComplete="off" className={classes.root}>
-      {renderCurrentStep(steps, currentStep - 1)}
+      {renderCurrentStep(STEPS, currentStep - 1)}
       <FormActions
         className={actionClasses(currentStep)}
         backButton={backButton}
         nextButton={nextButton}
         submitButton={submitButton}
         showSubmit={currentStep === MAX_STEP}
-        numSteps={steps.length}
+        numSteps={STEPS.length}
         activeStep={currentStep - 1}
       />
       {currentStep === MAX_STEP && formErrors.length > 0 &&
@@ -201,3 +212,4 @@ function PostForm() {
 }
 
 export default PostForm
+export { ROOT_ELEMENT_ID, MAX_STEP, MIN_STEP }
