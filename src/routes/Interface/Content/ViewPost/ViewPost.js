@@ -6,10 +6,10 @@ import {
 import ContentContainer from '../ContentContainer'
 import ContentHeader from '../ContentHeader'
 import PostDetails from '../../../../components/Interface/PostDetails'
+import { usePosts } from '../../../../hooks'
 
-import withPosts from '../../../../hoc/withPosts'
-
-const ViewPost = ({ match, posts }) => {
+const ViewPost = ({ match }) => {
+  const posts = usePosts()
   const _id = parseInt(match.params._id)
   const post = posts.data.find(post => post._id === _id)
 
@@ -36,4 +36,4 @@ const ViewPost = ({ match, posts }) => {
   )
 }
 
-export default withPosts(ViewPost)
+export default ViewPost

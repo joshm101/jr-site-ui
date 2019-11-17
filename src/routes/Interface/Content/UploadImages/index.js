@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, CircularProgress } from '@material-ui/core'
 import Filter from '@material-ui/icons/Filter'
 
 import validImageFile from '../../../../utils/valid-image-file'
-import withUploadImages from '../../../../hoc/withUploadImages'
-import withImagesActions from '../../../../hoc/withImagesActions'
-import withImages from '../../../../hoc/withImages'
+import {
+  useImages,
+  useImagesActions,
+  useUploadImages
+} from '../../../../hooks'
 import InvalidFilesNotice from './InvalidFilesNotice'
 import ImagesUploadingNotice from './ImagesUploadingNotice'
 import FolderSelect from './FolderSelect'
@@ -24,14 +26,38 @@ import './index.css'
 
 const fileHandlerService = fileHandlerServiceCreator()
 
-class UploadImages extends Component {
-  state = {
-    displayImagesUploadingNotice: false
-  }
-  componentDidMount() {
-    const { getImagesRoutine } = this.props
+function UploadImages() {
+  const { actions, state } = useUploadImages()
+  const {
+    uploadImagesRoutine,
+    uploadImagesRemoveImage,
+    uploadImagesSelectFolder,
+    uploadImagesImageSelection,
+    uploadImagesInvalidFilesNoticeDismissed
+  } = actions
+
+  const { getImagesRoutine } = useImagesActions()
+
+  const {
+    invalidFiles,
+    filePreviewUrls,
+    uploadingImages,
+    folders,
+    selectedFolder
+  } = state
+
+  const [
+    displayImagesUploadingNotice,
+    setDisplayImagesUploadingNotice
+  ] = useState(false)
+
+  useEffect(() => {
     getImagesRoutine()
-  }
+  }, [])
+
+  const { retrievingImages } = useImages()
+  const files = fileHandlerService.getFiles()
+
   /**
    * Reads the provided file to create
    * a base64 string for image previewing
@@ -39,8 +65,9 @@ class UploadImages extends Component {
    * @return {Promise<string>} - base64 image string
    * wrapped in Promise context
    */
-  readFile = (file) => {
+  const readFile = file => {
     const reader = new FileReader()
+
     return new Promise((resolve, reject) => {
       reader.onload = () => {
         resolve(reader.result)
@@ -63,10 +90,9 @@ class UploadImages extends Component {
    * notify the user
    * @return {void}
    */
-  readFiles = (files, invalidFiles) => {
-    const { uploadImagesImageSelection } = this.props
+  const readFiles = (files, invalidFiles) => {
     Promise.all(
-      files.map(this.readFile)
+      files.map(readFile)
     ).then(filePreviewUrls => {
       fileHandlerService.setFiles(files)
       uploadImagesImageSelection({
@@ -85,7 +111,7 @@ class UploadImages extends Component {
    * @param {Event} - <input type="file" />
    * change event object
    */
-  handleImagesSelection = (event) => {
+  const handleImagesSelection = (event) => {
     event.preventDefault()
     const files = Array.from(event.target.files)
     const validFiles = files.filter(file =>
@@ -95,135 +121,114 @@ class UploadImages extends Component {
       !validImageFile(file.name)
     )
 
-    this.readFiles(validFiles, invalidFiles)
+    readFiles(validFiles, invalidFiles)
   }
 
-  handleUnsupportedFileNoticeClose = () => {
-    const { uploadImagesInvalidFilesNoticeDismissed } = this.props
+  const handleUnsupportedFileNoticeClose = () => {
     uploadImagesInvalidFilesNoticeDismissed()
   }
 
-  handleUploadImagesClick = () => {
-    const { selectedFolder } = this.props.uploadImages
-    this.props.uploadImagesRoutine(selectedFolder)
-    this.setState({
-      displayImagesUploadingNotice: true
-    })
+  const handleUploadImagesClick = () => {
+    const { selectedFolder } = state
+
+    uploadImagesRoutine(selectedFolder)
+
+    setDisplayImagesUploadingNotice(true)
   }
 
-  handleFolderSelect = (event) => {
-    this.props.uploadImagesSelectFolder(event.target.value)
+  const handleFolderSelect = (event) => {
+    uploadImagesSelectFolder(event.target.value)
   }
 
-  handleImagesUploadingNoticeDismiss = () => {
-    this.setState({
-      displayImagesUploadingNotice: false
-    })
+  const handleImagesUploadingNoticeDismiss = () => {
+    setDisplayImagesUploadingNotice(false)
   }
 
-  handleSelectedFileRemoval = index => {
+  const handleSelectedFileRemoval = index => {
     // note that currying does not prevent recreation
     // of function on render (compared to an inline
     // function inside of render method)
     return () => {
-      const { uploadImagesRemoveImage } = this.props
-
       fileHandlerService.removeFile(index)
       uploadImagesRemoveImage(index)
     }
   }
 
-  render() {
-    const {
-      invalidFiles,
-      filePreviewUrls,
-      uploadingImages,
-      folders,
-      selectedFolder
-    } = this.props.uploadImages
-    const { retrievingImages } = this.props.images
-    const files = fileHandlerService.getFiles()
-
-    return (
-      <div>
-        <ContentHeader
-          title="Upload Images"
-          action={
-            <div className="file-upload-controls-wrapper">
-              <Button
-                component="label"
-                variant="text"
-                color="secondary"
-                disabled={retrievingImages || uploadingImages}
-              >
-                {!retrievingImages &&
-                  <Filter fontSize="inherit" />
-                }
-                {retrievingImages &&
-                  <CircularProgress size={15} color="primary" />
-                }
-                &nbsp;&nbsp;
-                {'Select images'}
-                <input
-                  id="select-images-input"
-                  multiple
-                  type="file"
-                  onChange={this.handleImagesSelection}
-                />
-              </Button>
-            </div>
-          }
-        />
-        <ContentContainer>
-          {files.length > 0 &&
-            <div className="files-selected-additional-controls">
-              <div className="folder-select-button-wrapper">
-                <FolderSelect
-                  folders={folders}
-                  value={selectedFolder}
-                  onChange={this.handleFolderSelect}
-                  disabled={uploadingImages}
-                />
-              </div>
-              <SubmitButton
-                onClick={this.handleUploadImagesClick}
-                uploadingImages={uploadingImages}
+  return (
+    <div>
+      <ContentHeader
+        title="Upload Images"
+        action={
+          <div className="file-upload-controls-wrapper">
+            <Button
+              component="label"
+              variant="text"
+              color="secondary"
+              disabled={retrievingImages || uploadingImages}
+            >
+              {!retrievingImages &&
+                <Filter fontSize="inherit" />
+              }
+              {retrievingImages &&
+                <CircularProgress size={15} color="primary" />
+              }
+              &nbsp;&nbsp;
+              {'Select images'}
+              <input
+                id="select-images-input"
+                multiple
+                type="file"
+                onChange={handleImagesSelection}
+              />
+            </Button>
+          </div>
+        }
+      />
+      <ContentContainer>
+        {files.length > 0 &&
+          <div className="files-selected-additional-controls">
+            <div className="folder-select-button-wrapper">
+              <FolderSelect
+                folders={folders}
+                value={selectedFolder}
+                onChange={handleFolderSelect}
+                disabled={uploadingImages}
               />
             </div>
-          }
-          {filePreviewUrls.length > 0 &&
-            <div className="file-upload-previews">
-              <ImageGrid>
-                {filePreviewUrls.map((imgSrc, index) => (
-                  <UploadPreviewImage
-                    key={imgSrc}
-                    src={imgSrc}
-                    imageIndex={index}
-                    onClick={this.handleSelectedFileRemoval(index)}
-                  />
-                ))}
-              </ImageGrid>
-            </div>
-          }
-          <InvalidFilesNotice
-            onClose={this.handleUnsupportedFileNoticeClose}
-            open={invalidFiles.length > 0}
-            invalidFiles={invalidFiles}
-          />
-          <ImagesUploadingNotice
-            onClose={this.handleImagesUploadingNoticeDismiss}
-            open={this.state.displayImagesUploadingNotice}
-          />
-          <SuccessDialog />
-          <FailureDialog />
-        </ContentContainer>
-      </div>
-    )
-  }
+            <SubmitButton
+              onClick={handleUploadImagesClick}
+              uploadingImages={uploadingImages}
+            />
+          </div>
+        }
+        {filePreviewUrls.length > 0 &&
+          <div className="file-upload-previews">
+            <ImageGrid>
+              {filePreviewUrls.map((imgSrc, index) => (
+                <UploadPreviewImage
+                  key={imgSrc}
+                  src={imgSrc}
+                  imageIndex={index}
+                  onClick={handleSelectedFileRemoval(index)}
+                />
+              ))}
+            </ImageGrid>
+          </div>
+        }
+        <InvalidFilesNotice
+          onClose={handleUnsupportedFileNoticeClose}
+          open={invalidFiles.length > 0}
+          invalidFiles={invalidFiles}
+        />
+        <ImagesUploadingNotice
+          onClose={handleImagesUploadingNoticeDismiss}
+          open={displayImagesUploadingNotice}
+        />
+        <SuccessDialog />
+        <FailureDialog />
+      </ContentContainer>
+    </div>
+  )
 }
 
-export default withUploadImages(
-  withImagesActions(
-    withImages(UploadImages)
-  )
-)
+export default UploadImages

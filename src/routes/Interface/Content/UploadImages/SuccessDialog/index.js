@@ -10,13 +10,14 @@ import {
 import Check from '@material-ui/icons/Check'
 import { Link } from 'react-router-dom'
 
-import withUploadImages from '../../../../../hoc/withUploadImages'
+import { useUploadImages } from '../../../../../hooks'
 
 import './index.css'
 
-const SuccessDialog = (props) => {
-  const { displaySuccessNotification } = props.uploadImages
-  const { dismissUploadImagesSuccessNotice } = props
+function SuccessDialog() {
+  const { state, actions } = useUploadImages()
+  const { displaySuccessNotification } = state
+  const { dismissUploadImagesSuccessNotice } = actions
   return (
     <Dialog
       open={displaySuccessNotification}
@@ -52,4 +53,4 @@ const SuccessDialog = (props) => {
   )
 }
 
-export default withUploadImages(SuccessDialog)
+export default SuccessDialog

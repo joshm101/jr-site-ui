@@ -1,13 +1,21 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import mockStore from 'redux-mock-store'
+
 import { shallow } from 'enzyme'
 
-import { ImagesNoWrap as Images } from './index'
+import Images from './index'
 
 const setup = overrideProps => {
+  const createMockStore = mockStore([])
+  const store = createMockStore()
+
   const props = { ...overrideProps }
 
   const wrapper = shallow(
-    <Images {...props} />
+    <Provider store={store}>
+      <Images {...props} />
+    </Provider>
   )
 
   return { wrapper, props }
