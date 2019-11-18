@@ -16,7 +16,12 @@ function* getImagesHanlder() {
     )
   } catch (error) {
     yield put(
-      getImagesRoutine.failure([error.message])
+      getImagesRoutine.failure([
+        {
+          error: 'Could not retrieve images',
+          details: error.message
+        }
+      ])
     )
   }
 }

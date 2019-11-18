@@ -77,14 +77,14 @@ class Interface extends Component {
             </Toolbar>
           </AppBar>
           {drawer}
-          <main
+          <div
             className={classNames(classes.content, {
               [classes.contentShift]: drawerOpen
             })}
           >
             <div className={classes.drawerHeaderPlaceholder} />
             <Content match={match} />
-          </main>
+          </div>
         </Hidden>
 
         <Hidden smUp>
@@ -97,11 +97,11 @@ class Interface extends Component {
               </Typography>
             </Toolbar>
           </AppBar>
-          <main className={classes.mobileContent}>
+          <div className={classes.mobileContent}>
             <div className={classes.drawerHeaderPlaceholder} />
             <Content match={match} />
             <MobileLinks />
-          </main>
+          </div>
         </Hidden>
       </div>
     )

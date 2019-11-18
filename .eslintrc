@@ -7,7 +7,8 @@
   "rules": {
     "space-before-function-paren": 0,
     "generator-star-spacing": 0,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "operator-linebreak": 0
   },
   "env": {
     "browser": true,

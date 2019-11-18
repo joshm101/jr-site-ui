@@ -5,7 +5,7 @@ import classname from 'classnames'
 
 import './index.css'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = (customStyles = {}) => makeStyles(theme => ({
   root: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 275px))',
@@ -14,10 +14,12 @@ const useStyles = makeStyles(theme => ({
 
     },
     justifyContent: 'center',
-    gridGap: '10px'
+    gridGap: '10px',
+    ...customStyles.root
   },
   gridItem: {
-    margin: '4px'
+    margin: '4px',
+    ...customStyles.gridItem
   },
   image: {
     width: '100%',
@@ -28,8 +30,8 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ImageGrid = ({ children }) => {
-  const classes = useStyles()
+const ImageGrid = ({ children, customStyles }) => {
+  const classes = useStyles(customStyles)()
 
   return (
     <div className={classes.root}>
