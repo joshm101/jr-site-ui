@@ -46,7 +46,7 @@ const initialFormValues = {
 
 const ROOT_ELEMENT_ID = 'pf'
 
-function PostForm() {
+function PostForm({ onSubmit }) {
   const [ currentStep, setCurrentStep ] = useState(1)
   const [ formState, formFieldInitializers ] = (
     useFormState(initialFormValues)
@@ -59,7 +59,13 @@ function PostForm() {
   const handleSubmitClick = event => {
     event.preventDefault()
 
-    console.log('form state on submit: ', formState)
+    const { values: postData } = formState
+    onSubmit(
+      {
+        ...postData,
+        type: '5dd20cffc8eba3001c02db6e' // TODO: REMOVE HARDCODED DEFAULT TYPE
+      }
+    )
   }
 
   const handleNextButtonClick = () => {

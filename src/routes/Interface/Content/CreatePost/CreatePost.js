@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 
 import PostForm from '../../../../components/Interface/PostForm'
-import { useImagesActions } from '../../../../hooks'
+import { useImagesActions, useCreatePost } from '../../../../hooks'
 
 function CreatePost() {
   const { getImagesRoutine } = useImagesActions()
@@ -14,9 +14,12 @@ function CreatePost() {
     initGetImagesRoutine()
   }, [initGetImagesRoutine])
 
+  const { actions } = useCreatePost()
+  const { createPostRoutine } = actions
+
   return (
     <>
-      <PostForm />
+      <PostForm onSubmit={createPostRoutine} />
     </>
   )
 }
