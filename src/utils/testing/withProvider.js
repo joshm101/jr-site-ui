@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import configureStore from 'redux-mock-store'
 
 export default (Component, initialState = {}) => {
-  const mockStore = configureStore(initialState)
+  const mockStore = configureStore()
   const mockStoreInitialState = mockStore(initialState)
 
   const withProvider = props => (

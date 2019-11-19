@@ -50,7 +50,16 @@ export const dismissUploadImagesFailureNotice = () => ({
   type: actionTypes.DISMISS_UPLOAD_IMAGES_FAILURE_NOTICE
 })
 
+export const dismissCreatePostSuccessNotice = () => ({
+  type: actionTypes.DISMISS_CREATE_POST_SUCCESS_NOTICE
+})
+
+export const dismissCreatePostFailureNotice = () => ({
+  type: actionTypes.DISMISS_CREATE_POST_FAILURE_NOTICE
+})
+
 export const loginFormSubmittedRoutine = createRoutine('LOGIN_FORM_SUBMITTED')
 export const tokenValidityCheckRoutine = createRoutine('TOKEN_VALIDITY_CHECK')
 export const getImagesRoutine = createRoutine('GET_IMAGES')
 export const uploadImagesRoutine = createRoutine('UPLOAD_IMAGES')
+export const createPostRoutine = createRoutine('CREATE_POST')
