@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/styles'
 
 import Login from './routes/Login'
@@ -12,6 +13,7 @@ class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Router>
           <div className="routes-wrapper">
             <Route path="/" component={Home} />
