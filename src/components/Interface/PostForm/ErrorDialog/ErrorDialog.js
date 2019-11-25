@@ -10,17 +10,16 @@ import {
 } from '@material-ui/core'
 import Close from '@material-ui/icons/Close'
 
-import { useUploadImages } from '../../../../../hooks'
+import { useCreatePost } from '../../../../hooks'
 
-import './index.css'
 import styles from './styles'
 
 const useStyles = makeStyles(styles)
 
-function FailureDialog() {
-  const { actions, state } = useUploadImages()
+function ErrorDialog() {
+  const { actions, state } = useCreatePost()
   const { errors } = state
-  const { dismissUploadImagesFailureNotice } = actions
+  const { dismissCreatePostFailureNotice } = actions
 
   const classes = useStyles()
   return (
@@ -30,22 +29,24 @@ function FailureDialog() {
       disableBackdropClick
     >
       <DialogTitle>
-        Upload Failure
+        Create Post Error
       </DialogTitle>
       <DialogContent>
         <div className={classes.icon}>
           <Close />
         </div>
         <DialogContentText>
-          An error occurred while uploading the image(s).
+          An error occurred while creating the post.
           Please check your connection and try again.
         </DialogContentText>
       </DialogContent>
       <DialogActions>
+        <Button>
+          Go to Dashboard
+        </Button>
         <Button
-          onClick={dismissUploadImagesFailureNotice}
+          onClick={dismissCreatePostFailureNotice}
           color="primary"
-          className="white-text"
         >
           Ok
         </Button>
@@ -54,4 +55,4 @@ function FailureDialog() {
   )
 }
 
-export default FailureDialog
+export default ErrorDialog
