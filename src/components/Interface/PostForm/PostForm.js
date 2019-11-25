@@ -14,6 +14,7 @@ import {
   Submit
 } from './FormActions'
 import FormErrors from './FormErrors'
+import ErrorDialog from './ErrorDialog'
 import {
   MIN_STEP,
   MAX_STEP,
@@ -228,6 +229,7 @@ function PostForm({ onSubmit }) {
           errorClassName={classes.formError}
         />
       }
+      <ErrorDialog />
     </form>
   )
 }
