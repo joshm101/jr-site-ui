@@ -45,3 +45,4 @@ const createPostReducer = (state = initialState, action) => {
 }
 
 export default createPostReducer
+export { initialState }
