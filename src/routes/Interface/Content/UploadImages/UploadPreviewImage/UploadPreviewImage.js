@@ -5,7 +5,7 @@ import {
   CardActions,
   CardMedia
 } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import Close from '@material-ui/icons/Close'
 
 import styles from './styles'
