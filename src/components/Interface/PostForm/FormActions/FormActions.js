@@ -1,7 +1,7 @@
 import React from 'react'
 import classname from 'classnames'
 import MobileStepper from '@material-ui/core/MobileStepper'
-import { makeStyles } from '@material-ui/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 import styles from '../styles'
 
