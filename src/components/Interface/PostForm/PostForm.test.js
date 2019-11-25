@@ -2,7 +2,10 @@ import React from 'react'
 import { createMount } from '@material-ui/core/test-utils'
 
 import { withTheme, configureMockStore, withProvider } from '../../../utils/testing'
-import { mockImagesState } from '../../../utils/testing/mocks'
+import {
+  mockImagesState,
+  createMockCreatePostState
+} from '../../../utils/testing/mocks'
 import PostForm, { ROOT_ELEMENT_ID } from './PostForm'
 import {
   MIN_STEP,
@@ -14,10 +17,15 @@ import {
 
 let mount
 
+const mockCreatePostState = createMockCreatePostState()
+
 const PostFormWithSetup = withTheme(
   withProvider(
     PostForm,
-    { images: mockImagesState }
+    {
+      images: mockImagesState,
+      createPost: mockCreatePostState
+    }
   )
 )
 
