@@ -1,1 +1,5 @@
-export { default } from './ErrorDialog'
+export {
+  default as ErrorDialog,
+  ErrorDialogTitle,
+  ErrorDialogContent
+} from './ErrorDialog'
