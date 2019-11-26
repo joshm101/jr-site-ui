@@ -1,4 +1,5 @@
 import React from 'react'
+import { MemoryRouter } from 'react-router-dom'
 import { createMount } from '@material-ui/core/test-utils'
 
 import {
@@ -32,7 +33,9 @@ const setup = (propOverrides, stateOverrides) => {
   )
 
   const wrapper = mount(
-    <ErrorDialogWithSetup {...props} />
+    <MemoryRouter>
+      <ErrorDialogWithSetup {...props} />
+    </MemoryRouter>
   )
 
   return { wrapper, props }
