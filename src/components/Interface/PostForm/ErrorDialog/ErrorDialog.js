@@ -22,12 +22,11 @@ const ROOT_ELEMENT_ID = 'pf-error-dialog'
 
 const { HOME } = ROUTES.INTERFACE_ROUTES
 
-function ErrorDialog() {
+function ErrorDialog({ children }) {
   const { actions, state } = useCreatePost()
   const { errors } = state
   const { dismissFailureNotice } = actions
 
-  const classes = useStyles()
   return (
     <Dialog
       open={errors.length > 0}
@@ -35,18 +34,9 @@ function ErrorDialog() {
       disableBackdropClick
       data-test-id={ROOT_ELEMENT_ID}
     >
-      <DialogTitle>
-        Create Post Error
-      </DialogTitle>
-      <DialogContent>
-        <div className={classes.icon}>
-          <Close />
-        </div>
-        <DialogContentText>
-          An error occurred while creating the post.
-          Please check your connection and try again.
-        </DialogContentText>
-      </DialogContent>
+      {React.Children.map(children, child =>
+        React.cloneElement(child)
+      )}
       <DialogActions>
         <Link to={HOME} style={{ textDecoration: 'none' }}>
           <Button onClick={dismissFailureNotice}>
@@ -64,5 +54,30 @@ function ErrorDialog() {
   )
 }
 
+function ErrorDialogTitle({ children }) {
+  return (
+    <DialogTitle>{children}</DialogTitle>
+  )
+}
+
+function ErrorDialogContent({ children }) {
+  const classes = useStyles()
+
+  return (
+    <DialogContent>
+      <div className={classes.icon}>
+        <Close />
+      </div>
+      <DialogContentText>
+        {children}
+      </DialogContentText>
+    </DialogContent>
+  )
+}
+
 export default ErrorDialog
-export { ROOT_ELEMENT_ID }
+export {
+  ROOT_ELEMENT_ID,
+  ErrorDialogTitle,
+  ErrorDialogContent
+}
