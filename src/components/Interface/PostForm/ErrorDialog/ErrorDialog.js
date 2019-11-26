@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 import {
   Dialog,
@@ -11,12 +12,15 @@ import {
 import Close from '@material-ui/icons/Close'
 
 import { useCreatePost } from '../../../../hooks'
+import { ROUTES } from '../../../../routes/routes.constants'
 
 import styles from './ErrorDialog.styles'
 
 const useStyles = makeStyles(styles)
 
 const ROOT_ELEMENT_ID = 'pf-error-dialog'
+
+const { HOME } = ROUTES.INTERFACE_ROUTES
 
 function ErrorDialog() {
   const { actions, state } = useCreatePost()
@@ -44,9 +48,11 @@ function ErrorDialog() {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button>
-          Go to Dashboard
-        </Button>
+        <Link to={HOME} style={{ textDecoration: 'none' }}>
+          <Button onClick={dismissFailureNotice}>
+            Go to Dashboard
+          </Button>
+        </Link>
         <Button
           onClick={dismissFailureNotice}
           color="primary"
