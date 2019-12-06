@@ -8,26 +8,34 @@ describe('notificationsReducer', () => {
   const notificationId = 'test123'
   const showNotificationAction = {
     type: SHOW_NOTIFICATION,
-    payload: notificationId
+    payload: {
+      id: notificationId,
+      props: { test: 'foo' }
+    }
   }
   const dismissNotificationAction = {
     type: DISMISS_NOTIFICATION,
     payload: notificationId
   }
 
-  it('should return initial state', () => {
-    const expectedState = { activeNotifications: [] }
+  const expectedInitialState = {
+    activeNotifications: [],
+    notificationProps: {}
+  }
 
+  it('should return initial state', () => {
     const actualState = notificationsReducer(undefined, {})
 
-    expect(actualState).toEqual(expectedState)
+    expect(actualState).toEqual(expectedInitialState)
   })
 
-  it('should add notification ID', () => {
-    const notificationId = 'test123'
-
+  it('should add notification', () => {
     const expectedState = {
-      activeNotifications: [notificationId]
+      ...expectedInitialState,
+      activeNotifications: [notificationId],
+      notificationProps: {
+        [notificationId]: { test: 'foo' }
+      }
     }
 
     const actualState = notificationsReducer(
@@ -38,12 +46,18 @@ describe('notificationsReducer', () => {
     expect(expectedState).toEqual(actualState)
   })
 
-  it('should remove notification ID', () => {
+  it('should remove notification', () => {
     const initialState = {
-      activeNotifications: []
+      ...expectedInitialState,
+      activeNotifications: [notificationId]
     }
 
-    const expectedState = { activeNotifications: [] }
+    const expectedState = {
+      activeNotifications: [],
+      notificationProps: {
+        [notificationId]: undefined
+      }
+    }
 
     const actualState = notificationsReducer(
       initialState,

@@ -4,7 +4,8 @@ import {
 } from '../../actions/actionTypes'
 
 const initialState = {
-  activeNotifications: []
+  activeNotifications: [],
+  notificationProps: {}
 }
 
 const notificationsReducer = (state = initialState, action) => {
@@ -14,8 +15,12 @@ const notificationsReducer = (state = initialState, action) => {
         ...state,
         activeNotifications: [
           ...state.activeNotifications,
-          action.payload
-        ]
+          action.payload.id
+        ],
+        notificationProps: {
+          ...state.notificationProps,
+          [action.payload.id]: action.payload.props
+        }
       }
     case DISMISS_NOTIFICATION:
       const notificationIdIndex = (
@@ -33,7 +38,11 @@ const notificationsReducer = (state = initialState, action) => {
           ...state.activeNotifications.slice(
             notificationIdIndex + 1
           )
-        ]
+        ],
+        notificationProps: {
+          ...state.notificationProps,
+          [action.payload]: undefined
+        }
       }
     default:
       return state
