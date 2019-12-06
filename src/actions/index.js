@@ -58,14 +58,14 @@ export const dismissCreatePostFailureNotice = () => ({
   type: actionTypes.DISMISS_CREATE_POST_FAILURE_NOTICE
 })
 
-export const showNotification = id => ({
+export const showNotification = payload => ({
   type: actionTypes.SHOW_NOTIFICATION,
-  payload: id
+  payload
 })
 
-export const dismissNotification = id => ({
+export const dismissNotification = payload => ({
   type: actionTypes.DISMISS_NOTIFICATION,
-  payload: id
+  payload
 })
 
 export const loginFormSubmittedRoutine = createRoutine('LOGIN_FORM_SUBMITTED')
