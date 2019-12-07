@@ -13,6 +13,11 @@ import ImagesUploadingNotice,
   NOTIFICATION_ID as IMAGES_UPLOADING_NOTIFICATION_ID
 } from '../../../routes/Interface/Content/UploadImages/ImagesUploadingNotice'
 
+import LoginAuthErrorNotice,
+{
+  NOTIFICATION_ID as AUTH_ERROR_NOTIFICATION_ID
+} from '../../../routes/Login/LoginAuthErrorNotice'
+
 function NotificationRenderer() {
   const { state, actions } = useNotifications()
 
@@ -46,6 +51,9 @@ function NotificationRenderer() {
 
       <ImagesUploadingNotice
         {...createProps(IMAGES_UPLOADING_NOTIFICATION_ID)}
+      />
+      <LoginAuthErrorNotice
+        {...createProps(AUTH_ERROR_NOTIFICATION_ID)}
       />
     </>
   )

@@ -25,8 +25,8 @@ const authReducer = (state = initialState, action) => {
       return handleTokenValidityCheckSuccess(state, action)
     case tokenValidityCheckRoutine.FAILURE:
       return handleTokenValidityCheckFailure(state, action)
-    case actionTypes.AUTH_ERRORS_DISMISSED:
-      return handleAuthErrorsDismissed(state)
+    case actionTypes.CLEAR_AUTH_ERRORS:
+      return handleClearAuthErrors(state, action)
     default:
       return state
   }
@@ -67,7 +67,7 @@ const handleTokenValidityCheckFailure = (state, action) => ({
   errors: action.payload
 })
 
-const handleAuthErrorsDismissed = (state) => ({
+const handleClearAuthErrors = (state, action) => ({
   ...state,
   errors: []
 })
