@@ -7,6 +7,8 @@ import {
 } from '@material-ui/core'
 import Check from '@material-ui/icons/Check'
 
+const NOTIFICATION_ID = 'upload-images--images-uploading'
+
 const ImagesUploadingNotice = ({ open, onClose }) => (
   <Snackbar
     open={open}
@@ -15,13 +17,11 @@ const ImagesUploadingNotice = ({ open, onClose }) => (
     onClose={onClose}
   >
     <SnackbarContent
-      className="white-text"
       action={
         <Button
           color="primary"
           size="small"
           onClick={onClose}
-          className="white-text"
         >
           <Check fontSize="inherit" />&nbsp;&nbsp;
           Ok
@@ -30,12 +30,11 @@ const ImagesUploadingNotice = ({ open, onClose }) => (
       message={
         <div>
           <Typography
-            className="white-text"
             style={{ marginBottom: '15px' }}
           >
             Image uploads are currently being processed.
           </Typography>
-          <Typography className="white-text">
+          <Typography>
             This may take some time depending on your connection
             speed and the total size of the image(s) being uploaded.
           </Typography>
@@ -46,3 +45,4 @@ const ImagesUploadingNotice = ({ open, onClose }) => (
 )
 
 export default ImagesUploadingNotice
+export { NOTIFICATION_ID }

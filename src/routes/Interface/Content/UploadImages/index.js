@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Button, CircularProgress } from '@material-ui/core'
 import Filter from '@material-ui/icons/Filter'
 
@@ -6,10 +6,15 @@ import validImageFile from '../../../../utils/valid-image-file'
 import {
   useImages,
   useImagesActions,
-  useUploadImages
+  useUploadImages,
+  useNotifications
 } from '../../../../hooks'
-import InvalidFilesNotice from './InvalidFilesNotice'
-import ImagesUploadingNotice from './ImagesUploadingNotice'
+import {
+  NOTIFICATION_ID as INVALID_FILES_NOTIFICATION_ID
+} from './InvalidFilesNotice'
+import {
+  NOTIFICATION_ID as IMAGES_UPLOADING_NOTIFICATION_ID
+} from './ImagesUploadingNotice'
 import FolderSelect from './FolderSelect'
 import SubmitButton from './SubmitButton'
 import SuccessDialog from './SuccessDialog'
@@ -27,29 +32,23 @@ import './index.css'
 const fileHandlerService = fileHandlerServiceCreator()
 
 function UploadImages() {
+  const { actions: notificationActions } = useNotifications()
   const { actions, state } = useUploadImages()
   const {
     uploadImagesRoutine,
     uploadImagesRemoveImage,
     uploadImagesSelectFolder,
-    uploadImagesImageSelection,
-    uploadImagesInvalidFilesNoticeDismissed
+    uploadImagesImageSelection
   } = actions
 
   const { getImagesRoutine } = useImagesActions()
 
   const {
-    invalidFiles,
     filePreviewUrls,
     uploadingImages,
     folders,
     selectedFolder
   } = state
-
-  const [
-    displayImagesUploadingNotice,
-    setDisplayImagesUploadingNotice
-  ] = useState(false)
 
   useEffect(() => {
     getImagesRoutine()
@@ -91,6 +90,14 @@ function UploadImages() {
    * @return {void}
    */
   const readFiles = (files, invalidFiles) => {
+    if (invalidFiles.length) {
+      notificationActions.showNotification({
+        id: INVALID_FILES_NOTIFICATION_ID,
+        props: {
+          invalidFiles: invalidFiles.map(file => ({ name: file.name }))
+        }
+      })
+    }
     Promise.all(
       files.map(readFile)
     ).then(filePreviewUrls => {
@@ -124,24 +131,19 @@ function UploadImages() {
     readFiles(validFiles, invalidFiles)
   }
 
-  const handleUnsupportedFileNoticeClose = () => {
-    uploadImagesInvalidFilesNoticeDismissed()
-  }
-
   const handleUploadImagesClick = () => {
     const { selectedFolder } = state
 
     uploadImagesRoutine(selectedFolder)
 
-    setDisplayImagesUploadingNotice(true)
+    notificationActions.showNotification({
+      id: IMAGES_UPLOADING_NOTIFICATION_ID,
+      props: {}
+    })
   }
 
   const handleFolderSelect = (event) => {
     uploadImagesSelectFolder(event.target.value)
-  }
-
-  const handleImagesUploadingNoticeDismiss = () => {
-    setDisplayImagesUploadingNotice(false)
   }
 
   const handleSelectedFileRemoval = index => {
@@ -215,15 +217,6 @@ function UploadImages() {
             </ImageGrid>
           </div>
         }
-        <InvalidFilesNotice
-          onClose={handleUnsupportedFileNoticeClose}
-          open={invalidFiles.length > 0}
-          invalidFiles={invalidFiles}
-        />
-        <ImagesUploadingNotice
-          onClose={handleImagesUploadingNoticeDismiss}
-          open={displayImagesUploadingNotice}
-        />
         <SuccessDialog />
         <FailureDialog />
       </ContentContainer>

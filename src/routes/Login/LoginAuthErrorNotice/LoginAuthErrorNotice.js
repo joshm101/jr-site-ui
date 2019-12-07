@@ -3,10 +3,17 @@ import Snackbar from '@material-ui/core/Snackbar'
 
 import { useAuth } from '../../../hooks'
 
-function LoginAuthErrorNotice({ onClose }) {
-  const { state } = useAuth()
+const NOTIFICATION_ID = 'login--auth-error'
+
+function LoginAuthErrorNotice({ open, onClose }) {
+  const { state, actions } = useAuth()
 
   const { errors: authErrors } = state
+
+  const onNotificationClose = () => {
+    onClose()
+    actions.clearAuthErrors()
+  }
 
   return (
     <Snackbar
@@ -15,8 +22,8 @@ function LoginAuthErrorNotice({ onClose }) {
         horizontal: 'left'
       }}
       autoHideDuration={3000}
-      open={authErrors.length > 0}
-      onClose={onClose}
+      open={open}
+      onClose={onNotificationClose}
       message={
         authErrors.map(authError =>
           <div key={authError}>
@@ -29,3 +36,4 @@ function LoginAuthErrorNotice({ onClose }) {
 }
 
 export default LoginAuthErrorNotice
+export { NOTIFICATION_ID }

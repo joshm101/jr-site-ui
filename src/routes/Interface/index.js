@@ -17,6 +17,7 @@ import Content from './Content'
 import MobileLinks from '../../components/Interface/MobileLinks'
 
 import styles from './styles'
+import NotificationRenderer from '../../components/Interface/NotificationRenderer'
 
 class Interface extends Component {
   state = {
@@ -103,6 +104,7 @@ class Interface extends Component {
             <MobileLinks />
           </div>
         </Hidden>
+        <NotificationRenderer />
       </div>
     )
   }

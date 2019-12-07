@@ -2,17 +2,13 @@ import { createRoutine } from 'redux-saga-routines'
 
 import * as actionTypes from './actionTypes'
 
-export const authErrorsDismissed = () => ({
-  type: actionTypes.AUTH_ERRORS_DISMISSED
+export const clearAuthErrors = () => ({
+  type: actionTypes.CLEAR_AUTH_ERRORS
 })
 
 export const uploadImagesImageSelection = (payload) => ({
   type: actionTypes.UPLOAD_IMAGES_IMAGE_SELECTION,
   payload
-})
-
-export const uploadImagesInvalidFilesNoticeDismissed = () => ({
-  type: actionTypes.UPLOAD_IMAGES_INVALID_FILES_NOTICE_DISMISSED
 })
 
 export const uploadImagesSelectFolder = (payload) => ({
@@ -56,6 +52,16 @@ export const dismissCreatePostSuccessNotice = () => ({
 
 export const dismissCreatePostFailureNotice = () => ({
   type: actionTypes.DISMISS_CREATE_POST_FAILURE_NOTICE
+})
+
+export const showNotification = payload => ({
+  type: actionTypes.SHOW_NOTIFICATION,
+  payload
+})
+
+export const dismissNotification = payload => ({
+  type: actionTypes.DISMISS_NOTIFICATION,
+  payload
 })
 
 export const loginFormSubmittedRoutine = createRoutine('LOGIN_FORM_SUBMITTED')
