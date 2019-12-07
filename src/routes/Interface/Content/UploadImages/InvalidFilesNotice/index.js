@@ -2,7 +2,9 @@ import React from 'react'
 import { Button, Snackbar, SnackbarContent } from '@material-ui/core'
 import Check from '@material-ui/icons/Check'
 
-const InvalidFilesNotice = ({ open, invalidFiles, onClose }) => (
+const NOTIFICATION_ID = 'upload-images--invalid-files'
+
+const InvalidFilesNotice = ({ open, invalidFiles = [], onClose }) => (
   <Snackbar
     open={open}
     autoHideDuration={6000}
@@ -42,3 +44,4 @@ const InvalidFilesNotice = ({ open, invalidFiles, onClose }) => (
 )
 
 export default InvalidFilesNotice
+export { NOTIFICATION_ID }

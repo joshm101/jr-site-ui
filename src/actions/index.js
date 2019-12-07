@@ -11,10 +11,6 @@ export const uploadImagesImageSelection = (payload) => ({
   payload
 })
 
-export const uploadImagesInvalidFilesNoticeDismissed = () => ({
-  type: actionTypes.UPLOAD_IMAGES_INVALID_FILES_NOTICE_DISMISSED
-})
-
 export const uploadImagesSelectFolder = (payload) => ({
   type: actionTypes.UPLOAD_IMAGES_SELECT_FOLDER,
   payload
