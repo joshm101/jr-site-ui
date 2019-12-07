@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import {
   Button,
-  CircularProgress,
-  Snackbar
+  CircularProgress
 } from '@material-ui/core'
 
 import ValidatedLoginField from './ValidatedLoginField'
+import LoginAuthErrorNotice from './LoginAuthErrorNotice'
 import { useAuth } from '../../hooks'
 
 import './index.css'
@@ -119,7 +119,6 @@ function Login(props) {
     checkingTokenValidity
   } = state
   const loading = loginSubmitting || checkingTokenValidity
-  const authErrors = state.errors
   const {
     usernameTouched,
     passwordTouched
@@ -173,22 +172,7 @@ function Login(props) {
           </div>
         </form>
       </div>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left'
-        }}
-        autoHideDuration={3000}
-        open={authErrors.length > 0}
-        onClose={handleErrorDismiss}
-        message={
-          authErrors.map(authError =>
-            <div key={authError}>
-              {authError}
-            </div>
-          )
-        }
-      />
+      <LoginAuthErrorNotice onClose={handleErrorDismiss} />
     </div>
   )
 }
