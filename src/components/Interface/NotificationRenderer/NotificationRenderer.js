@@ -6,8 +6,12 @@ import
 InvalidFilesNotification,
 {
   NOTIFICATION_ID as INVALID_FILES_NOTIFICATION_ID
-}
-  from '../../../routes/Interface/Content/UploadImages/InvalidFilesNotice'
+} from '../../../routes/Interface/Content/UploadImages/InvalidFilesNotice'
+
+import ImagesUploadingNotice,
+{
+  NOTIFICATION_ID as IMAGES_UPLOADING_NOTIFICATION_ID
+} from '../../../routes/Interface/Content/UploadImages/ImagesUploadingNotice'
 
 function NotificationRenderer() {
   const { state, actions } = useNotifications()
@@ -26,12 +30,22 @@ function NotificationRenderer() {
     actions.dismissNotification(notificationId)
   }
 
+  const createProps = notificationId => {
+    return {
+      ...getNotificationProps(notificationId),
+      onClose: dismissNotification(notificationId),
+      open: notificationIsOpen(notificationId)
+    }
+  }
+
   return (
     <>
       <InvalidFilesNotification
-        {...getNotificationProps(INVALID_FILES_NOTIFICATION_ID)}
-        onClose={dismissNotification(INVALID_FILES_NOTIFICATION_ID)}
-        open={notificationIsOpen(INVALID_FILES_NOTIFICATION_ID)}
+        {...createProps(INVALID_FILES_NOTIFICATION_ID)}
+      />
+
+      <ImagesUploadingNotice
+        {...createProps(IMAGES_UPLOADING_NOTIFICATION_ID)}
       />
     </>
   )

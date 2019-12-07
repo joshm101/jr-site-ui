@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Button, CircularProgress } from '@material-ui/core'
 import Filter from '@material-ui/icons/Filter'
 
@@ -12,7 +12,9 @@ import {
 import {
   NOTIFICATION_ID as INVALID_FILES_NOTIFICATION_ID
 } from './InvalidFilesNotice'
-import ImagesUploadingNotice from './ImagesUploadingNotice'
+import {
+  NOTIFICATION_ID as IMAGES_UPLOADING_NOTIFICATION_ID
+} from './ImagesUploadingNotice'
 import FolderSelect from './FolderSelect'
 import SubmitButton from './SubmitButton'
 import SuccessDialog from './SuccessDialog'
@@ -47,11 +49,6 @@ function UploadImages() {
     folders,
     selectedFolder
   } = state
-
-  const [
-    displayImagesUploadingNotice,
-    setDisplayImagesUploadingNotice
-  ] = useState(false)
 
   useEffect(() => {
     getImagesRoutine()
@@ -139,15 +136,14 @@ function UploadImages() {
 
     uploadImagesRoutine(selectedFolder)
 
-    setDisplayImagesUploadingNotice(true)
+    notificationActions.showNotification({
+      id: IMAGES_UPLOADING_NOTIFICATION_ID,
+      props: {}
+    })
   }
 
   const handleFolderSelect = (event) => {
     uploadImagesSelectFolder(event.target.value)
-  }
-
-  const handleImagesUploadingNoticeDismiss = () => {
-    setDisplayImagesUploadingNotice(false)
   }
 
   const handleSelectedFileRemoval = index => {
@@ -221,10 +217,6 @@ function UploadImages() {
             </ImageGrid>
           </div>
         }
-        <ImagesUploadingNotice
-          onClose={handleImagesUploadingNoticeDismiss}
-          open={displayImagesUploadingNotice}
-        />
         <SuccessDialog />
         <FailureDialog />
       </ContentContainer>
