@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   loginFormSubmittedRoutine,
   tokenValidityCheckRoutine,
-  authErrorsDismissed
+  clearAuthErrors
 } from '../actions'
 
 function useAuth() {
@@ -17,8 +17,8 @@ function useAuth() {
     tokenValidityCheckRoutine: (...args) => dispatch(
       tokenValidityCheckRoutine(...args)
     ),
-    authErrorsDismissed: (...args) => dispatch(
-      authErrorsDismissed(...args)
+    clearAuthErrors: (...args) => dispatch(
+      clearAuthErrors(...args)
     )
   }
 

@@ -4,9 +4,12 @@ import {
   CircularProgress
 } from '@material-ui/core'
 
+import NotificationRenderer from '../../components/Interface/NotificationRenderer'
 import ValidatedLoginField from './ValidatedLoginField'
-import LoginAuthErrorNotice from './LoginAuthErrorNotice'
-import { useAuth } from '../../hooks'
+import {
+  NOTIFICATION_ID as AUTH_ERROR_NOTIFICATION_ID
+} from './LoginAuthErrorNotice'
+import { useAuth, useNotifications } from '../../hooks'
 
 import './index.css'
 
@@ -26,12 +29,13 @@ function Login(props) {
   ] = useState(initialFormState)
 
   const { state, actions } = useAuth()
+  const { actions: notificationActions } = useNotifications()
+  const { errors: authErrors } = state
 
   const { tokenValid } = state
   const {
     tokenValidityCheckRoutine,
-    loginFormSubmittedRoutine,
-    authErrorsDismissed
+    loginFormSubmittedRoutine
   } = actions
 
   useEffect(() => {
@@ -44,6 +48,17 @@ function Login(props) {
       history.push('/interface')
     }
   }, [tokenValid])
+
+  useEffect(() => {
+    if (authErrors.length > 0) {
+      notificationActions.showNotification(
+        {
+          id: AUTH_ERROR_NOTIFICATION_ID,
+          props: {}
+        }
+      )
+    }
+  }, [authErrors])
 
   /**
    * Login form submit event handler
@@ -73,13 +88,6 @@ function Login(props) {
       [name]: value,
       [touchedProperty]: true
     })
-  }
-
-  /**
-   * Error notification dismiss event handler
-   */
-  const handleErrorDismiss = () => {
-    authErrorsDismissed()
   }
 
   /**
@@ -172,7 +180,7 @@ function Login(props) {
           </div>
         </form>
       </div>
-      <LoginAuthErrorNotice onClose={handleErrorDismiss} />
+      <NotificationRenderer />
     </div>
   )
 }
