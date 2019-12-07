@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import {
   uploadImagesImageSelection,
-  uploadImagesInvalidFilesNoticeDismissed,
   uploadImagesRoutine,
   uploadImagesSelectFolder,
   uploadImagesDefineNewFolderTrigger,
@@ -21,9 +20,6 @@ function useUploadImages() {
   const uploadImagesActions = {
     uploadImagesImageSelection: (...args) => dispatch(
       uploadImagesImageSelection(...args)
-    ),
-    uploadImagesInvalidFilesNoticeDismissed: (...args) => dispatch(
-      uploadImagesInvalidFilesNoticeDismissed(...args)
     ),
     uploadImagesRoutine: (...args) => dispatch(
       uploadImagesRoutine(...args)
