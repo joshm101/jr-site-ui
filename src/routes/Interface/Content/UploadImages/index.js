@@ -6,9 +6,12 @@ import validImageFile from '../../../../utils/valid-image-file'
 import {
   useImages,
   useImagesActions,
-  useUploadImages
+  useUploadImages,
+  useNotifications
 } from '../../../../hooks'
-import InvalidFilesNotice from './InvalidFilesNotice'
+import {
+  NOTIFICATION_ID as INVALID_FILES_NOTIFICATION_ID
+} from './InvalidFilesNotice'
 import ImagesUploadingNotice from './ImagesUploadingNotice'
 import FolderSelect from './FolderSelect'
 import SubmitButton from './SubmitButton'
@@ -27,19 +30,18 @@ import './index.css'
 const fileHandlerService = fileHandlerServiceCreator()
 
 function UploadImages() {
+  const { actions: notificationActions } = useNotifications()
   const { actions, state } = useUploadImages()
   const {
     uploadImagesRoutine,
     uploadImagesRemoveImage,
     uploadImagesSelectFolder,
-    uploadImagesImageSelection,
-    uploadImagesInvalidFilesNoticeDismissed
+    uploadImagesImageSelection
   } = actions
 
   const { getImagesRoutine } = useImagesActions()
 
   const {
-    invalidFiles,
     filePreviewUrls,
     uploadingImages,
     folders,
@@ -91,6 +93,14 @@ function UploadImages() {
    * @return {void}
    */
   const readFiles = (files, invalidFiles) => {
+    if (invalidFiles.length) {
+      notificationActions.showNotification({
+        id: INVALID_FILES_NOTIFICATION_ID,
+        props: {
+          invalidFiles: invalidFiles.map(file => ({ name: file.name }))
+        }
+      })
+    }
     Promise.all(
       files.map(readFile)
     ).then(filePreviewUrls => {
@@ -122,10 +132,6 @@ function UploadImages() {
     )
 
     readFiles(validFiles, invalidFiles)
-  }
-
-  const handleUnsupportedFileNoticeClose = () => {
-    uploadImagesInvalidFilesNoticeDismissed()
   }
 
   const handleUploadImagesClick = () => {
@@ -215,11 +221,6 @@ function UploadImages() {
             </ImageGrid>
           </div>
         }
-        <InvalidFilesNotice
-          onClose={handleUnsupportedFileNoticeClose}
-          open={invalidFiles.length > 0}
-          invalidFiles={invalidFiles}
-        />
         <ImagesUploadingNotice
           onClose={handleImagesUploadingNoticeDismiss}
           open={displayImagesUploadingNotice}

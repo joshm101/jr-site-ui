@@ -28,8 +28,6 @@ const uploadImagesReducer = (state = initialState, action) => {
       return handleGetImagesSuccess(state, action)
     case actionTypes.UPLOAD_IMAGES_IMAGE_SELECTION:
       return handleUploadImagesImageSelection(state, action)
-    case actionTypes.UPLOAD_IMAGES_INVALID_FILES_NOTICE_DISMISSED:
-      return handleUploadImagesInvalidFilesNoticeDismissed(state)
     case actionTypes.UPLOAD_IMAGES_SELECT_FOLDER:
       return handleUploadImagesSelectFolder(state, action)
     case actionTypes.UPLOAD_IMAGES_DEFINE_NEW_FOLDER_TRIGGER:
@@ -56,13 +54,6 @@ const handleUploadImagesImageSelection = (state, action) => {
     ...state,
     filePreviewUrls: action.payload.filePreviewUrls || [],
     invalidFiles: action.payload.invalidFiles || []
-  }
-}
-
-const handleUploadImagesInvalidFilesNoticeDismissed = (state) => {
-  return {
-    ...state,
-    invalidFiles: []
   }
 }
 
