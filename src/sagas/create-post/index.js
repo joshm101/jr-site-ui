@@ -1,7 +1,12 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 
-import { createPostRoutine } from '../../actions'
+import {
+  createPostRoutine,
+  showNotification
+} from '../../actions'
 import * as postsService from '../../services/posts'
+
+import { SUCCESS_NOTIFICATION_ID } from '../../components/Interface/PostForm'
 
 function* handleCreatePost(action) {
   const { payload } = action
@@ -14,6 +19,13 @@ function* handleCreatePost(action) {
 
     yield put(
       createPostRoutine.success(result)
+    )
+
+    yield put(
+      showNotification({
+        id: SUCCESS_NOTIFICATION_ID,
+        props: { message: 'The post was successfully created!' }
+      })
     )
   } catch (error) {
     yield put(
