@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import { ConnectedRouter as Router } from 'connected-react-router'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { ThemeProvider } from '@material-ui/core/styles'
 
+import { history } from './store'
 import Login from './routes/Login'
 import Home from './routes/Home'
 import Interface from './routes/Interface'
@@ -15,7 +17,7 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Router>
+        <Router history={history}>
           <div className="routes-wrapper">
             <Route path={`/${ROUTES.HOME}`} component={Home} />
             <Route exact path={`/${ROUTES.LOGIN}`} component={Login} />
