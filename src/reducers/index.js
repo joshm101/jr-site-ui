@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { connectRouter } from 'connected-react-router'
 
 import auth from './auth'
 import posts from './posts'
@@ -7,13 +8,22 @@ import uploadImages from './upload-images'
 import createPost from './create-post'
 import notifications from './notifications'
 
-const rootReducer = combineReducers({
+const appReducers = {
   auth,
   posts,
   images,
   uploadImages,
   createPost,
   notifications
-})
+}
 
-export default rootReducer
+const reducersWithRouter = reducers => history => (
+  combineReducers({
+    ...reducers,
+    router: connectRouter(history)
+  })
+)
+
+const createRootReducer = reducersWithRouter(appReducers)
+
+export default createRootReducer
