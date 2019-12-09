@@ -24,6 +24,6 @@ const reducersWithRouter = reducers => history => (
   })
 )
 
-const rootReducer = reducersWithRouter(appReducers)
+const createRootReducer = reducersWithRouter(appReducers)
 
-export default rootReducer
+export default createRootReducer
