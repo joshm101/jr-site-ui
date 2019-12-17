@@ -1,5 +1,13 @@
-import { mockPost } from '../posts'
+import { mockPost, mockPosts } from '../posts'
 
 const createPost = data => new Promise(resolve => resolve(mockPost))
+const getPosts = () => (
+  new Promise(resolve =>
+    resolve({
+      data: mockPosts,
+      meta: { page: 1, pageSize: 10, total: mockPosts.length }
+    })
+  )
+)
 
-export { createPost }
+export { createPost, getPosts }
