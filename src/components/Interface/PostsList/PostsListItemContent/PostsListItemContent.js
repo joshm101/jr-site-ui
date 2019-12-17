@@ -26,7 +26,7 @@ function PostsListItemContent({ post }) {
         sm={2}
         md={1}
       >
-        <Avatar src={post.thumbnail} />
+        <Avatar src={post.thumbnailImage} />
       </Grid>
       <Grid
         item

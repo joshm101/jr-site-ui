@@ -5,13 +5,15 @@ import tokenValidSaga from './token-valid'
 import getImagesSaga from './get-images'
 import uploadImagesSaga from './upload-images'
 import createPostSaga from './create-post'
+import getPostsSaga from './get-posts'
 
 const sagas = [
   loginSaga,
   tokenValidSaga,
   getImagesSaga,
   uploadImagesSaga,
-  createPostSaga
+  createPostSaga,
+  getPostsSaga
 ]
 
 export default function* rootSaga() {

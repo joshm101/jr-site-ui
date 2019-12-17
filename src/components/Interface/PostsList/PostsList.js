@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import Grid from '@material-ui/core/Grid'
@@ -9,12 +9,21 @@ import PostsListItemActions from './PostsListItemActions'
 import { usePosts } from '../../../hooks'
 
 function PostsList() {
-  const postsState = usePosts()
-  const { data: posts } = postsState
+  const {
+    state,
+    actions
+  } = usePosts()
+
+  const { data: postsData } = state
+  const { getPosts } = actions
+
+  useEffect(() => {
+    getPosts()
+  }, [])
 
   return (
     <List>
-      {posts.map(post =>
+      {postsData.map(post =>
         <ListItem key={post._id}>
           <Grid container alignItems="center">
             <Grid item xs={9}>
