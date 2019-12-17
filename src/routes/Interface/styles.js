@@ -84,7 +84,7 @@ const styles = theme => ({
   mobileContent: {
     backgroundColor: theme.palette.background.main,
     width: '100%',
-    padding: '24px',
+    padding: '8px',
     overflow: 'auto',
     marginBottom: '56px'
   }
