@@ -1,3 +1,5 @@
+import { grey } from '@material-ui/core/colors'
+
 const DEFAULT_PALETTE = {
   type: 'dark',
   primary: {
@@ -15,7 +17,8 @@ const DEFAULT_PALETTE = {
   background: {
     main: '#181a1b',
     light: '#1f2123'
-  }
+  },
+  grey
 }
 
 export { DEFAULT_PALETTE }
