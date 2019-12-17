@@ -1,3 +1,3 @@
 export { mockImagesData, mockImagesState } from './images'
-export { mockPost } from './posts'
+export { mockPost, mockPosts } from './posts'
 export { createMockCreatePostState } from './createPost'

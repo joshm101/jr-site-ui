@@ -1,6 +1,6 @@
 import moxios from 'moxios'
 
-import { mockPost } from '../../utils/testing/mocks'
+import { mockPost, mockPosts } from '../../utils/testing/mocks'
 
 const createPostMock = () => (
   moxios.wait(() => {
@@ -26,4 +26,40 @@ const createPostRequestErrorMock = () => (
   })
 )
 
-export { createPostMock, createPostRequestErrorMock }
+const getPostsMock = () => (
+  moxios.wait(() => {
+    const request = moxios.requests.mostRecent()
+    request.respondWith({
+      status: 200,
+      response: {
+        data: mockPosts,
+        meta: { page: 1, pageSize: 10, total: mockPosts.length }
+      }
+    })
+  })
+)
+
+const getPostsRequestErrorMock = () => (
+  moxios.wait(() => {
+    const request = moxios.requests.mostRecent()
+
+    const requestError = {
+      status: 500,
+      response: {
+        data: {
+          errors: [{ message: 'An unknown error occurred' }],
+          message: 'Could not retrieve posts'
+        }
+      }
+    }
+
+    request.reject(requestError)
+  })
+)
+
+export {
+  createPostMock,
+  createPostRequestErrorMock,
+  getPostsMock,
+  getPostsRequestErrorMock
+}

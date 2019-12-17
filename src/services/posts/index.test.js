@@ -4,7 +4,7 @@ import axios from 'axios'
 import * as postsService from './index'
 import * as postsServiceMocks from './index.mock'
 
-import { mockPost } from '../../utils/testing/mocks'
+import { mockPost, mockPosts } from '../../utils/testing/mocks'
 
 describe('posts service', () => {
   beforeAll(() => {
@@ -34,6 +34,24 @@ describe('posts service', () => {
 
     return postsService.createPost(mockPost).catch(error =>
       expect(error.message).toEqual('error')
+    )
+  })
+
+  test('getPosts returns posts', () => {
+    expect.assertions(1)
+    postsServiceMocks.getPostsMock()
+
+    return postsService.getPosts(mockPosts).then(result =>
+      expect(result.data).toEqual(mockPosts)
+    )
+  })
+
+  test('getPosts rejects on error', () => {
+    expect.assertions(1)
+    postsServiceMocks.getPostsRequestErrorMock()
+
+    return postsService.getPosts().catch(error =>
+      expect(error.message.length).toBeTruthy()
     )
   })
 })
