@@ -11,6 +11,16 @@ const overrides = {
     root: {
       background: DEFAULT_PALETTE.background.main
     }
+  },
+  MuiAvatar: {
+    root: {
+      borderRadius: '10%'
+    }
+  },
+  MuiTypography: {
+    body2: {
+      color: DEFAULT_PALETTE.grey[500]
+    }
   }
 }
 
