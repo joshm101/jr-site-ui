@@ -18,6 +18,12 @@ import LoginAuthErrorNotice,
   NOTIFICATION_ID as AUTH_ERROR_NOTIFICATION_ID
 } from '../../../routes/Login/LoginAuthErrorNotice'
 
+import
+{
+  SuccessNotice as PostFormSuccessNotice,
+  SUCCESS_NOTIFICATION_ID as POST_FORM_SUCCESS_NOTIFICATION_ID
+} from '../PostForm'
+
 function NotificationRenderer() {
   const { state, actions } = useNotifications()
 
@@ -54,6 +60,9 @@ function NotificationRenderer() {
       />
       <LoginAuthErrorNotice
         {...createProps(AUTH_ERROR_NOTIFICATION_ID)}
+      />
+      <PostFormSuccessNotice
+        {...createProps(POST_FORM_SUCCESS_NOTIFICATION_ID)}
       />
     </>
   )

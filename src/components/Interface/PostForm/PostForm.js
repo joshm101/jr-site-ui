@@ -7,7 +7,12 @@ import Typography from '@material-ui/core/Typography'
 import BasicInfo from './BasicInfo'
 import ThumbnailSelection from './ThumbnailSelection'
 import ImagesSelection from './ImagesSelection'
-import FormActions, { Back, Next, Submit } from './FormActions'
+import {
+  default as FormActions,
+  Back,
+  Next,
+  Submit
+} from './FormActions'
 import FormErrors from './FormErrors'
 import {
   MIN_STEP,
@@ -16,6 +21,7 @@ import {
   CURRENT_STEP_ROOT,
   STEPS
 } from './PostForm.constants'
+import { useCreatePost } from '../../../hooks'
 
 import styles from './styles'
 
@@ -51,6 +57,9 @@ function PostForm({ onSubmit }) {
   const [ formState, formFieldInitializers ] = (
     useFormState(initialFormValues)
   )
+
+  const { state: createPostState } = useCreatePost()
+  const { submitting: submittingForm } = createPostState
 
   const classes = useStyles()
 
@@ -99,15 +108,16 @@ function PostForm({ onSubmit }) {
   const formHasValidationErrors = Object.values(validity).some(value => !value)
   const formTouched = Object.values(touched).some(fieldTouched => fieldTouched)
   const hasAtLeastOneImage = values.images.length > 0
-  const hasThumbnail = values.thumbnailImage
   const requiredFieldHasValue = fieldName => values[fieldName]
   const hasTitle = requiredFieldHasValue('title')
+  const hasThumbnail = requiredFieldHasValue('thumbnailImage')
 
   const submitDisabled = (
     formHasValidationErrors ||
     !formTouched ||
     !hasAtLeastOneImage ||
-    !hasTitle
+    !hasTitle ||
+    !hasThumbnail
   )
 
   const formErrors = [
@@ -174,8 +184,14 @@ function PostForm({ onSubmit }) {
   const submitButton = (
     <Submit
       onClick={handleSubmitClick}
-      disabled={submitDisabled}
-    />
+      disabled={submitDisabled || submittingForm}
+      submitting={submittingForm}
+    >
+      {submittingForm ?
+        'Submitting...' :
+        'Done'
+      }
+    </Submit>
   )
 
   const renderCurrentStep = (steps, currentStepIndex) => {
