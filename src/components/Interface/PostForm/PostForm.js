@@ -108,15 +108,16 @@ function PostForm({ onSubmit }) {
   const formHasValidationErrors = Object.values(validity).some(value => !value)
   const formTouched = Object.values(touched).some(fieldTouched => fieldTouched)
   const hasAtLeastOneImage = values.images.length > 0
-  const hasThumbnail = values.thumbnailImage
   const requiredFieldHasValue = fieldName => values[fieldName]
   const hasTitle = requiredFieldHasValue('title')
+  const hasThumbnail = requiredFieldHasValue('thumbnailImage')
 
   const submitDisabled = (
     formHasValidationErrors ||
     !formTouched ||
     !hasAtLeastOneImage ||
-    !hasTitle
+    !hasTitle ||
+    !hasThumbnail
   )
 
   const formErrors = [
