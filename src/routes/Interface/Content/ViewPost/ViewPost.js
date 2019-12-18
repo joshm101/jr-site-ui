@@ -9,9 +9,10 @@ import PostDetails from '../../../../components/Interface/PostDetails'
 import { usePosts } from '../../../../hooks'
 
 const ViewPost = ({ match }) => {
-  const posts = usePosts()
-  const _id = parseInt(match.params._id)
-  const post = posts.data.find(post => post._id === _id)
+  const { state } = usePosts()
+  const { data: posts } = state
+  const id = match.params.id
+  const post = posts.find(post => post._id === id)
 
   return (
     <>
