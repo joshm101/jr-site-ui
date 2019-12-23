@@ -1,3 +1,5 @@
+import { initialState } from '../../../reducers/posts'
+
 const mockPost = { title: 'mock' }
 
 const mockPosts = [
@@ -30,4 +32,9 @@ const mockPosts = [
   }
 ]
 
-export { mockPost, mockPosts }
+const createMockPostsState = overrides => ({
+  ...initialState,
+  ...overrides
+})
+
+export { mockPost, mockPosts, createMockPostsState }
