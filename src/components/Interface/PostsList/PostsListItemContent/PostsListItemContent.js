@@ -4,15 +4,9 @@ import Grid from '@material-ui/core/Grid'
 import Avatar from '@material-ui/core/Avatar'
 import Typography from '@material-ui/core/Typography'
 
+import truncateText from '../../../../utils/truncate-text'
+
 function PostsListItemContent({ post }) {
-  const truncateText = maxLength => string => {
-    if (string.length <= maxLength) {
-      return string
-    }
-
-    return `${string.slice(0, maxLength + 1).trim()}...`
-  }
-
   const truncateDescription = truncateText(42)
   const truncateTitle = truncateText(15)
 
