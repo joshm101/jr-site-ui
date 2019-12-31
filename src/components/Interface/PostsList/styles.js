@@ -3,6 +3,9 @@ const styles = theme => ({
     '&:hover': {
       cursor: 'pointer'
     }
+  },
+  noPostsNoticeLabel: {
+    marginBottom: theme.spacing(10)
   }
 })
 

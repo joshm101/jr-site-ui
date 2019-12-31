@@ -8,6 +8,7 @@ import { withTheme, configureMockStore, withProvider } from '../../../utils/test
 import { createMockPostsState, mockPosts } from '../../../utils/testing/mocks'
 
 import PostsList from './PostsList'
+import NoPostsNotice from './NoPostsNotice'
 
 let mount
 
@@ -67,5 +68,18 @@ describe('PostsList', () => {
     const loadingIndicator = wrapper.find(LinearProgress)
 
     expect(loadingIndicator.exists()).toBe(true)
+  })
+
+  it('displays no posts notice when there are no posts', () => {
+    const mockState = getMockState({
+      data: [],
+      retrievingPosts: false
+    })
+
+    const { wrapper } = setup({ posts: mockState })()
+
+    const notice = wrapper.find(NoPostsNotice)
+
+    expect(notice.exists()).toBe(true)
   })
 })
