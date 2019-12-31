@@ -18,7 +18,7 @@ const postsReducer = (state = initialState, action) => {
       return {
         ...state,
         retrievingPosts: false,
-        data: action.payload.data,
+        data: [],
         meta: action.payload.meta
       }
     case getPostsRoutine.FAILURE:

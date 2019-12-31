@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import PostsListItemContent from './PostsListItemContent'
 import PostsListItemActions from './PostsListItemActions'
+import NoPostsNotice from './NoPostsNotice'
 import styles from './styles'
 
 import { usePosts } from '../../../hooks'
@@ -39,7 +40,7 @@ function PostsList() {
       {retrievingPosts &&
         <LinearProgress color="secondary" />
       }
-      {!retrievingPosts &&
+      {!retrievingPosts && postsData.length > 0 &&
         <List>
           {postsData.map(post =>
             <ListItem
@@ -58,6 +59,19 @@ function PostsList() {
             </ListItem>
           )}
         </List>
+      }
+      {!retrievingPosts && postsData.length === 0 &&
+        <NoPostsNotice>
+          <NoPostsNotice.Label
+            className={classes.noPostsNoticeLabel}
+          >
+            No posts found
+          </NoPostsNotice.Label>
+
+          <NoPostsNotice.Action>
+            Create Post
+          </NoPostsNotice.Action>
+        </NoPostsNotice>
       }
     </>
   )
