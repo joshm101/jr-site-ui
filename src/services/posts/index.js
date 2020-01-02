@@ -32,4 +32,27 @@ const createPost = data => {
     .catch(handleAxiosRequestError)
 }
 
-export { createPost }
+/**
+ * Fires a network request to API to retrieve posts
+ * @return {Promise<object>} - API response data
+ */
+const getPosts = () => {
+  const authToken = localStorage.getItem('jr-site-auth-token')
+
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer: ${authToken}`
+    },
+    url: `${API_URL}/posts`
+  }
+
+  return axios(requestOptions)
+    .then(response => response.data)
+    .catch(handleAxiosRequestError)
+}
+
+export {
+  createPost,
+  getPosts
+}

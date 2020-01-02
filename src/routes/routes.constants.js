@@ -5,7 +5,7 @@ const ROUTES = {
   INTERFACE_ROUTES: {
     HOME: '',
     CREATE_POST: 'create-post',
-    VIEW_POST: 'view-post/:_id',
+    VIEW_POST: 'view-post',
     IMAGES: 'images',
     UPLOAD_IMAGES: 'images/upload'
   }

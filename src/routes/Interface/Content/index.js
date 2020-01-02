@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import Container from '@material-ui/core/Container'
 
-import Posts from './Posts'
+import Dashboard from './Dashboard'
 import ViewPost from './ViewPost'
 import Images from './Images'
 import UploadImages from './UploadImages'
@@ -22,9 +22,9 @@ const {
 
 const Content = ({ match, posts }) => (
   <Container>
-    <Route exact path={`${match.url}/${INTERFACE_HOME}`} component={Posts} />
+    <Route exact path={`${match.url}/${INTERFACE_HOME}`} component={Dashboard} />
     <Route exact path={`${match.url}/${CREATE_POST}`} component={CreatePost} />
-    <Route path={`${match.url}/${VIEW_POST}`} component={ViewPost} />
+    <Route path={`${match.url}/${VIEW_POST}/:id`} component={ViewPost} />
     <Route exact path={`${match.url}/${IMAGES}`} component={Images} />
     <Route path={`${match.url}/${UPLOAD_IMAGES}`} component={UploadImages} />
   </Container>
