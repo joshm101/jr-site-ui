@@ -36,7 +36,7 @@ function PostsList() {
   }
 
   return (
-    <>
+    <div className={classes.root}>
       {retrievingPosts &&
         <LinearProgress color="secondary" />
       }
@@ -73,7 +73,7 @@ function PostsList() {
           </NoPostsNotice.Action>
         </NoPostsNotice>
       }
-    </>
+    </div>
   )
 }
 

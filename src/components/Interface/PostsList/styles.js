@@ -6,6 +6,10 @@ const styles = theme => ({
   },
   noPostsNoticeLabel: {
     marginBottom: theme.spacing(10)
+  },
+  root: {
+    width: '100%',
+    height: '100%'
   }
 })
 

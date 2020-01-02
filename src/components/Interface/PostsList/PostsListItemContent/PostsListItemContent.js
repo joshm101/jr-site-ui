@@ -18,7 +18,7 @@ function PostsListItemContent({ post }) {
         justify="center"
         xs={3}
         sm={2}
-        md={1}
+        md={2}
       >
         <Avatar src={post.thumbnailImage} />
       </Grid>
@@ -27,7 +27,7 @@ function PostsListItemContent({ post }) {
         container
         xs={9}
         sm={10}
-        md={11}
+        md={10}
       >
         <Grid item xs={12}>
           <Typography variant="body1">
