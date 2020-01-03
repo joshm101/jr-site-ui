@@ -1,3 +1,5 @@
+import constructQueryString from './construct-query-string'
+
 const handleAxiosRequestError = (error) => {
   if (error.response) {
     // The request was made and the server responded with a
@@ -13,5 +15,6 @@ const handleAxiosRequestError = (error) => {
 }
 
 export {
-  handleAxiosRequestError
+  handleAxiosRequestError,
+  constructQueryString
 }

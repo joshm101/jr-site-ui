@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-import { handleAxiosRequestError } from '../utils'
+import {
+  handleAxiosRequestError,
+  constructQueryString
+} from '../utils'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -34,9 +37,19 @@ const createPost = data => {
 
 /**
  * Fires a network request to API to retrieve posts
+ * @param {object} options - Contains various request-related
+ * configuration options (such as request query params)
  * @return {Promise<object>} - API response data
  */
-const getPosts = () => {
+const getPosts = (options) => {
+  const validQueryProperties = ['id']
+  const constructPostsQueryString = (
+    constructQueryString(validQueryProperties)
+  )
+
+  const { query } = options
+  const queryString = constructPostsQueryString(query)
+  const url = `${API_URL}/posts${queryString}`
   const authToken = localStorage.getItem('jr-site-auth-token')
 
   const requestOptions = {
@@ -44,7 +57,7 @@ const getPosts = () => {
     headers: {
       'Authorization': `Bearer: ${authToken}`
     },
-    url: `${API_URL}/posts`
+    url
   }
 
   return axios(requestOptions)
