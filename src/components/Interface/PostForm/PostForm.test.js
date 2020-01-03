@@ -6,7 +6,10 @@ import {
   mockImagesState,
   createMockCreatePostState
 } from '../../../utils/testing/mocks'
-import PostForm, { ROOT_ELEMENT_ID } from './PostForm'
+import PostForm, {
+  ROOT_ELEMENT_ID,
+  generateInitialFormValues
+} from './PostForm'
 import {
   MIN_STEP,
   MAX_STEP,
@@ -120,5 +123,44 @@ describe('Post Form', () => {
 
   it('renders images select step', () => {
     stepRenderingTester(STEP_IDS.POST_IMAGES)
+  })
+
+  it('generates initial default form values', () => {
+    const expectedInitialValues = {
+      title: '',
+      description: '',
+      embedContent: '',
+      images: [],
+      thumbnailImage: '',
+      featured: false
+    }
+
+    const actualInitialValues = generateInitialFormValues()
+
+    expect(actualInitialValues).toEqual(expectedInitialValues)
+  })
+
+  it('generates initial prefilled values from post', () => {
+    const post = {
+      title: 'some-title',
+      description: 'some description',
+      embedContent: '',
+      images: ['foo.jpg'],
+      thumbnailImage: 'bar.jpg',
+      featured: true
+    }
+
+    const expectedInitialValues = {
+      title: 'some-title',
+      description: 'some description',
+      embedContent: '',
+      images: ['foo.jpg'],
+      thumbnailImage: 'bar.jpg',
+      featured: true
+    }
+
+    const actualInitialValues = generateInitialFormValues(post)
+
+    expect(actualInitialValues).toEqual(expectedInitialValues)
   })
 })
