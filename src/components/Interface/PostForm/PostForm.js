@@ -41,21 +41,46 @@ const canDecrementStep = (currentStep, minStep) => (
   decrementStep(currentStep) >= minStep
 )
 
-const initialFormValues = {
-  title: '',
-  description: '',
-  embedContent: '',
-  featured: false,
-  thumbnailImage: '',
-  images: []
+const generateInitialFormValues = post => {
+  const defaultValues = {
+    title: '',
+    description: '',
+    embedContent: '',
+    featured: false,
+    thumbnailImage: '',
+    images: []
+  }
+
+  if (!post) {
+    return defaultValues
+  }
+
+  const {
+    title,
+    description,
+    embedContent,
+    featured,
+    thumbnailImage,
+    images
+  } = post
+
+  return {
+    ...defaultValues,
+    title,
+    description,
+    embedContent,
+    featured,
+    thumbnailImage,
+    images
+  }
 }
 
 const ROOT_ELEMENT_ID = 'pf'
 
-function PostForm({ onSubmit }) {
+function PostForm({ onSubmit, post }) {
   const [ currentStep, setCurrentStep ] = useState(1)
   const [ formState, formFieldInitializers ] = (
-    useFormState(initialFormValues)
+    useFormState(generateInitialFormValues(post))
   )
 
   const { state: createPostState } = useCreatePost()
@@ -234,4 +259,9 @@ function PostForm({ onSubmit }) {
 }
 
 export default PostForm
-export { ROOT_ELEMENT_ID, MAX_STEP, MIN_STEP }
+export {
+  ROOT_ELEMENT_ID,
+  MAX_STEP,
+  MIN_STEP,
+  generateInitialFormValues
+}
