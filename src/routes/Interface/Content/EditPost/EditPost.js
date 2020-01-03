@@ -1,11 +1,18 @@
 import React, { useEffect } from 'react'
 import Typography from '@material-ui/core/Typography'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import { makeStyles } from '@material-ui/core/styles'
 
 import PostForm from '../../../../components/Interface/PostForm'
 
 import { usePosts, useImagesActions } from '../../../../hooks'
 
+import styles from './styles'
+
+const useStyles = makeStyles(styles)
+
 function EditPost(props) {
+  const classes = useStyles()
   const { match } = props
   const { id } = match.params
 
@@ -31,9 +38,16 @@ function EditPost(props) {
       <Typography variant="h4" gutterBottom>
         Edit Post
       </Typography>
-      {!retrievingPosts && postToEdit &&
-        <PostForm post={postToEdit} />
-      }
+      <div className={classes.contentRoot}>
+        {!retrievingPosts && postToEdit &&
+          <div className={classes.form}>
+            <PostForm post={postToEdit} />
+          </div>
+        }
+        {retrievingPosts &&
+          <CircularProgress color="secondary" />
+        }
+      </div>
     </div>
   )
 }
