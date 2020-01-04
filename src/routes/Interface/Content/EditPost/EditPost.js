@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import { makeStyles } from '@material-ui/core/styles'
 
 import PostForm from '../../../../components/Interface/PostForm'
+import PostNotFoundNotice from './PostNotFoundNotice'
 
 import { usePosts, useImagesActions } from '../../../../hooks'
 
@@ -46,6 +47,9 @@ function EditPost(props) {
         }
         {retrievingPosts &&
           <CircularProgress color="secondary" />
+        }
+        {!retrievingPosts && !postToEdit &&
+          <PostNotFoundNotice />
         }
       </div>
     </div>
