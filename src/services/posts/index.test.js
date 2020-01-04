@@ -7,11 +7,11 @@ import * as postsServiceMocks from './index.mock'
 import { mockPost, mockPosts } from '../../utils/testing/mocks'
 
 describe('posts service', () => {
-  beforeAll(() => {
+  beforeEach(() => {
     moxios.install(axios)
   })
 
-  afterAll(() => {
+  afterEach(() => {
     moxios.uninstall(axios)
   })
 
@@ -33,6 +33,27 @@ describe('posts service', () => {
     postsServiceMocks.createPostRequestErrorMock()
 
     return postsService.createPost(mockPost).catch(error =>
+      expect(error.message).toEqual('error')
+    )
+  })
+
+  test('updatePost throws error when data not provided', () => {
+    expect(
+      () => postsService.updatePost('id')
+    ).toThrow()
+  })
+
+  test('updatePost throws error when id not provided', () => {
+    expect(
+      () => postsService.updatePost(undefined, {})
+    ).toThrow()
+  })
+
+  test('updatePost throws an error to be caught on request error', () => {
+    // expect.assertions(1)
+    postsServiceMocks.updatePostRequestErrorMock()
+
+    return postsService.updatePost('id', {}).catch(error =>
       expect(error.message).toEqual('error')
     )
   })
