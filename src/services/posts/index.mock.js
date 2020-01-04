@@ -26,6 +26,18 @@ const createPostRequestErrorMock = () => (
   })
 )
 
+const updatePostRequestErrorMock = () => (
+  moxios.wait(() => {
+    const request = moxios.requests.mostRecent()
+
+    const requestError = {
+      status: 400,
+      response: { data: { message: 'error' } }
+    }
+    request.reject(requestError)
+  })
+)
+
 const getPostsMock = () => (
   moxios.wait(() => {
     const request = moxios.requests.mostRecent()
@@ -60,6 +72,7 @@ const getPostsRequestErrorMock = () => (
 export {
   createPostMock,
   createPostRequestErrorMock,
+  updatePostRequestErrorMock,
   getPostsMock,
   getPostsRequestErrorMock
 }
