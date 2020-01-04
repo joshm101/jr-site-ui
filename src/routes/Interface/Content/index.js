@@ -7,6 +7,7 @@ import ViewPost from './ViewPost'
 import Images from './Images'
 import UploadImages from './UploadImages'
 import CreatePost from './CreatePost'
+import EditPost from './EditPost'
 import { ROUTES } from '../../routes.constants'
 
 import './index.css'
@@ -16,6 +17,7 @@ const {
   HOME: INTERFACE_HOME,
   CREATE_POST,
   VIEW_POST,
+  EDIT_POST,
   IMAGES,
   UPLOAD_IMAGES
 } = INTERFACE_ROUTES
@@ -25,6 +27,7 @@ const Content = ({ match, posts }) => (
     <Route exact path={`${match.url}/${INTERFACE_HOME}`} component={Dashboard} />
     <Route exact path={`${match.url}/${CREATE_POST}`} component={CreatePost} />
     <Route path={`${match.url}/${VIEW_POST}/:id`} component={ViewPost} />
+    <Route path={`${match.url}/${EDIT_POST}/:id`} component={EditPost} />
     <Route exact path={`${match.url}/${IMAGES}`} component={Images} />
     <Route path={`${match.url}/${UPLOAD_IMAGES}`} component={UploadImages} />
   </Container>

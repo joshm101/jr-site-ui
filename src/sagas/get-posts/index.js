@@ -9,7 +9,7 @@ function* handleGetPosts(action) {
   try {
     const result = yield call(
       postsService.getPosts,
-      payload
+      payload || {}
     )
 
     yield put(
