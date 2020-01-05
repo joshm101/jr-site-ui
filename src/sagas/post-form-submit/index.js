@@ -2,7 +2,7 @@ import { takeEvery, call, put } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
 
 import {
-  createPostRoutine,
+  postFormSubmitRoutine,
   showNotification
 } from '../../actions'
 import * as postsService from '../../services/posts'
@@ -10,23 +10,31 @@ import * as postsService from '../../services/posts'
 import { SUCCESS_NOTIFICATION_ID } from '../../components/Interface/PostForm'
 import { ROUTES } from '../../routes/routes.constants'
 
-function* handleCreatePost(action) {
+function* handlePostFormSubmit(action) {
   const { payload } = action
+
+  const isEdit = payload.id
+
+  const { createPost, updatePost } = postsService
 
   try {
     const result = yield call(
-      postsService.createPost,
-      payload
+      isEdit ? updatePost : createPost,
+      payload.data
     )
 
     yield put(
-      createPostRoutine.success(result)
+      postFormSubmitRoutine.success(result)
     )
+
+    const message = isEdit ? (
+      'The post was successfully updated!'
+    ) : 'The post was successfully created!'
 
     yield put(
       showNotification({
         id: SUCCESS_NOTIFICATION_ID,
-        props: { message: 'The post was successfully created!' }
+        props: { message }
       })
     )
 
@@ -35,16 +43,17 @@ function* handleCreatePost(action) {
     )
   } catch (error) {
     yield put(
-      createPostRoutine.failure([error])
+      postFormSubmitRoutine.failure([error])
     )
   }
 }
 
-function* createPostSaga() {
+function* postFormSubmitSaga() {
   yield takeEvery(
-    createPostRoutine.TRIGGER,
-    handleCreatePost
+    postFormSubmitRoutine.TRIGGER,
+    handlePostFormSubmit
   )
 }
 
-export default createPostSaga
+export default postFormSubmitSaga
+export { handlePostFormSubmit }

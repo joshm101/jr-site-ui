@@ -1,7 +1,7 @@
-import { createPostRoutine } from '../../actions'
+import { postFormSubmitRoutine } from '../../actions'
 import {
-  DISMISS_CREATE_POST_SUCCESS_NOTICE,
-  DISMISS_CREATE_POST_FAILURE_NOTICE
+  DISMISS_POST_FORM_SUBMIT_SUCCESS_NOTICE,
+  DISMISS_POST_FORM_SUBMIT_FAILURE_NOTICE
 } from '../../actions/actionTypes'
 
 const initialState = {
@@ -10,31 +10,31 @@ const initialState = {
   displaySuccessNotification: false
 }
 
-const createPostReducer = (state = initialState, action) => {
+const postFormReducer = (state = initialState, action) => {
   switch (action.type) {
-    case createPostRoutine.TRIGGER:
+    case postFormSubmitRoutine.TRIGGER:
       return {
         ...state,
         submitting: true
       }
-    case createPostRoutine.SUCCESS:
+    case postFormSubmitRoutine.SUCCESS:
       return {
         ...state,
         submitting: false,
         displaySuccessNotification: true
       }
-    case createPostRoutine.FAILURE:
+    case postFormSubmitRoutine.FAILURE:
       return {
         ...state,
         submitting: false,
         errors: action.payload
       }
-    case DISMISS_CREATE_POST_SUCCESS_NOTICE:
+    case DISMISS_POST_FORM_SUBMIT_SUCCESS_NOTICE:
       return {
         ...state,
         displaySuccessNotification: false
       }
-    case DISMISS_CREATE_POST_FAILURE_NOTICE:
+    case DISMISS_POST_FORM_SUBMIT_FAILURE_NOTICE:
       return {
         ...state,
         errors: []
@@ -44,5 +44,5 @@ const createPostReducer = (state = initialState, action) => {
   }
 }
 
-export default createPostReducer
+export default postFormReducer
 export { initialState }

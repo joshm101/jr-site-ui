@@ -1,1 +1,1 @@
-export { createPost, getPosts } from './posts'
+export { createPost, getPosts, updatePost } from './posts'

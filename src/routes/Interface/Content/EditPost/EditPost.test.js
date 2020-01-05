@@ -76,7 +76,7 @@ describe('EditPost', () => {
 
     const { wrapper } = setup({
       posts: mockState,
-      createPost: {}
+      postForm: {}
     })()
 
     const notice = wrapper.find(PostNotFoundNotice)

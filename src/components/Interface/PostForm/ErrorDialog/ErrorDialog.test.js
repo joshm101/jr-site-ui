@@ -8,7 +8,7 @@ import {
   withProvider
 } from '../../../../utils/testing'
 import {
-  createMockCreatePostState
+  createMockPostFormState
 } from '../../../../utils/testing/mocks'
 
 import ErrorDialog, { ROOT_ELEMENT_ID } from './ErrorDialog'
@@ -19,8 +19,8 @@ const mockErrorsState = {
   errors: ['something', 'went', 'wrong']
 }
 
-const mockState = createMockCreatePostState(mockErrorsState)
-const mockInitialState = createMockCreatePostState()
+const mockState = createMockPostFormState(mockErrorsState)
+const mockInitialState = createMockPostFormState()
 
 const setup = (propOverrides, stateOverrides) => {
   const props = { ...propOverrides }
@@ -28,7 +28,7 @@ const setup = (propOverrides, stateOverrides) => {
   const ErrorDialogWithSetup = withTheme(
     withProvider(
       ErrorDialog,
-      { createPost: { ...mockState, ...stateOverrides } }
+      { postForm: { ...mockState, ...stateOverrides } }
     )
   )
 
@@ -59,7 +59,7 @@ describe('Post Form - Error Dialog', () => {
   })
 
   it('renders when there are errors in state', () => {
-    configureMockStore({ createPost: mockState })
+    configureMockStore({ postForm: mockState })
 
     const { wrapper } = setup()
 
