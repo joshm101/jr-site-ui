@@ -94,7 +94,6 @@ function PostForm({ onSubmit, post }) {
     event.preventDefault()
 
     const { values: postData } = formState
-    console.log('postData: ', postData)
     onSubmit(
       {
         data: {

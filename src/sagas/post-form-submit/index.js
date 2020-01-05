@@ -23,8 +23,6 @@ function* handlePostFormSubmit(action) {
       payload.data
     )
 
-    console.log('result: ', result)
-
     yield put(
       postFormSubmitRoutine.success(result)
     )
