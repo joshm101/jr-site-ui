@@ -67,7 +67,7 @@ const updatePost = (id, data) => {
   }
 
   return axios(requestOptions)
-    .then(response => response.data)
+    .then(response => response.data.data)
     .catch(handleAxiosRequestError)
 }
 

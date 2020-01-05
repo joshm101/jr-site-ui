@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core'
 import Close from '@material-ui/icons/Close'
 
-import { useCreatePost } from '../../../../hooks'
+import { usePostForm } from '../../../../hooks'
 import { ROUTES } from '../../../../routes/routes.constants'
 
 import styles from './ErrorDialog.styles'
@@ -23,7 +23,7 @@ const ROOT_ELEMENT_ID = 'pf-error-dialog'
 const { HOME } = ROUTES.INTERFACE_ROUTES
 
 function ErrorDialog({ children }) {
-  const { actions, state } = useCreatePost()
+  const { actions, state } = usePostForm()
   const { errors } = state
   const { dismissFailureNotice } = actions
 

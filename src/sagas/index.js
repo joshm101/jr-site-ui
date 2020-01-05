@@ -4,7 +4,7 @@ import loginSaga from './login'
 import tokenValidSaga from './token-valid'
 import getImagesSaga from './get-images'
 import uploadImagesSaga from './upload-images'
-import createPostSaga from './create-post'
+import postFormSubmitSaga from './post-form-submit'
 import getPostsSaga from './get-posts'
 
 const sagas = [
@@ -12,7 +12,7 @@ const sagas = [
   tokenValidSaga,
   getImagesSaga,
   uploadImagesSaga,
-  createPostSaga,
+  postFormSubmitSaga,
   getPostsSaga
 ]
 

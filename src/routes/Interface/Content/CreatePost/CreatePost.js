@@ -5,7 +5,7 @@ import PostForm, {
   ErrorDialogTitle,
   ErrorDialogContent
 } from '../../../../components/Interface/PostForm'
-import { useImagesActions, useCreatePost } from '../../../../hooks'
+import { useImagesActions, usePostForm } from '../../../../hooks'
 
 function CreatePost() {
   const { getImagesRoutine } = useImagesActions()
@@ -18,12 +18,12 @@ function CreatePost() {
     initGetImagesRoutine()
   }, [initGetImagesRoutine])
 
-  const { actions } = useCreatePost()
-  const { createPostRoutine } = actions
+  const { actions } = usePostForm()
+  const { postFormSubmitRoutine } = actions
 
   return (
     <>
-      <PostForm onSubmit={createPostRoutine} />
+      <PostForm onSubmit={postFormSubmitRoutine} />
       <ErrorDialog>
         <ErrorDialogTitle>
           Create Post Error

@@ -4,7 +4,7 @@ import { createMount } from '@material-ui/core/test-utils'
 import { withTheme, configureMockStore, withProvider } from '../../../utils/testing'
 import {
   mockImagesState,
-  createMockCreatePostState
+  createMockPostFormState
 } from '../../../utils/testing/mocks'
 import PostForm, {
   ROOT_ELEMENT_ID,
@@ -20,14 +20,14 @@ import {
 
 let mount
 
-const mockCreatePostState = createMockCreatePostState()
+const mockPostFormState = createMockPostFormState()
 
 const PostFormWithSetup = withTheme(
   withProvider(
     PostForm,
     {
       images: mockImagesState,
-      createPost: mockCreatePostState
+      postForm: mockPostFormState
     }
   )
 )

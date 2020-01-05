@@ -21,7 +21,7 @@ import {
   CURRENT_STEP_ROOT,
   STEPS
 } from './PostForm.constants'
-import { useCreatePost } from '../../../hooks'
+import { usePostForm } from '../../../hooks'
 
 import styles from './styles'
 
@@ -83,8 +83,8 @@ function PostForm({ onSubmit, post }) {
     useFormState(generateInitialFormValues(post))
   )
 
-  const { state: createPostState } = useCreatePost()
-  const { submitting: submittingForm } = createPostState
+  const { state: postFormState } = usePostForm()
+  const { submitting: submittingForm } = postFormState
 
   const classes = useStyles()
 
@@ -94,10 +94,13 @@ function PostForm({ onSubmit, post }) {
     event.preventDefault()
 
     const { values: postData } = formState
+    console.log('postData: ', postData)
     onSubmit(
       {
-        ...postData,
-        type: '5dd20cffc8eba3001c02db6e' // TODO: REMOVE HARDCODED DEFAULT TYPE
+        data: {
+          ...postData,
+          type: '5dd20cffc8eba3001c02db6e' // TODO: REMOVE HARDCODED DEFAULT TYPE
+        }
       }
     )
   }
