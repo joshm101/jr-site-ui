@@ -17,10 +17,14 @@ function* handlePostFormSubmit(action) {
 
   const { createPost, updatePost } = postsService
 
+  const args = isEdit ? (
+    [payload.id, payload.data]
+  ) : [payload.data]
+
   try {
     const result = yield call(
       isEdit ? updatePost : createPost,
-      payload.data
+      ...args
     )
 
     yield put(
