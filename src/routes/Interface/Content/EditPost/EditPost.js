@@ -3,10 +3,18 @@ import Typography from '@material-ui/core/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { makeStyles } from '@material-ui/core/styles'
 
-import PostForm from '../../../../components/Interface/PostForm'
+import PostForm, {
+  ErrorDialog,
+  ErrorDialogContent,
+  ErrorDialogTitle
+} from '../../../../components/Interface/PostForm'
 import PostNotFoundNotice from './PostNotFoundNotice'
 
-import { usePosts, useImagesActions } from '../../../../hooks'
+import {
+  usePosts,
+  useImagesActions,
+  usePostForm
+} from '../../../../hooks'
 
 import styles from './styles'
 
@@ -19,6 +27,7 @@ function EditPost(props) {
 
   const { getImagesRoutine } = useImagesActions()
   const { actions, state } = usePosts()
+  const { actions: postFormActions } = usePostForm()
   const { getPosts } = actions
   const { data: posts, retrievingPosts } = state
 
@@ -34,6 +43,8 @@ function EditPost(props) {
     })
   }, [id])
 
+  const { postFormSubmitRoutine } = postFormActions
+
   return (
     <div>
       <Typography variant="h4" gutterBottom>
@@ -42,7 +53,12 @@ function EditPost(props) {
       <div className={classes.contentRoot}>
         {!retrievingPosts && postToEdit &&
           <div className={classes.form}>
-            <PostForm post={postToEdit} />
+            <PostForm
+              post={postToEdit}
+              onSubmit={data =>
+                postFormSubmitRoutine({ id, ...data })
+              }
+            />
           </div>
         }
         {retrievingPosts &&
@@ -52,6 +68,13 @@ function EditPost(props) {
           <PostNotFoundNotice />
         }
       </div>
+      <ErrorDialog>
+        <ErrorDialogTitle>Update Post Error</ErrorDialogTitle>
+        <ErrorDialogContent>
+          An error occurred while updating the post.
+          Please check your connection and try again.
+        </ErrorDialogContent>
+      </ErrorDialog>
     </div>
   )
 }
