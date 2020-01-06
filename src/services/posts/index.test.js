@@ -50,7 +50,7 @@ describe('posts service', () => {
   })
 
   test('updatePost throws an error to be caught on request error', () => {
-    // expect.assertions(1)
+    expect.assertions(1)
     postsServiceMocks.updatePostRequestErrorMock()
 
     return postsService.updatePost('id', {}).catch(error =>
