@@ -1,6 +1,9 @@
 import axios from 'axios'
 
-import { handleAxiosRequestError } from '../utils'
+import {
+  handleAxiosRequestError,
+  constructQueryString
+} from '../utils'
 
 const API_URL = process.env.REACT_APP_API_URL
 
@@ -33,10 +36,56 @@ const createPost = data => {
 }
 
 /**
- * Fires a network request to API to retrieve posts
+ * Fires a network request to API to update post specified by
+ * id argument
+ * @param {string} id - ID of post to update
+ * @param {object} data - Post updates object
  * @return {Promise<object>} - API response data
  */
-const getPosts = () => {
+const updatePost = (id, data) => {
+  if (!id) {
+    throw new Error(
+      'No post specified for updating'
+    )
+  }
+
+  if (!data) {
+    throw new Error(
+      'No post data provided'
+    )
+  }
+
+  const authToken = localStorage.getItem('jr-site-auth-token')
+  const url = `${API_URL}/posts/${id}`
+  const requestOptions = {
+    method: 'PUT',
+    headers: {
+      'Authorization': `Bearer: ${authToken}`
+    },
+    url,
+    data
+  }
+
+  return axios(requestOptions)
+    .then(response => response.data.data)
+    .catch(handleAxiosRequestError)
+}
+
+/**
+ * Fires a network request to API to retrieve posts
+ * @param {object} options - Contains various request-related
+ * configuration options (such as request query params)
+ * @return {Promise<object>} - API response data
+ */
+const getPosts = (options) => {
+  const validQueryProperties = ['id']
+  const constructPostsQueryString = (
+    constructQueryString(validQueryProperties)
+  )
+
+  const { query } = options
+  const queryString = constructPostsQueryString(query)
+  const url = `${API_URL}/posts${queryString}`
   const authToken = localStorage.getItem('jr-site-auth-token')
 
   const requestOptions = {
@@ -44,7 +93,7 @@ const getPosts = () => {
     headers: {
       'Authorization': `Bearer: ${authToken}`
     },
-    url: `${API_URL}/posts`
+    url
   }
 
   return axios(requestOptions)
@@ -54,5 +103,6 @@ const getPosts = () => {
 
 export {
   createPost,
+  updatePost,
   getPosts
 }

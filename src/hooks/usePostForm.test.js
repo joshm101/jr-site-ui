@@ -1,12 +1,12 @@
-import useCreatePost from './useCreatePost'
+import usePostForm from './usePostForm'
 import { testHook } from '../utils/testing'
 
 let hookOutput
 
-describe('useCreatePost', () => {
+describe('usePostForm', () => {
   beforeEach(() => {
     testHook(() => {
-      hookOutput = useCreatePost()
+      hookOutput = usePostForm()
     })
   })
 

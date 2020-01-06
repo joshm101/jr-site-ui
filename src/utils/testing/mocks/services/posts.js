@@ -1,6 +1,11 @@
 import { mockPost, mockPosts } from '../posts'
 
-const createPost = data => new Promise(resolve => resolve(mockPost))
+const createPost = data => new Promise(resolve => resolve({ data: mockPost }))
+const updatePost = (id, data) => (
+  new Promise(resolve =>
+    resolve({ data: mockPost })
+  )
+)
 const getPosts = () => (
   new Promise(resolve =>
     resolve({
@@ -10,4 +15,4 @@ const getPosts = () => (
   )
 )
 
-export { createPost, getPosts }
+export { createPost, getPosts, updatePost }

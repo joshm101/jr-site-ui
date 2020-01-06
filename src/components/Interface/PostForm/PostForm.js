@@ -21,7 +21,7 @@ import {
   CURRENT_STEP_ROOT,
   STEPS
 } from './PostForm.constants'
-import { useCreatePost } from '../../../hooks'
+import { usePostForm } from '../../../hooks'
 
 import styles from './styles'
 
@@ -41,25 +41,50 @@ const canDecrementStep = (currentStep, minStep) => (
   decrementStep(currentStep) >= minStep
 )
 
-const initialFormValues = {
-  title: '',
-  description: '',
-  embedContent: '',
-  featured: false,
-  thumbnailImage: '',
-  images: []
+const generateInitialFormValues = post => {
+  const defaultValues = {
+    title: '',
+    description: '',
+    embedContent: '',
+    featured: false,
+    thumbnailImage: '',
+    images: []
+  }
+
+  if (!post) {
+    return defaultValues
+  }
+
+  const {
+    title,
+    description,
+    embedContent,
+    featured,
+    thumbnailImage,
+    images
+  } = post
+
+  return {
+    ...defaultValues,
+    title,
+    description,
+    embedContent,
+    featured,
+    thumbnailImage,
+    images
+  }
 }
 
 const ROOT_ELEMENT_ID = 'pf'
 
-function PostForm({ onSubmit }) {
+function PostForm({ onSubmit, post }) {
   const [ currentStep, setCurrentStep ] = useState(1)
   const [ formState, formFieldInitializers ] = (
-    useFormState(initialFormValues)
+    useFormState(generateInitialFormValues(post))
   )
 
-  const { state: createPostState } = useCreatePost()
-  const { submitting: submittingForm } = createPostState
+  const { state: postFormState } = usePostForm()
+  const { submitting: submittingForm } = postFormState
 
   const classes = useStyles()
 
@@ -71,8 +96,10 @@ function PostForm({ onSubmit }) {
     const { values: postData } = formState
     onSubmit(
       {
-        ...postData,
-        type: '5dd20cffc8eba3001c02db6e' // TODO: REMOVE HARDCODED DEFAULT TYPE
+        data: {
+          ...postData,
+          type: '5dd20cffc8eba3001c02db6e' // TODO: REMOVE HARDCODED DEFAULT TYPE
+        }
       }
     )
   }
@@ -107,6 +134,7 @@ function PostForm({ onSubmit }) {
 
   const formHasValidationErrors = Object.values(validity).some(value => !value)
   const formTouched = Object.values(touched).some(fieldTouched => fieldTouched)
+  const formPrefilled = !!post
   const hasAtLeastOneImage = values.images.length > 0
   const requiredFieldHasValue = fieldName => values[fieldName]
   const hasTitle = requiredFieldHasValue('title')
@@ -114,7 +142,7 @@ function PostForm({ onSubmit }) {
 
   const submitDisabled = (
     formHasValidationErrors ||
-    !formTouched ||
+    (!formTouched && !formPrefilled) ||
     !hasAtLeastOneImage ||
     !hasTitle ||
     !hasThumbnail
@@ -234,4 +262,9 @@ function PostForm({ onSubmit }) {
 }
 
 export default PostForm
-export { ROOT_ELEMENT_ID, MAX_STEP, MIN_STEP }
+export {
+  ROOT_ELEMENT_ID,
+  MAX_STEP,
+  MIN_STEP,
+  generateInitialFormValues
+}

@@ -5,7 +5,7 @@ import auth from './auth'
 import posts from './posts'
 import images from './images'
 import uploadImages from './upload-images'
-import createPost from './create-post'
+import postForm from './post-form'
 import notifications from './notifications'
 
 const appReducers = {
@@ -13,7 +13,7 @@ const appReducers = {
   posts,
   images,
   uploadImages,
-  createPost,
+  postForm,
   notifications
 }
 

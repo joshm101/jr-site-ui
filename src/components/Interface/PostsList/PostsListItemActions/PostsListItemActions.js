@@ -6,7 +6,12 @@ import Grid from '@material-ui/core/Grid'
 import DeleteIcon from '@material-ui/icons/DeleteForever'
 import EditIcon from '@material-ui/icons/Edit'
 
-function PostsListItemActions() {
+import { usePosts } from '../../../../hooks'
+
+function PostsListItemActions({ post }) {
+  const { actions } = usePosts()
+  const { editPost } = actions
+
   const onActionClick = fn => event => {
     event.preventDefault()
     event.stopPropagation()
@@ -15,7 +20,7 @@ function PostsListItemActions() {
   }
 
   const onEditClick = () => {
-    console.log('edit clicked')
+    editPost(post._id)
   }
 
   const onDeleteClick = () => {
