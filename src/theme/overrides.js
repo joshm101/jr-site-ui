@@ -21,6 +21,11 @@ const overrides = {
     body2: {
       color: DEFAULT_PALETTE.grey[500]
     }
+  },
+  MuiCard: {
+    root: {
+      backgroundColor: DEFAULT_PALETTE.background.light
+    }
   }
 }
 

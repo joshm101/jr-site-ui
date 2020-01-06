@@ -47,7 +47,7 @@ function* handlePostFormSubmit(action) {
     )
   } catch (error) {
     yield put(
-      postFormSubmitRoutine.failure([error])
+      postFormSubmitRoutine.failure([error.message])
     )
   }
 }
