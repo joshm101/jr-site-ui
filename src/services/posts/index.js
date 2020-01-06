@@ -71,6 +71,28 @@ const updatePost = (id, data) => {
     .catch(handleAxiosRequestError)
 }
 
+const deletePost = id => {
+  if (!id) {
+    throw new Error(
+      'No post specified for deletion'
+    )
+  }
+
+  const authToken = localStorage.getItem('jr-site-auth-token')
+  const url = `${API_URL}/posts/${id}`
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer: ${authToken}`
+    },
+    url
+  }
+
+  return axios(requestOptions)
+    .then(() => 'Post deleted')
+    .catch(handleAxiosRequestError)
+}
+
 /**
  * Fires a network request to API to retrieve posts
  * @param {object} options - Contains various request-related
@@ -104,5 +126,6 @@ const getPosts = (options) => {
 export {
   createPost,
   updatePost,
+  deletePost,
   getPosts
 }

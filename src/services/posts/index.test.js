@@ -58,6 +58,30 @@ describe('posts service', () => {
     )
   })
 
+  test('deletePost fires delete request', () => {
+    expect.assertions(1)
+    postsServiceMocks.deletePostRequestMock()
+
+    return postsService.deletePost('id').then(result =>
+      expect(result).toBe('Post deleted')
+    )
+  })
+
+  test('deletePost throws error when id not provided', () => {
+    expect(
+      () => postsService.deletePost()
+    ).toThrow()
+  })
+
+  test('deletePost handles request error', () => {
+    expect.assertions(1)
+    postsServiceMocks.deletePostRequestErrorMock()
+
+    return postsService.deletePost('id').catch(error =>
+      expect(error.message).toEqual('Could not delete post')
+    )
+  })
+
   test('getPosts returns posts', () => {
     expect.assertions(1)
     postsServiceMocks.getPostsMock()
