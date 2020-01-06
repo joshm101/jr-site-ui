@@ -53,7 +53,7 @@ function PostsList() {
                   <PostsListItemContent post={post} />
                 </Grid>
                 <Grid item xs={3}>
-                  <PostsListItemActions />
+                  <PostsListItemActions post={post} />
                 </Grid>
               </Grid>
             </ListItem>
