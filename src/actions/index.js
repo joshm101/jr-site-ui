@@ -46,10 +46,6 @@ export const dismissUploadImagesFailureNotice = () => ({
   type: actionTypes.DISMISS_UPLOAD_IMAGES_FAILURE_NOTICE
 })
 
-export const dismissPostFormSubmitSuccessNotice = () => ({
-  type: actionTypes.DISMISS_POST_FORM_SUBMIT_SUCCESS_NOTICE
-})
-
 export const dismissPostFormSubmitFailureNotice = () => ({
   type: actionTypes.DISMISS_POST_FORM_SUBMIT_FAILURE_NOTICE
 })
