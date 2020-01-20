@@ -1,6 +1,5 @@
 import { postFormSubmitRoutine } from '../../actions'
 import {
-  DISMISS_POST_FORM_SUBMIT_SUCCESS_NOTICE,
   DISMISS_POST_FORM_SUBMIT_FAILURE_NOTICE
 } from '../../actions/actionTypes'
 
@@ -28,11 +27,6 @@ const postFormReducer = (state = initialState, action) => {
         ...state,
         submitting: false,
         errors: action.payload
-      }
-    case DISMISS_POST_FORM_SUBMIT_SUCCESS_NOTICE:
-      return {
-        ...state,
-        displaySuccessNotification: false
       }
     case DISMISS_POST_FORM_SUBMIT_FAILURE_NOTICE:
       return {

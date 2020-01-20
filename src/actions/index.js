@@ -46,10 +46,6 @@ export const dismissUploadImagesFailureNotice = () => ({
   type: actionTypes.DISMISS_UPLOAD_IMAGES_FAILURE_NOTICE
 })
 
-export const dismissPostFormSubmitSuccessNotice = () => ({
-  type: actionTypes.DISMISS_POST_FORM_SUBMIT_SUCCESS_NOTICE
-})
-
 export const dismissPostFormSubmitFailureNotice = () => ({
   type: actionTypes.DISMISS_POST_FORM_SUBMIT_FAILURE_NOTICE
 })
@@ -70,3 +66,4 @@ export const getImagesRoutine = createRoutine('GET_IMAGES')
 export const uploadImagesRoutine = createRoutine('UPLOAD_IMAGES')
 export const postFormSubmitRoutine = createRoutine('POST_FORM_SUBMIT')
 export const getPostsRoutine = createRoutine('GET_POSTS')
+export const deletePostRoutine = createRoutine('DELETE_POST')

@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import {
   postFormSubmitRoutine,
-  dismissPostFormSubmitSuccessNotice,
   dismissPostFormSubmitFailureNotice
 } from '../actions'
 
@@ -13,9 +12,6 @@ function usePostForm() {
   const postFormActions = {
     postFormSubmitRoutine: (...args) => dispatch(
       postFormSubmitRoutine(...args)
-    ),
-    dismissSuccessNotice: (...args) => dispatch(
-      dismissPostFormSubmitSuccessNotice(...args)
     ),
     dismissFailureNotice: (...args) => dispatch(
       dismissPostFormSubmitFailureNotice(...args)

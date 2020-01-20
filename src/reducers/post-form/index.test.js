@@ -1,6 +1,5 @@
 import { postFormSubmitRoutine } from '../../actions'
 import {
-  DISMISS_POST_FORM_SUBMIT_SUCCESS_NOTICE,
   DISMISS_POST_FORM_SUBMIT_FAILURE_NOTICE
 } from '../../actions/actionTypes'
 
@@ -27,11 +26,6 @@ const expectedPostFormSubmitFailureState = {
   ...expectedInitialState,
   submitting: false,
   errors: ['no', 'bueno']
-}
-
-const expectedDismissSuccessNoticeState = {
-  ...expectedInitialState,
-  displaySuccessNotification: false
 }
 
 const expectedDismissFailureNoticeState = {
@@ -77,16 +71,6 @@ describe('post form reducer', () => {
     expect(
       postFormReducer(expectedInitialState, action)
     ).toEqual(expectedPostFormSubmitFailureState)
-  })
-
-  it(`handles ${DISMISS_POST_FORM_SUBMIT_SUCCESS_NOTICE}`, () => {
-    const action = {
-      type: DISMISS_POST_FORM_SUBMIT_SUCCESS_NOTICE
-    }
-
-    expect(
-      postFormReducer(expectedInitialState, action)
-    ).toEqual(expectedDismissSuccessNoticeState)
   })
 
   it(`handles ${DISMISS_POST_FORM_SUBMIT_FAILURE_NOTICE}`, () => {
