@@ -18,6 +18,11 @@ import LoginAuthErrorNotice,
   NOTIFICATION_ID as AUTH_ERROR_NOTIFICATION_ID
 } from '../../../routes/Login/LoginAuthErrorNotice'
 
+import DeletePostSuccessNotice,
+{
+  NOTIFICATION_ID as DELETE_POST_SUCCESS_NOTIFICATION_ID
+} from '../DeletePostSuccessNotice'
+
 import
 {
   SuccessNotice as PostFormSuccessNotice,
@@ -63,6 +68,9 @@ function NotificationRenderer() {
       />
       <PostFormSuccessNotice
         {...createProps(POST_FORM_SUCCESS_NOTIFICATION_ID)}
+      />
+      <DeletePostSuccessNotice
+        {...createProps(DELETE_POST_SUCCESS_NOTIFICATION_ID)}
       />
     </>
   )

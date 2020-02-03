@@ -7,6 +7,7 @@ import images from './images'
 import uploadImages from './upload-images'
 import postForm from './post-form'
 import notifications from './notifications'
+import deletePost from './delete-post'
 
 const appReducers = {
   auth,
@@ -14,7 +15,8 @@ const appReducers = {
   images,
   uploadImages,
   postForm,
-  notifications
+  notifications,
+  deletePost
 }
 
 const reducersWithRouter = reducers => history => (
