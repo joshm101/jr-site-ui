@@ -22,7 +22,7 @@ describe('Get posts saga', () => {
       })
       .dispatch({
         type: getPostsRoutine.TRIGGER,
-        payload: {}
+        payload: { options: {} }
       })
 
       // suppress redux-saga-test-plan timeout warning

@@ -95,7 +95,7 @@ describe('posts service', () => {
     expect.assertions(1)
     postsServiceMocks.getPostsRequestErrorMock()
 
-    return postsService.getPosts().catch(error =>
+    return postsService.getPosts({}).catch(error =>
       expect(error.message.length).toBeTruthy()
     )
   })

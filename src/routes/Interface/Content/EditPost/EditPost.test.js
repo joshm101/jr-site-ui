@@ -9,6 +9,7 @@ import {
   withProvider
 } from '../../../../utils/testing'
 import {
+  createMockPostFormState,
   createMockPostsState,
   mockPosts
 } from '../../../../utils/testing/mocks'
@@ -17,6 +18,8 @@ import PostForm from '../../../../components/Interface/PostForm'
 import PostNotFoundNotice from './PostNotFoundNotice'
 
 let mount
+
+const mockPostFormState = createMockPostFormState()
 
 const configComponent = mockState => (
   withTheme(
@@ -58,7 +61,10 @@ describe('EditPost', () => {
       data: []
     })
 
-    const { wrapper } = setup({ posts: mockState })()
+    const { wrapper } = setup({
+      posts: mockState,
+      postForm: mockPostFormState
+    })()
 
     const notice = wrapper.find(PostNotFoundNotice)
     const loadingIndicator = wrapper.find(CircularProgress)
@@ -76,7 +82,7 @@ describe('EditPost', () => {
 
     const { wrapper } = setup({
       posts: mockState,
-      postForm: {}
+      postForm: mockPostFormState
     })()
 
     const notice = wrapper.find(PostNotFoundNotice)
@@ -91,7 +97,8 @@ describe('EditPost', () => {
     const mockState = createMockPostsState()
 
     const { wrapper } = setup({
-      posts: mockState
+      posts: mockState,
+      postForm: mockPostFormState
     })()
 
     const notice = wrapper.find(PostNotFoundNotice)
