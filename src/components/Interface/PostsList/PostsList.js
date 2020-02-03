@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import LinearProgress from '@material-ui/core/LinearProgress'
@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import PostsListItemContent from './PostsListItemContent'
 import PostsListItemActions from './PostsListItemActions'
 import NoPostsNotice from './NoPostsNotice'
+import DeletePostDialog from '../DeletePostDialog'
 import styles from './styles'
 
 import { usePosts } from '../../../hooks'
@@ -15,6 +16,7 @@ import { usePosts } from '../../../hooks'
 const useStyles = makeStyles(styles)
 
 function PostsList() {
+  const [postToDelete, setPostToDelete] = useState(null)
   const classes = useStyles()
   const {
     state,
@@ -53,7 +55,10 @@ function PostsList() {
                   <PostsListItemContent post={post} />
                 </Grid>
                 <Grid item xs={3}>
-                  <PostsListItemActions post={post} />
+                  <PostsListItemActions
+                    post={post}
+                    onDeleteClick={() => setPostToDelete(post)}
+                  />
                 </Grid>
               </Grid>
             </ListItem>
@@ -73,6 +78,12 @@ function PostsList() {
           </NoPostsNotice.Action>
         </NoPostsNotice>
       }
+      <DeletePostDialog
+        open={!!postToDelete}
+        post={postToDelete}
+        onCancel={() => setPostToDelete(null)}
+        onConfirm={() => setPostToDelete(null)}
+      />
     </div>
   )
 }

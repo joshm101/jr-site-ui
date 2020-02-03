@@ -6,6 +6,7 @@ import getImagesSaga from './get-images'
 import uploadImagesSaga from './upload-images'
 import postFormSubmitSaga from './post-form-submit'
 import getPostsSaga from './get-posts'
+import deletePostSaga from './delete-post'
 
 const sagas = [
   loginSaga,
@@ -13,7 +14,8 @@ const sagas = [
   getImagesSaga,
   uploadImagesSaga,
   postFormSubmitSaga,
-  getPostsSaga
+  getPostsSaga,
+  deletePostSaga
 ]
 
 export default function* rootSaga() {
