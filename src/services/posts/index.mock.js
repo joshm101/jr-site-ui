@@ -38,6 +38,34 @@ const updatePostRequestErrorMock = () => (
   })
 )
 
+const deletePostRequestMock = () => (
+  moxios.wait(() => {
+    const request = moxios.requests.mostRecent()
+    request.respondWith({
+      status: 200,
+      response: ''
+    })
+  })
+)
+
+const deletePostRequestErrorMock = () => (
+  moxios.wait(() => {
+    const request = moxios.requests.mostRecent()
+
+    const requestError = {
+      status: 400,
+      response: {
+        data: {
+          errors: [{ message: 'Invalid ID' }],
+          message: 'Could not delete post'
+        }
+      }
+    }
+
+    request.reject(requestError)
+  })
+)
+
 const getPostsMock = () => (
   moxios.wait(() => {
     const request = moxios.requests.mostRecent()
@@ -73,6 +101,8 @@ export {
   createPostMock,
   createPostRequestErrorMock,
   updatePostRequestErrorMock,
+  deletePostRequestMock,
+  deletePostRequestErrorMock,
   getPostsMock,
   getPostsRequestErrorMock
 }

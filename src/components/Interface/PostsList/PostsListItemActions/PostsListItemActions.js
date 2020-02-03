@@ -8,7 +8,10 @@ import EditIcon from '@material-ui/icons/Edit'
 
 import { usePosts } from '../../../../hooks'
 
-function PostsListItemActions({ post }) {
+function PostsListItemActions({
+  post,
+  onDeleteClick: _onDeleteClick
+}) {
   const { actions } = usePosts()
   const { editPost } = actions
 
@@ -24,7 +27,7 @@ function PostsListItemActions({ post }) {
   }
 
   const onDeleteClick = () => {
-    console.log('delete clicked')
+    _onDeleteClick && _onDeleteClick()
   }
 
   return (
