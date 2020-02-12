@@ -1,7 +1,6 @@
 import React from 'react'
 import { createMount } from '@material-ui/core/test-utils'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import DialogActions from '@material-ui/core/DialogActions'
 import Typography from '@material-ui/core/Typography'
 
 import {
@@ -76,22 +75,5 @@ describe('DeletePostDialog', () => {
       dialogTitleElement.text().includes(mockPostTitle)
     )
     expect(hasTitle).toBe(true)
-  })
-
-  it('invokes onCancel function prop', () => {
-    const onCancel = jest.fn()
-    const props = {
-      post: mockPost,
-      open: true,
-      onCancel
-    }
-
-    const { wrapper } = setup({ deletePost: mockState })(props)
-
-    const buttons = wrapper.find(DialogActions).find('button')
-    const cancelButton = buttons.at(0)
-    cancelButton.simulate('click')
-
-    expect(onCancel.mock.calls.length).toBe(1)
   })
 })

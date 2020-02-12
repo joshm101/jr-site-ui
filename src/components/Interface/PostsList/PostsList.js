@@ -78,12 +78,12 @@ function PostsList() {
           </NoPostsNotice.Action>
         </NoPostsNotice>
       }
-      <DeletePostDialog
-        open={!!postToDelete}
-        post={postToDelete}
-        onCancel={() => setPostToDelete(null)}
-        onConfirm={() => setPostToDelete(null)}
-      />
+      {postToDelete &&
+        <DeletePostDialog
+          post={postToDelete}
+          onAction={() => setPostToDelete(null)}
+        />
+      }
     </div>
   )
 }
