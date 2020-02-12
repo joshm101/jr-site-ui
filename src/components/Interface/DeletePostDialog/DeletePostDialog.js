@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import Dialog from '@material-ui/core/Dialog'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -11,19 +11,24 @@ import { deletePostRoutine } from '../../../actions'
 
 function DeletePostDialog({
   post,
-  open,
-  onCancel,
-  onConfirm: _onConfirm
+  onAction: _onAction
 }) {
+  const [ actionTaken, setActionTaken ] = useState(false)
   const dispatch = useDispatch()
 
-  const onConfirm = useCallback(() => {
-    _onConfirm && _onConfirm()
-    dispatch(deletePostRoutine(post._id))
+  const onAction = useCallback(action => {
+    setActionTaken(true)
+
+    if (action === 'confirm') {
+      dispatch(deletePostRoutine(post._id))
+    }
   }, [dispatch, deletePostRoutine, post])
 
   return (
-    <Dialog open={open}>
+    <Dialog
+      open={!actionTaken}
+      onExited={_onAction}
+    >
       <DialogTitle>
         Delete &quot;{post && post.title}&quot;
       </DialogTitle>
@@ -36,10 +41,10 @@ function DeletePostDialog({
         </Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onCancel}>
+        <Button onClick={() => onAction('cancel')}>
           Cancel
         </Button>
-        <Button onClick={onConfirm}>
+        <Button onClick={() => onAction('confirm')}>
           Delete Post
         </Button>
       </DialogActions>
