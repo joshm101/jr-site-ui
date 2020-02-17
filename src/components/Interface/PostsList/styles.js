@@ -2,7 +2,24 @@ const styles = theme => ({
   listItem: {
     '&:hover': {
       cursor: 'pointer'
-    }
+    },
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  listItemContent: {
+    display: 'flex'
+  },
+  listItemActions: {
+    minWidth: '96px'
+  },
+  listItemAvatar: {
+    height: theme.spacing(6),
+    width: theme.spacing(6),
+    [theme.breakpoints.up('sm')]: {
+      height: theme.spacing(8),
+      width: theme.spacing(8)
+    },
+    marginRight: theme.spacing(3)
   },
   noPostsNoticeLabel: {
     marginBottom: theme.spacing(10)

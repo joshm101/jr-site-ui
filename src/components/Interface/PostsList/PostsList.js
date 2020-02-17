@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import LinearProgress from '@material-ui/core/LinearProgress'
-import Grid from '@material-ui/core/Grid'
 import { makeStyles } from '@material-ui/core/styles'
 
 import PostsListItemContent from './PostsListItemContent'
@@ -50,18 +49,13 @@ function PostsList({ onItemClick }) {
               key={post._id}
               className={classes.listItem}
               onClick={() => onListItemClick(post)}
+              disableGutters
             >
-              <Grid container alignItems="center">
-                <Grid item xs={9}>
-                  <PostsListItemContent post={post} />
-                </Grid>
-                <Grid item xs={3}>
-                  <PostsListItemActions
-                    post={post}
-                    onDeleteClick={() => setPostToDelete(post)}
-                  />
-                </Grid>
-              </Grid>
+              <PostsListItemContent post={post} />
+              <PostsListItemActions
+                post={post}
+                onDeleteClick={() => setPostToDelete(post)}
+              />
             </ListItem>
           )}
         </List>
