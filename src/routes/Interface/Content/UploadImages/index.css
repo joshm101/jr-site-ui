@@ -2,11 +2,6 @@
   display: none;
 }
 
-.file-upload-controls-wrapper {
-  display: flex;
-  justify-content: flex-end;
-}
-
 .upload-images-route-content-wrapper {
   max-width: 980px;
   margin: auto;

@@ -26,6 +26,16 @@ const overrides = {
     root: {
       backgroundColor: DEFAULT_PALETTE.background.light
     }
+  },
+  MuiFab: {
+    secondary: {
+      color: '#000'
+    }
+  },
+  MuiMenuItem: {
+    hover: {
+      color: '#000'
+    }
   }
 }
 

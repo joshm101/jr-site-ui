@@ -5,11 +5,12 @@ import {
   InputLabel,
   FormControl
 } from '@material-ui/core'
+import Select from '@material-ui/core/Select'
+import MenuItem from '@material-ui/core/MenuItem'
 import CreateNewFolder from '@material-ui/icons/CreateNewFolder'
 
 import { useUploadImages } from '../../../../../hooks'
 import NewFolderDialog from './NewFolderDialog'
-import Select from '../../../../../components/Select'
 
 import './index.css'
 
@@ -59,9 +60,9 @@ function FolderSelect(props) {
           >
             {
               finalFolders.map(folder =>
-                <Select.Item key={folder} value={folder}>
+                <MenuItem key={folder} value={folder}>
                   {folder}
-                </Select.Item>
+                </MenuItem>
               )
             }
           </Select>
