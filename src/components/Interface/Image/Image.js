@@ -2,7 +2,7 @@ import React from 'react'
 
 const Image = ({ src, alt, className }) => {
   const styles = {
-    backgroundImage: `url(${src})`,
+    backgroundImage: `url(${encodeURI(src)})`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
