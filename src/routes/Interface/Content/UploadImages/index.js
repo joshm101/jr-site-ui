@@ -156,29 +156,30 @@ function UploadImages() {
 
   return (
     <div>
-      <div className="file-upload-controls-wrapper">
-        <Button
-          component="label"
-          variant="text"
-          color="secondary"
-          disabled={retrievingImages || uploadingImages}
-        >
-          {!retrievingImages &&
-            <Filter fontSize="inherit" />
-          }
-          {retrievingImages &&
-            <CircularProgress size={15} color="primary" />
-          }
-          &nbsp;&nbsp;
-          {'Select images'}
-          <input
-            id="select-images-input"
-            multiple
-            type="file"
-            onChange={handleImagesSelection}
-          />
-        </Button>
-      </div>
+      <Button
+        component="label"
+        variant="outlined"
+        color="secondary"
+        disabled={retrievingImages || uploadingImages}
+      >
+        {!retrievingImages &&
+          <Filter fontSize="inherit" />
+        }
+        {retrievingImages &&
+          <CircularProgress size={15} color="primary" />
+        }
+        &nbsp;&nbsp;
+        {'Select images'}
+        <input
+          id="select-images-input"
+          multiple
+          type="file"
+          onChange={handleImagesSelection}
+        />
+      </Button>
+      <br />
+      <br />
+      <br />
       {files.length > 0 &&
         <div className="files-selected-additional-controls">
           <div className="folder-select-button-wrapper">
@@ -195,6 +196,7 @@ function UploadImages() {
           />
         </div>
       }
+      <br />
       {filePreviewUrls.length > 0 &&
         <div className="file-upload-previews">
           <ImageGrid>

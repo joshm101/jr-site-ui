@@ -27,6 +27,8 @@ function ImagesHome({ match }) {
       >
         Upload Images
       </Button>
+      <br />
+      <br />
       <ImagesDisplay />
     </div>
   )

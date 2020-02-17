@@ -30,6 +30,8 @@ function PostsHome({ match }) {
       >
         Create Post
       </Button>
+      <br />
+      <br />
       <PostsList onItemClick={onPostClick} />
     </>
   )
