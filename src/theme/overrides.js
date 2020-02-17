@@ -9,7 +9,10 @@ const overrides = {
   },
   MuiMobileStepper: {
     root: {
-      background: DEFAULT_PALETTE.background.main
+      background: DEFAULT_PALETTE.background.light
+    },
+    dotActive: {
+      backgroundColor: DEFAULT_PALETTE.secondary.main
     }
   },
   MuiAvatar: {
