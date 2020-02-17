@@ -6,6 +6,8 @@ import posts from './posts'
 import images from './images'
 import uploadImages from './upload-images'
 import postForm from './post-form'
+import postTypeForm from './post-type-form'
+import postTypes from './post-types'
 import notifications from './notifications'
 import deletePost from './delete-post'
 
@@ -15,6 +17,8 @@ const appReducers = {
   images,
   uploadImages,
   postForm,
+  postTypeForm,
+  postTypes,
   notifications,
   deletePost
 }

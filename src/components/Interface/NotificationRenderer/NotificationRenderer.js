@@ -29,6 +29,13 @@ import
   SUCCESS_NOTIFICATION_ID as POST_FORM_SUCCESS_NOTIFICATION_ID
 } from '../PostForm'
 
+import {
+  SuccessNotice as PostTypeFormSuccessNotice,
+  FailureNotice as PostTypeFormFailureNotice,
+  SUCCESS_NOTIFICATION_ID as POST_TYPE_FORM_SUCCESS_NOTIFICATION_ID,
+  FAILURE_NOTIFICATION_ID as POST_TYPE_FORM_FAILURE_NOTIFICATION_ID
+} from '../PostTypeFormDialog'
+
 function NotificationRenderer() {
   const { state, actions } = useNotifications()
 
@@ -68,6 +75,12 @@ function NotificationRenderer() {
       />
       <PostFormSuccessNotice
         {...createProps(POST_FORM_SUCCESS_NOTIFICATION_ID)}
+      />
+      <PostTypeFormSuccessNotice
+        {...createProps(POST_TYPE_FORM_SUCCESS_NOTIFICATION_ID)}
+      />
+      <PostTypeFormFailureNotice
+        {...createProps(POST_TYPE_FORM_FAILURE_NOTIFICATION_ID)}
       />
       <DeletePostSuccessNotice
         {...createProps(DELETE_POST_SUCCESS_NOTIFICATION_ID)}

@@ -16,7 +16,7 @@ const DEFAULT_PALETTE = {
   },
   background: {
     main: '#181a1b',
-    light: '#1f2123'
+    light: '#282828'
   },
   grey
 }

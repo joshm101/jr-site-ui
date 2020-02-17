@@ -30,6 +30,11 @@ const overrides = {
       backgroundColor: DEFAULT_PALETTE.background.light
     }
   },
+  MuiCardHeader: {
+    root: {
+      padding: '8px 16px'
+    }
+  },
   MuiFab: {
     secondary: {
       color: '#000'
@@ -37,6 +42,14 @@ const overrides = {
   },
   MuiMenuItem: {
     hover: {
+      color: '#000'
+    }
+  },
+  MuiButton: {
+    textPrimary: {
+      color: '#fff'
+    },
+    containedSecondary: {
       color: '#000'
     }
   }

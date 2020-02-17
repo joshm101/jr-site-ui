@@ -29,14 +29,15 @@ const styles = theme => ({
     height: '100%',
     minHeight: '250px',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center'
   },
   list: {
     width: '100%'
   },
   loadingBar: {
-    width: '100%'
+    width: '100%',
+    alignSelf: 'center'
   }
 })
 

@@ -7,7 +7,16 @@ const palette = DEFAULT_PALETTE
 
 const theme = createMuiTheme({
   palette,
-  overrides
+  overrides,
+  props: {
+    MuiTextField: {
+      color: 'secondary',
+      autoComplete: 'off'
+    },
+    MuiFormHelperText: {
+      color: '#fff'
+    }
+  }
 })
 
 export default theme
