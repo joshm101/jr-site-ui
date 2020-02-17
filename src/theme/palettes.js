@@ -3,9 +3,9 @@ import { grey } from '@material-ui/core/colors'
 const DEFAULT_PALETTE = {
   type: 'dark',
   primary: {
-    main: '#cfd8dc',
-    light: '#ffffff',
-    dark: '#9ea7aa',
+    main: '#1f2023',
+    light: '#424242',
+    dark: '#181a1b',
     contrastText: '#fff'
   },
   secondary: {
