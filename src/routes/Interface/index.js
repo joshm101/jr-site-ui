@@ -1,113 +1,202 @@
-import React, { Component } from 'react'
-import classNames from 'classnames'
-import {
-  Drawer,
-  IconButton,
-  Divider,
-  Toolbar,
-  Typography,
-  AppBar,
-  Hidden,
-  withStyles
-} from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import React from 'react'
+import { useDispatch } from 'react-redux'
+import { push } from 'connected-react-router'
+import classnames from 'classnames'
+import { makeStyles } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import List from '@material-ui/core/List'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import PhotoIcon from '@material-ui/icons/PhotoSharp'
+import SettingsIcon from '@material-ui/icons/SettingsSharp'
+import DeviceHubIcon from '@material-ui/icons/DeviceHubSharp'
+import LibraryBooksIcon from '@material-ui/icons/LibraryBooksSharp'
+import ExitToAppIcon from '@material-ui/icons/ExitToAppSharp'
 
 import Content from './Content'
-import MobileLinks from '../../components/Interface/MobileLinks'
-
-import styles from './styles'
 import NotificationRenderer from '../../components/Interface/NotificationRenderer'
 
-class Interface extends Component {
-  state = {
-    drawerOpen: true,
-    anchor: 'left',
-    title: 'Interface'
+import { ROUTES } from '../routes.constants'
+
+const { POSTS, IMAGES } = ROUTES.INTERFACE_ROUTES
+
+const drawerWidth = 240
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    height: '100%',
+    backgroundColor: theme.palette.primary.main
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    })
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  menuButton: {
+    marginRight: 36
+  },
+  hide: {
+    display: 'none'
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: 'nowrap'
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen
+    })
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(9) + 1
+  },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3)
+  },
+  navListItem: {
+    '& > div': {
+      width: '100%',
+      textAlign: 'center'
+    },
+    '& .MuiListItemIcon-root': {
+      minWidth: 'auto'
+    }
   }
+}))
 
-  handleDrawerOpen = () => {
-    this.setState({ drawerOpen: true })
-  }
+function Interface({ match, location }) {
+  const dispatch = useDispatch()
+  const classes = useStyles()
+  const { pathname } = location
 
-  handleDrawerClose = () => {
-    this.setState({ drawerOpen: false })
-  }
+  const goToRoute = route => dispatch(
+    push(route)
+  )
 
-  render() {
-    const { drawerOpen, anchor, title } = this.state
-    const { classes, match } = this.props
-
-    const drawer = (
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={classes.appBar}
+      >
+        <Toolbar>
+          <Typography variant="h6" noWrap>
+            Content Management
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <Drawer
-        variant="persistent"
-        anchor={anchor}
-        open={drawerOpen}
+        variant="permanent"
+        className={classnames(classes.drawer, classes.drawerClose)}
         classes={{
-          paper: classes.drawerPaper
+          paper: classes.drawerClose
         }}
       >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={this.handleDrawerClose}>
-            {<ChevronLeftIcon />}
-          </IconButton>
-        </div>
+        <div className={classes.toolbar} />
         <Divider />
+        <List>
+          <ListItem
+            button
+            onClick={() => goToRoute(`${match.path}/${POSTS}`)}
+            selected={pathname.startsWith(`${match.path}/${POSTS}`)}
+            className={classes.navListItem}
+          >
+            <div>
+              <ListItemIcon>
+                <LibraryBooksIcon />
+              </ListItemIcon>
+              {pathname.startsWith(`${match.path}/${POSTS}`) &&
+                <Typography variant="subtitle2">
+                  Posts
+                </Typography>
+              }
+            </div>
+          </ListItem>
+          <ListItem
+            button
+            onClick={() => goToRoute(`${match.path}/${IMAGES}`)}
+            selected={pathname.startsWith(`${match.path}/${IMAGES}`)}
+            className={classes.navListItem}
+          >
+            <div>
+              <ListItemIcon>
+                <PhotoIcon />
+              </ListItemIcon>
+              {pathname.startsWith(`${match.path}/${IMAGES}`) &&
+                <Typography variant="subtitle2">
+                  Images
+                </Typography>
+              }
+            </div>
+          </ListItem>
+          <ListItem button className={classes.navListItem}>
+            <div>
+              <ListItemIcon>
+                <DeviceHubIcon />
+              </ListItemIcon>
+            </div>
+          </ListItem>
+          <ListItem button className={classes.navListItem}>
+            <div>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+            </div>
+          </ListItem>
+        </List>
+        <Divider />
+        <List>
+          <ListItem button className={classes.navListItem}>
+            <div>
+              <ListItemIcon>
+                <ExitToAppIcon />
+              </ListItemIcon>
+              <Typography variant="subtitle2">
+                Logout
+              </Typography>
+            </div>
+          </ListItem>
+        </List>
       </Drawer>
-    )
-    return (
-      <div className={classes.interfaceRoot}>
-        <Hidden xsDown>
-          <AppBar
-            className={classNames(classes.appBar, {
-              [classes.appBarShift]: drawerOpen
-            })}
-          >
-            <Toolbar disableGutters={!drawerOpen}>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={this.handleDrawerOpen}
-                className={classNames(classes.menuButton, drawerOpen && classes.hide)}
-              >
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" color="inherit" noWrap>
-                {title}
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          {drawer}
-          <div
-            className={classNames(classes.content, {
-              [classes.contentShift]: drawerOpen
-            })}
-          >
-            <div className={classes.drawerHeaderPlaceholder} />
-            <Content match={match} />
-          </div>
-        </Hidden>
-
-        <Hidden smUp>
-          <AppBar
-            className={classNames(classes.appBar)}
-          >
-            <Toolbar>
-              <Typography variant="h6" color="inherit" noWrap>
-                {title}
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <div className={classes.mobileContent}>
-            <div className={classes.drawerHeaderPlaceholder} />
-            <Content match={match} />
-            <MobileLinks />
-          </div>
-        </Hidden>
-        <NotificationRenderer />
-      </div>
-    )
-  }
+      <main className={classes.content}>
+        <Content match={match} />
+      </main>
+      <NotificationRenderer />
+    </div>
+  )
 }
 
-export default withStyles(styles, { withTheme: true })(Interface)
+export default Interface

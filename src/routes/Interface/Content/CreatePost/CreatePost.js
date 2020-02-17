@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback } from 'react'
+import Typography from '@material-ui/core/Typography'
 
 import PostForm, {
   ErrorDialog,
@@ -23,6 +24,9 @@ function CreatePost() {
 
   return (
     <>
+      <Typography variant="h5" gutterBottom>
+        Create Post
+      </Typography>
       <PostForm onSubmit={postFormSubmitRoutine} />
       <ErrorDialog>
         <ErrorDialogTitle>

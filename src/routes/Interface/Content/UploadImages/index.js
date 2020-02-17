@@ -19,8 +19,6 @@ import FolderSelect from './FolderSelect'
 import SubmitButton from './SubmitButton'
 import SuccessDialog from './SuccessDialog'
 import FailureDialog from './FailureDialog'
-import ContentHeader from '../ContentHeader'
-import ContentContainer from '../ContentContainer'
 import UploadPreviewImage from './UploadPreviewImage'
 import ImageGrid
   from '../../../../components/Interface/ImageGrid'
@@ -158,68 +156,61 @@ function UploadImages() {
 
   return (
     <div>
-      <ContentHeader
-        title="Upload Images"
-        action={
-          <div className="file-upload-controls-wrapper">
-            <Button
-              component="label"
-              variant="text"
-              color="secondary"
-              disabled={retrievingImages || uploadingImages}
-            >
-              {!retrievingImages &&
-                <Filter fontSize="inherit" />
-              }
-              {retrievingImages &&
-                <CircularProgress size={15} color="primary" />
-              }
-              &nbsp;&nbsp;
-              {'Select images'}
-              <input
-                id="select-images-input"
-                multiple
-                type="file"
-                onChange={handleImagesSelection}
-              />
-            </Button>
-          </div>
-        }
-      />
-      <ContentContainer>
-        {files.length > 0 &&
-          <div className="files-selected-additional-controls">
-            <div className="folder-select-button-wrapper">
-              <FolderSelect
-                folders={folders}
-                value={selectedFolder}
-                onChange={handleFolderSelect}
-                disabled={uploadingImages}
-              />
-            </div>
-            <SubmitButton
-              onClick={handleUploadImagesClick}
-              uploadingImages={uploadingImages}
+      <div className="file-upload-controls-wrapper">
+        <Button
+          component="label"
+          variant="text"
+          color="secondary"
+          disabled={retrievingImages || uploadingImages}
+        >
+          {!retrievingImages &&
+            <Filter fontSize="inherit" />
+          }
+          {retrievingImages &&
+            <CircularProgress size={15} color="primary" />
+          }
+          &nbsp;&nbsp;
+          {'Select images'}
+          <input
+            id="select-images-input"
+            multiple
+            type="file"
+            onChange={handleImagesSelection}
+          />
+        </Button>
+      </div>
+      {files.length > 0 &&
+        <div className="files-selected-additional-controls">
+          <div className="folder-select-button-wrapper">
+            <FolderSelect
+              folders={folders}
+              value={selectedFolder}
+              onChange={handleFolderSelect}
+              disabled={uploadingImages}
             />
           </div>
-        }
-        {filePreviewUrls.length > 0 &&
-          <div className="file-upload-previews">
-            <ImageGrid>
-              {filePreviewUrls.map((imgSrc, index) => (
-                <UploadPreviewImage
-                  key={imgSrc}
-                  src={imgSrc}
-                  imageIndex={index}
-                  onClick={handleSelectedFileRemoval(index)}
-                />
-              ))}
-            </ImageGrid>
-          </div>
-        }
-        <SuccessDialog />
-        <FailureDialog />
-      </ContentContainer>
+          <SubmitButton
+            onClick={handleUploadImagesClick}
+            uploadingImages={uploadingImages}
+          />
+        </div>
+      }
+      {filePreviewUrls.length > 0 &&
+        <div className="file-upload-previews">
+          <ImageGrid>
+            {filePreviewUrls.map((imgSrc, index) => (
+              <UploadPreviewImage
+                key={imgSrc}
+                src={imgSrc}
+                imageIndex={index}
+                onClick={handleSelectedFileRemoval(index)}
+              />
+            ))}
+          </ImageGrid>
+        </div>
+      }
+      <SuccessDialog />
+      <FailureDialog />
     </div>
   )
 }

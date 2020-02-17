@@ -23,6 +23,7 @@ const handleGetImagesTrigger = (state) => {
   return {
     ...state,
     retrievingImages: true,
+    data: [],
     uploadErrors: [],
     invalidFiles: []
   }

@@ -1,3 +1,11 @@
 .interface-images-display {
   text-align: center;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.interface-images-display > * {
+  width: 100%;
 }

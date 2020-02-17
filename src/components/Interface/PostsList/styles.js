@@ -9,7 +9,17 @@ const styles = theme => ({
   },
   root: {
     width: '100%',
-    height: '100%'
+    height: '100%',
+    minHeight: '250px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  list: {
+    width: '100%'
+  },
+  loadingBar: {
+    width: '100%'
   }
 })
 

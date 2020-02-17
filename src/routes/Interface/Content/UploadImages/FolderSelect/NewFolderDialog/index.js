@@ -16,9 +16,6 @@ import { useUploadImages } from '../../../../../../hooks'
 import './index.css'
 
 const useStyles = makeStyles(theme => ({
-  cardAreas: {
-    backgroundColor: theme.palette.primary.main
-  },
   cancel: {
     color: theme.palette.text.primary
   },
@@ -69,10 +66,10 @@ function NewFolderDialog(props) {
       open={definingNewFolder}
       onClose={uploadImagesDefineNewFolderCancel}
     >
-      <DialogTitle className={classes.cardAreas}>
+      <DialogTitle>
         Define New Folder
       </DialogTitle>
-      <DialogContent className={classes.cardAreas}>
+      <DialogContent>
         <DialogContentText className={classes.dialogContentText}>
           Please type in the name of the new folder.
         </DialogContentText>
@@ -100,7 +97,7 @@ function NewFolderDialog(props) {
           </FormHelperText>
         }
       </DialogContent>
-      <DialogActions className={classes.cardAreas}>
+      <DialogActions>
         <Button
           onClick={uploadImagesDefineNewFolderCancel}
           color="primary"

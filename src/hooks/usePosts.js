@@ -9,17 +9,17 @@ function usePosts() {
   const postsState = useSelector(state => state.posts)
 
   const { INTERFACE_ROUTES, INTERFACE } = ROUTES
-  const { VIEW_POST, EDIT_POST } = INTERFACE_ROUTES
+  const { POSTS } = INTERFACE_ROUTES
 
   const postsActions = {
     getPosts: (...args) => dispatch(
       getPostsRoutine(...args)
     ),
     viewPost: postId => dispatch(
-      push(`${INTERFACE}/${VIEW_POST}/${postId}`)
+      push(`${INTERFACE}/${POSTS}/${postId}`)
     ),
     editPost: postId => dispatch(
-      push(`${INTERFACE}/${EDIT_POST}/${postId}`)
+      push(`/${INTERFACE}/${POSTS}/edit/${postId}`)
     )
   }
 

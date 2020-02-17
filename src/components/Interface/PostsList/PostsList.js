@@ -15,7 +15,7 @@ import { usePosts } from '../../../hooks'
 
 const useStyles = makeStyles(styles)
 
-function PostsList() {
+function PostsList({ onItemClick }) {
   const [postToDelete, setPostToDelete] = useState(null)
   const classes = useStyles()
   const {
@@ -27,23 +27,24 @@ function PostsList() {
     data: postsData,
     retrievingPosts
   } = state
-  const { getPosts, viewPost } = actions
+  const { getPosts } = actions
 
   useEffect(() => {
     getPosts()
   }, [])
 
-  const onListItemClick = post => {
-    viewPost(post._id)
-  }
+  const onListItemClick = onItemClick
 
   return (
     <div className={classes.root}>
       {retrievingPosts &&
-        <LinearProgress color="secondary" />
+        <LinearProgress
+          color="secondary"
+          className={classes.loadingBar}
+        />
       }
       {!retrievingPosts && postsData.length > 0 &&
-        <List>
+        <List className={classes.list}>
           {postsData.map(post =>
             <ListItem
               key={post._id}

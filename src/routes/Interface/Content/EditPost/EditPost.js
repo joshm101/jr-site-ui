@@ -47,7 +47,7 @@ function EditPost(props) {
 
   return (
     <div>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         Edit Post
       </Typography>
       <div className={classes.contentRoot}>
