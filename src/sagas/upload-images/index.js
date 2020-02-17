@@ -1,6 +1,9 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 
-import { uploadImagesRoutine } from '../../actions'
+import {
+  uploadImagesRoutine,
+  getImagesRoutine
+} from '../../actions'
 import * as imagesService from '../../services/images'
 import fileHandlerServiceCreator
   from '../../services/images/fileHandlerService'
@@ -19,6 +22,7 @@ function* handleUploadImages(action) {
     yield put(
       uploadImagesRoutine.success(result)
     )
+    yield put(getImagesRoutine())
   } catch (error) {
     yield put(
       uploadImagesRoutine.failure([error])

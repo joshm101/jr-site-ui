@@ -10,6 +10,8 @@ import * as postsService from '../../services/posts'
 import { SUCCESS_NOTIFICATION_ID } from '../../components/Interface/PostForm'
 import { ROUTES } from '../../routes/routes.constants'
 
+const { POSTS } = ROUTES.INTERFACE_ROUTES
+
 function* handlePostFormSubmit(action) {
   const { payload } = action
 
@@ -43,7 +45,7 @@ function* handlePostFormSubmit(action) {
     )
 
     yield put(
-      push(`/${ROUTES.INTERFACE}`)
+      push(`/${ROUTES.INTERFACE}/${POSTS}`)
     )
   } catch (error) {
     yield put(

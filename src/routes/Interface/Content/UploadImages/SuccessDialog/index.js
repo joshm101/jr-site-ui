@@ -12,7 +12,11 @@ import { Link } from 'react-router-dom'
 
 import { useUploadImages } from '../../../../../hooks'
 
+import { ROUTES } from '../../../../routes.constants'
+
 import './index.css'
+
+const { IMAGES } = ROUTES.INTERFACE_ROUTES
 
 function SuccessDialog() {
   const { state, actions } = useUploadImages()
@@ -38,7 +42,7 @@ function SuccessDialog() {
       <DialogActions>
         <Link
           style={{ textDecoration: 'none' }}
-          to="/interface/images"
+          to={`/${ROUTES.INTERFACE}/${IMAGES}`}
         >
           <Button
             onClick={dismissUploadImagesSuccessNotice}
