@@ -5,7 +5,9 @@ const ROUTES = {
   INTERFACE_ROUTES: {
     HOME: '',
     POSTS: 'posts',
-    IMAGES: 'images'
+    IMAGES: 'images',
+    INTEGRATIONS: 'integrations',
+    SETTINGS: 'settings'
   }
 }
 

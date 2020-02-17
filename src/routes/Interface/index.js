@@ -23,7 +23,12 @@ import NotificationRenderer from '../../components/Interface/NotificationRendere
 
 import { ROUTES } from '../routes.constants'
 
-const { POSTS, IMAGES } = ROUTES.INTERFACE_ROUTES
+const {
+  POSTS,
+  IMAGES,
+  INTEGRATIONS,
+  SETTINGS
+} = ROUTES.INTERFACE_ROUTES
 
 const drawerWidth = 240
 
@@ -131,6 +136,7 @@ function Interface({ match, location }) {
         <List>
           <ListItem
             button
+            disableGutters
             onClick={() => goToRoute(`${match.path}/${POSTS}`)}
             selected={pathname.startsWith(`${match.path}/${POSTS}`)}
             className={classes.navListItem}
@@ -148,6 +154,7 @@ function Interface({ match, location }) {
           </ListItem>
           <ListItem
             button
+            disableGutters
             onClick={() => goToRoute(`${match.path}/${IMAGES}`)}
             selected={pathname.startsWith(`${match.path}/${IMAGES}`)}
             className={classes.navListItem}
@@ -163,18 +170,40 @@ function Interface({ match, location }) {
               }
             </div>
           </ListItem>
-          <ListItem button className={classes.navListItem}>
+          <ListItem
+            button
+            disableGutters
+            onClick={() => goToRoute(`${match.path}/${INTEGRATIONS}`)}
+            selected={pathname.startsWith(`${match.path}/${INTEGRATIONS}`)}
+            className={classes.navListItem}
+          >
             <div>
               <ListItemIcon>
                 <DeviceHubIcon />
               </ListItemIcon>
+              {pathname.startsWith(`${match.path}/${INTEGRATIONS}`) &&
+                <Typography variant="subtitle2">
+                  Integ.
+                </Typography>
+              }
             </div>
           </ListItem>
-          <ListItem button className={classes.navListItem}>
+          <ListItem
+            button
+            disableGutters
+            onClick={() => goToRoute(`${match.path}/${SETTINGS}/site`)}
+            selected={pathname.startsWith(`${match.path}/${SETTINGS}`)}
+            className={classes.navListItem}
+          >
             <div>
               <ListItemIcon>
                 <SettingsIcon />
               </ListItemIcon>
+              {pathname.startsWith(`${match.path}/${SETTINGS}`) &&
+                <Typography variant="subtitle2">
+                  Settings
+                </Typography>
+              }
             </div>
           </ListItem>
         </List>
